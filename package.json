@@ -3,7 +3,7 @@
   "version"      : "1.0.0",
   "description"  : "Overwatch Aplpication.",
   "main"         : "server.js",
-  "author"       : "Scotch",
+  "author"       : "Gustavo",
   "dependencies" : {
     "body-parser"    : "^1.4.3",
     "express"        : "^4.13.4",
