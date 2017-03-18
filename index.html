@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Overwe</title>
+	
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/assets/css/app.css">
+	<link rel="stylesheet" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+	<!-- Firebase -->
+		<srcipt src="https://code.jquery.com/jquery-2.2.4.min.js"></srcipt>
+		<script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+		<script>
+		  // Initialize Firebase
+		  var config = {
+		    apiKey: "AIzaSyDoSNIZPh6vCKhO5U5YWMBmqMeyzCfBOXI",
+		    authDomain: "overwatch-17418.firebaseapp.com",
+		    databaseURL: "https://overwatch-17418.firebaseio.com",
+		    storageBucket: "overwatch-17418.appspot.com",
+		    messagingSenderId: "413697016856"
+		  };
+		  firebase.initializeApp(config);
+		</script>
+	<!-- Firebase End -->
+	
+	<!-- Angular -->
+
+		<script src="/components/angular.min.js"></script>
+		<script src="/components/angular-route.min.js"></script>
+	<!-- Angular End -->
+
+	<!-- Javascript -->
+		<script src="/assets/js/database/firebaseDatabase.js"></script>
+		<script src="/node_modules/chart.js/dist/Chart.min.js"></script>
+		<script src="/node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
+		<script src="/assets/js/app.js"></script>
+		<script src="/assets/js/controller.js"></script>
+		<script src="/assets/js/services.js"></script>
+	<!-- End Javascript -->
+
+</head>
+<body>
+	
+	<header>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-12">
+					<h1>Overwatch Rating Calculator</h1>
+				</div>
+			</div>
+		</div>
+	</header>
+	<div id="main" class="main">
+	<div class="row">
+		<aside class="col-xs-2">
+			<ul>
+				<li><h2>Menu</h2></li>
+				<li>
+					<a href="#!/">Home</a>
+				</li>
+				<li>
+					<a ng-href="#!/adicionarJogo">Adicionar Jogo</a>
+				</li>
+			</ul>
+		</aside>
+		<ng-view class="col-xs-10 view">
+			<!-- graficos Iniciais -->
+		</ng-view>
+	</div>
+	</div>
+	<footer>
+		
+	</footer>
+
+</body>
+</html>

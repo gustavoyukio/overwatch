@@ -1,0 +1,17 @@
+{
+  "name"         : "overwatch",
+  "version"      : "1.0.0",
+  "description"  : "Overwatch Aplpication.",
+  "main"         : "server.js",
+  "author"       : "Scotch",
+  "dependencies" : {
+    "body-parser"    : "^1.4.3",
+    "express"        : "^4.13.4",
+    "method-override": "^2.1.3"
+  },
+  "version": "1.0.0",
+  "engines": {
+    "node": "6.9.5"
+  }
+}  
+}
