@@ -213,9 +213,20 @@ var Firebase = function() {
 				
 				callback(snapshot.val()[0]);
 
-			});
+			});				
+	}
 
+	_self.heroesNeverDie = function (callback) {
+		
+		firebase
+		.database()
+		.orderByChild('heroes/')
+		.once("value", function(snapshot){
 				
+			callback(snapshot.val());
+
+		});	
+
 	}
 
 

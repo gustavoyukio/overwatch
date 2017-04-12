@@ -1,9 +1,9 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-var app = angular.module('myApp.controller', ["ngRoute","myApp.services","chart.js"]);
+var app = angular.module('myApp.controller', ["ngRoute","myApp.services","chart.js","myApp.filters"]);
 
-app.controller('HomeController', ['$scope','Mock','Score','$timeout','ViewControl', function($scope,Mock,Score,$timeout,ViewControl){
+app.controller('HomeController', ['$scope','Mock','Score','$timeout','ViewControl','Home', function($scope,Mock,Score,$timeout,ViewControl, Home){
  	
  	var checkEnterStatus = ViewControl.getInitial();
 	$scope.series = ['SR'];
@@ -71,7 +71,11 @@ app.controller('HomeController', ['$scope','Mock','Score','$timeout','ViewContro
 	  	ViewControl.setInitial();
  	}
 
- 	// Update do Grafico Necessario
+ 	var HeroesNeverDieCallback = function (data) {
+ 		$scope.HeroesNeverDie = data;
+ 	}
+
+ 	Home.heroesNeverDie(HeroesNeverDieCallback);
   	Score.getScores(setGraphScore);
 
 

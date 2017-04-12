@@ -166,7 +166,6 @@ app.service('Game', ['Firebase', function(Firebase){
 	}
 
 	return new Game();
-
 }])
 
 app.service('ViewControl', function(){
@@ -190,4 +189,32 @@ app.service('ViewControl', function(){
 
 app.service('Firebase', function(){
 	return new Firebase();
+})
+
+app.service('Home', ['Firebase', function(Firebase) {
+	var Home = function () {
+
+		var _self = this;
+
+		_self.heroesNeverDie = function (callback) {
+			Firebase.heroesNeverDie(callback);
+		}
+	}
+	return new Home();
+}])
+
+app.service('User', function () {
+
+	var User = function () {
+
+		var _self = this;
+
+		_self.loggedIn = true;
+
+		_self.returnStatus = function () {
+			return _self.loggedIn;
+		}
+	}
+
+	return new User();
 })

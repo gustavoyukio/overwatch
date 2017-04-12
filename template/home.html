@@ -38,4 +38,12 @@
             chart-click="onClick">
         </canvas>
     </div>
+    <div class="col-xs-6">
+        <h2>Herois Maisa Usados</h2>
+        <ul>
+            <li class="item" ng-repeat="(key,value) in HeroesNeverDie">
+                {{key}} - {{value}}
+            </li>
+        </ul>
+    </div>
 </div>

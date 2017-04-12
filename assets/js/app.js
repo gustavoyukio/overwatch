@@ -6,8 +6,21 @@ angular.module('myApp', [
   'myApp.services',
   'myApp.controller'
 ]).
+run(['$rootScope','User',function($rootScope,User){
+  
+  $rootScope.$on('$routeChangeStart', function (event) {
+    
+    // Verify if user is logged
+    console.log("oi amores");
+    console.log( User.returnStatus() );
+    
+  })
+
+}]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   
+  console.dir($routeProvider);
+
   $locationProvider.hashPrefix('!');
 
   $routeProvider
