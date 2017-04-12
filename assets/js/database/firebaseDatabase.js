@@ -220,7 +220,8 @@ var Firebase = function() {
 		
 		firebase
 		.database()
-		.orderByChild('heroes/')
+		.ref('heroes')
+		.orderByChild('heroes')
 		.once("value", function(snapshot){
 				
 			callback(snapshot.val());
@@ -229,5 +230,8 @@ var Firebase = function() {
 
 	}
 
+	// --- User --- //
+	_self.verifyUser = function (login,senha) {
 
+	}
 }

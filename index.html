@@ -11,6 +11,7 @@
 	<!-- Firebase -->
 		<srcipt src="https://code.jquery.com/jquery-2.2.4.min.js"></srcipt>
 		<script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+		<script src="https://apis.google.com/js/platform.js" async defer></script>
 		<script>
 		  // Initialize Firebase
 		  var config = {
@@ -21,6 +22,10 @@
 		    messagingSenderId: "413697016856"
 		  };
 		  firebase.initializeApp(config);
+		  // login with Google Api
+		  var provider = new firebase.auth.GoogleAuthProvider();
+		  provider.addScope('https://www.googleapis.com/auth/plus.login');
+
 		</script>
 	<!-- Firebase End -->
 	
@@ -47,7 +52,7 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-xs-12">
-					<h1>Overwatch Rating Calculator</h1>
+					<h1>Testando Rating Calculator</h1>
 				</div>
 			</div>
 		</div>

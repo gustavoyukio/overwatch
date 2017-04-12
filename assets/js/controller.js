@@ -3,13 +3,14 @@
 // Declare app level module which depends on views, and components
 var app = angular.module('myApp.controller', ["ngRoute","myApp.services","chart.js","myApp.filters"]);
 
-app.controller('HomeController', ['$scope','Mock','Score','$timeout','ViewControl','Home', function($scope,Mock,Score,$timeout,ViewControl, Home){
+app.controller('HomeController', ['$scope','Mock','Score','$timeout','ViewControl','Home','User', function($scope,Mock,Score,$timeout,ViewControl,Home,User){
  	
  	var checkEnterStatus = ViewControl.getInitial();
 	$scope.series = ['SR'];
 	$scope.labels = ['Start','Fim'];
 	$scope.data   = ['0','4000'];
 	$scope.showScoreInicial = false;
+	console.dir(User);
 
 	$scope.onClick = function (points, evt) {
     	// Acao quando Clicar
@@ -78,8 +79,8 @@ app.controller('HomeController', ['$scope','Mock','Score','$timeout','ViewContro
  	Home.heroesNeverDie(HeroesNeverDieCallback);
   	Score.getScores(setGraphScore);
 
-
 }])
+
 app.controller('GameController', ['$scope','Mock','Heroes','Map','Score','Game', function($scope,Mock,Heroes,Map,Score,Game){
 	
 	$scope.startHour = "00:00";
@@ -157,6 +158,39 @@ app.controller('GameController', ['$scope','Mock','Heroes','Map','Score','Game',
 		$scope.showMsg = 'active';
 
 	}
+}])
 
+app.controller('LoginController', ['$scope','User','$rootScope', function($scope,User,$rootScope) {
+
+	var logIn = function (valor) {
+		if (valor == true) {
+			$rootScope.loggedIn = valor;
+			location = '/';
+		}
+	}
+
+	firebase.auth().signInWithPopup(provider).then(function(result) {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        var token = result.credential.accessToken;
+        // The signed-in user info.
+        var user = result.user;
+        console.dir(result);
+        if (user.uid != null) {
+        	console.dir(user);
+          	User.setLoggedStatus(user, logIn)  
+          	// Mais pra frente, guardar dados
+        }
+        // ...
+    }).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        // ...
+        console.log("OI");
+    });
 }])
 ;

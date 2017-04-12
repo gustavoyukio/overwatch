@@ -187,6 +187,33 @@ app.service('ViewControl', function(){
 	return new ViewControl();
 })
 
+app.service('User', function () {
+
+	var User = function () {
+
+		var _self = this;
+
+		_self.loggedIn = false;
+		_self.data = {};
+
+		_self.getLoggedStatus = function () {
+			return _self.loggedIn;
+		}
+
+		_self.setLoggedStatus = function (dados, callback) {
+
+			_self.data.name  = dados.displayName;
+			_self.data.email = dados.email;
+			_self.fata.token = "AIzaSyDoSNIZPh6vCKhO5U5YWMBmqMeyzCfBOXI";
+
+			this.loggedIn = true;
+			callback(this.loggedIn);
+		}
+	}
+
+	return new User();
+})
+
 app.service('Firebase', function(){
 	return new Firebase();
 })
@@ -203,18 +230,3 @@ app.service('Home', ['Firebase', function(Firebase) {
 	return new Home();
 }])
 
-app.service('User', function () {
-
-	var User = function () {
-
-		var _self = this;
-
-		_self.loggedIn = true;
-
-		_self.returnStatus = function () {
-			return _self.loggedIn;
-		}
-	}
-
-	return new User();
-})
