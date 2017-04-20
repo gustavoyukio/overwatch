@@ -162,6 +162,13 @@ app.controller('GameController', ['$scope','Mock','Heroes','Map','Score','Game',
 
 app.controller('LoginController', ['$scope','User','$rootScope', function($scope,User,$rootScope) {
 
+	$rootScope.$on("$stateChangeStart", ['$state', function(event, toState, fromState, $state){
+		console.log("oi");
+		if (User.getLoggedStatus()) {
+			window.location = "/#!/"
+		}
+	}]);
+
 	var logIn = function (valor) {
 		if (valor == true) {
 			$rootScope.loggedIn = valor;

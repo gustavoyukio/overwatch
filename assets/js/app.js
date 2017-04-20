@@ -95,6 +95,6 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
       controller: "LoginController"
     })
 
-  	.otherwise({redirectTo: '/'});
+  	.otherwise({redirectTo: '/login'});
 
 }]);

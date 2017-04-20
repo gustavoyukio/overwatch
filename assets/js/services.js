@@ -169,6 +169,7 @@ app.service('Game', ['Firebase', function(Firebase){
 }])
 
 app.service('ViewControl', function(){
+
 	var ViewControl = function () {
 
 		var _self = this;
@@ -204,11 +205,17 @@ app.service('User', function () {
 
 			_self.data.name  = dados.displayName;
 			_self.data.email = dados.email;
-			_self.fata.token = "AIzaSyDoSNIZPh6vCKhO5U5YWMBmqMeyzCfBOXI";
+			_self.data.token = "AIzaSyDoSNIZPh6vCKhO5U5YWMBmqMeyzCfBOXI";
 
 			this.loggedIn = true;
 			callback(this.loggedIn);
+
 		}
+
+		_self.saveUser = function () {
+
+		}
+		
 	}
 
 	return new User();
