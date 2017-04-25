@@ -4,44 +4,19 @@
 angular.module('myApp', [
   'ngRoute',
   'myApp.services',
-  'myApp.controller'
+  'myApp.controllers'
 ]).
-run(['$rootScope','User',function($rootScope,User){
-  
-  /*
-  if (User.getLoggedStatus) {
+run(['$rootScope', 'User', '$location', function($rootScope, User, $location){
 
-    location.href = '/#!/login';
-
-    // Redirect to login
-    $rootScope.$on('$routeChangeStart', function (event) {
-      
-      // Verify if user is logged
-      firebase.auth().signInWithPopup(provider).then(function(result) {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        var token = result.credential.accessToken;
-        // The signed-in user info.
-        var user = result.user;
-        if (user.uid != null) {
-          User.setLoggedStatus()  
-          // Mais pra frente, guardar dados
+    $rootScope.$on("$locationChangeStart", function(event, next, current) { 
+        console.dir(User);
+        if (!User.getLoggedStatus()) {
+            console.log("Usuario nao logado");
+            $location.path('/login');
+        } else {
+            console.log("Usuario Logado, nao fazer nada")
         }
-        // ...
-      }).catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // The email of the user's account used.
-        var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
-        // ...
-      });
-      
     });
-
-  }
-  */
 
 }]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
@@ -52,46 +27,16 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
   	
   	.when("/", {
   		templateUrl: "template/home.html",
-  		controller: "HomeController",
-      
-      resolve: {
-        app: function($q, $rootScope, $location, User) {
-          
-          var defer = $q.defer();
-          
-          if ($rootScope.loggedIn == false) {
-            $location.path('/login');
-          };
-          
-          defer.resolve();
-          return defer.promise;
-
-        }
-      }
-
+  		controller: "HomeController"
   	})
 
   	.when("/adicionarJogo", {
   		templateUrl: "template/game/add.html",
-      controller: "GameController",
-      resolve: {
-        app: function($q, $rootScope, $location, User) {
-          
-          var defer = $q.defer();
-          
-          if (User.getLoggedStatus == false) {
-            $location.path('/login');
-          };
-          
-          defer.resolve();
-          return defer.promise;
-
-        }
-      }
+      controller: "GameController"
   	})
 
     .when("/login", {
-      templateUrl: "template/login/notLogged.html",
+      templateUrl: "template/login/index.html",
       controller: "LoginController"
     })
 

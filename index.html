@@ -39,45 +39,30 @@
 		<script src="/assets/js/database/firebaseDatabase.js"></script>
 		<script src="/node_modules/chart.js/dist/Chart.min.js"></script>
 		<script src="/node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
+		<!-- data -->
 		<script src="/assets/js/app.js"></script>
-		<script src="/assets/js/controller.js"></script>
-		<script src="/assets/js/filter.js"></script>
+		<script src="/assets/js/controllers.js"></script>
+		<script src="/assets/js/filters.js"></script>
 		<script src="/assets/js/services.js"></script>
+
 	<!-- End Javascript -->
 
 </head>
 <body>
 	
 	<header>
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-xs-12">
-					<h1>Testando Rating Calculator</h1>
-				</div>
-			</div>
-		</div>
-	</header>
-	<div id="main" class="main">
-	<div class="row">
-		<aside class="col-xs-2">
-			<ul>
-				<li><h2>Menu</h2></li>
-				<li>
-					<a href="#!/">Home</a>
-				</li>
-				<li>
-					<a ng-href="#!/adicionarJogo">Adicionar Jogo</a>
-				</li>
-			</ul>
-		</aside>
-		<ng-view class="col-xs-10 view">
-			<!-- graficos Iniciais -->
-		</ng-view>
-	</div>
-	</div>
-	<footer>
 		
-	</footer>
+	</header>
+	
+	<nav ng-controller="NavController" class="col-xs-2">
+		<ul>
+			<li>Antivirus</li>
+			<li>Loja de Jogos</li>
+			<li>Office 365</li>
+		</ul>	
+	</nav>
+	
+	<ng-view class="col-xs-10"/>
 
 </body>
 </html>
