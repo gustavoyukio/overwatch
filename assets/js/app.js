@@ -9,24 +9,20 @@ angular.module('myApp', [
 run(['$rootScope', 'User', '$location', function($rootScope, User, $location){
 
     $rootScope.$on("$locationChangeStart", function(event, next, current) { 
-        console.dir(User);
+        
         if (!User.getLoggedStatus()) {
-            console.log("Usuario nao logado");
             $location.path('/login');
-        } else {
-            console.log("Usuario Logado, nao fazer nada")
         }
+        
     });
 
 }]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
 
-  $locationProvider.hashPrefix('!');
-
   $routeProvider
   	
   	.when("/", {
-  		templateUrl: "template/home.html",
+  		templateUrl: "template/home/index.html",
   		controller: "HomeController"
   	})
 
@@ -40,6 +36,6 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
       controller: "LoginController"
     })
 
-  	.otherwise({redirectTo: '/login'});
+  	//.otherwise({redirectTo: '/login'});
 
 }]);

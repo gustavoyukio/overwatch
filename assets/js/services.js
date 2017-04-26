@@ -203,17 +203,20 @@ app.service('User', function () {
 
 		_self.setLoggedStatus = function (dados, callback) {
 
+			//console.dir(dados);
+
 			_self.data.name  = dados.displayName;
 			_self.data.email = dados.email;
-			_self.data.token = "AIzaSyDoSNIZPh6vCKhO5U5YWMBmqMeyzCfBOXI";
+			_self.data.uid   = dados.uid;
 
 			this.loggedIn = true;
+
 			callback(this.loggedIn);
 
 		}
 
-		_self.saveUser = function () {
-
+		_self.getUid = function () {
+			return _self.data.uid;
 		}
 		
 	}

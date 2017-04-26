@@ -3,8 +3,13 @@
 // Declare app level module which depends on views, and components
 var app = angular.module('myApp.controllers', ["ngRoute","myApp.services","chart.js","myApp.filters"]);
 
-app.controller('NavController', ['$rootScope', '$scope', function ($rootScope, $scope) {
+app.controller('NavController', ['$scope', function ($scope) {
 	
+	$scope.showMenu = true;
+
+	$scope.$on('abacate', function (event, valor) {
+		$scope.showMenu = valor;
+	});
 
 }])
 
@@ -89,7 +94,7 @@ app.controller('HomeController', ['$scope','ViewControl','User','Score','Home', 
   	
 }])
 
-app.controller('GameController', ['$scope', function($scope){
+app.controller('GameController', ['$scope','Score','Heroes','Map','Game', function($scope,Score,Heroes,Map,Game){
 	
 	$scope.startHour = "00:00";
 	$scope.heroList = [];
@@ -169,20 +174,30 @@ app.controller('GameController', ['$scope', function($scope){
 	
 }])
 
-app.controller('LoginController', ['$scope','User','$location', function($scope,User,$location) {
+app.controller('LoginController', ['$rootScope', '$scope','User','$location', function($rootScope,$scope,User,$location) {
+
+
+	$rootScope.$broadcast('abacate',false);
 
 	if (User.getLoggedStatus()) {
-		console.log("Usuario Logado, redirecionar")
-        $location.path('/!#/');
+
+        $location.path('/adicionarJogo');
+
+    } else {
+
+	    var logIn = function (valor) {
+			if (valor == true || valor) {
+				$rootScope.$broadcast('abacate',true);
+				if (!$scope.$$phase) {
+					$location.path('/');
+					$scope.$apply();
+				}
+			}
+		}
+
     }
 
-	var logIn = function (valor) {
-		console.log("Valor vindo do resultado do callback = " + valor);
-		if (valor == true || valor) {
-			console.log("Redirecionar ele pra home");
-			$location.path('/!#/');
-		}
-	}
+	
 
 	$scope.googleLogin = function () {
 
@@ -195,6 +210,7 @@ app.controller('LoginController', ['$scope','User','$location', function($scope,
 	        if (user.uid != null) {
 	          	User.setLoggedStatus(user, logIn)  
 	          	// Mais pra frente, guardar dados
+	          	//$location.path('/adicionarJogo');
 	        }
 	        // ...
 	    }).catch(function(error) {
