@@ -1,10 +1,10 @@
 var Firebase = function() {
 	
-	var _self	 		= this;
-	this.config  		= null;
-	this.hasInit 		= false;
-	this.initCallbacks 	= [];
-	_self.vitoria 		= false;
+	var _self	 			= this;
+	this.config  			= null;
+	this.hasInit 			= false;
+	this.initCallbacks 		= [];
+	_self.gameStatusLabel   = 'loss';
 	
 	this.addInitCallback = function(callback){
 		if(_self.hasInit) callback();
@@ -37,6 +37,17 @@ var Firebase = function() {
 		return firebase.auth().currentUser.uid;
 	}
 
+	// Game Status
+	_self.gameStatus = function (value) {
+		if (value == 0) {
+			_self.gameStatusLabel = 'loss';
+		} else if (value == 2){
+			_self.gameStatusLabel = 'win';
+		} else {
+			_self.gameStatusLabel = 'draw';
+		}
+	}
+
 	// Hero Counter
 	_self.saveNewHeroCounter = function (hero, valor) {
 		
@@ -44,34 +55,68 @@ var Firebase = function() {
 		delete obj;
 
 		var uid = _self.getUserUid();
-		var path = "/" + uid + "/heroes";
+		var path = "/" + uid + "/heroes/" + hero;
+		console.log(path);
+		console.dir(valor);
 
 		obj = {};
-		obj[hero] = valor;
+		obj[_self.gameStatusLabel] = valor;
 
-		firebase
-			.database()
-			.ref(path)
-			.update(obj);
+		firebase.database().ref(path).update(obj);
+
 	}
-	_self.getHeroCounter = function (hero, callback) {
+
+	_self.saveHeroCounterStart = function () {
+
+	}
+
+	_self.getHeroCounter = function (item, callback, contador = 0) {
 
 		var uid = _self.getUserUid();
-		var path = "/" + uid + "/heroes";
+		
+		console.log("=== Get Hero Counter ===");
+		console.dir(item);
 
-		firebase
-			.database()
-			.ref(path+'/'+hero)
-			.once("value", function(snapshot){
+		var counter = 10 || contador;
+
+		console.log("=== Counter ===");
+		console.dir(counter);
+
+		var heroes = '';
+		var valor = 0;
+
+		if (counter >= item.heroes.length) {
+
+		}
+
+		for (var i=0; i < item.heroes.length; i++) {
+			
+			var heroes = '';
+			var valor = 0;
+			
+			heroes = item.heroes[i];
+			console.log(heroes);
+			
+			var path = "/" + uid + "/heroes/" + heroes + "/" + _self.gameStatusLabel;
+			console.log(path);
+			
+			firebase
+				.database()
+				.ref(path)
+				.once("value", function(snapshot){
 				
-				console.dir(snapshot.val());
-				var valor = 1;
-				if (snapshot.val() != null) {
-					valor = parseInt(snapshot.val())+1;
-				}
+					if (snapshot.val() != null) {
+						valor = parseInt(snapshot.val())+1;
+						console.log("======");
+						console.log(valor);
+					}
 
-				callback(hero,valor);
-			});
+					_self.saveNewHeroCounter(heroes, valor);
+				});
+			
+			
+		}
+
 	}
 
 	// Map Counter
@@ -148,9 +193,18 @@ var Firebase = function() {
 	// Primeiro Acesso de Gravacao de Jogo
 	_self.saveNewGameEntry = function (item, callback) {
 
-		// console.dir(item);
-		// Definir Derrota ou Vitoria
-		_self.getScoreCounter(item.score, _self.saveScoreCounter);
+		// 1 Save Score - OK
+		_self.getScoreCounter(item, _self.saveScoreCounter);
+		// 2 Save Heroes - 
+		// _self.getHeroCounter(item,_self.saveNewHeroCounter);
+		// 3 Save Maps
+		// _self.getMapCounter(item.map, _self.saveMapCounter);
+		// 4 Save Hours
+		// _self.getHourCounter(item.hour, _self.saveHourCounter)
+		// 5 Save Game Details
+		// _self.saveEntry(item, callback);
+		// 6 Callback
+		
 
 		// save heroes counter
 		/*
@@ -159,18 +213,11 @@ var Firebase = function() {
 			heroes = item.heroes[i];
 			_self.getHeroCounter(heroes,_self.saveNewHeroCounter);
 		}
-
-		_self.getMapCounter(item.map, _self.saveMapCounter);
-		_self.getHourCounter(item.hour, _self.saveHourCounter)
-		
-		
-		_self.saveEntry(item, callback);
 		*/
-
 	}	
 
 	// Get Scores
-	_self.getScoreCounter = function (score, callback) {
+	_self.getScoreCounter = function (item, callback) {
 
 		var uid = _self.getUserUid();
 		var path = "/" + uid + "/scores";
@@ -185,24 +232,29 @@ var Firebase = function() {
 
 				if (snapshot.val() != null ) {
 					valor = snapshot.val();
-					contadorDeScorePartidas = Object.keys(snapshot.val()).length;	
+					contadorDeScorePartidas = Object.keys(snapshot.val()).length;
+					valor = valor[contadorDeScorePartidas-1];
 				}
 
-				if (score > valor) {
-					_self.vitoria = true;
+				if (item.score > valor) {
+					_self.gameStatus(2);
+				} else if (item.score == valor){
+					_self.gameStatus(1);
+				} else {
+					_self.gameStatus(0);
 				}
 				
-				callback(contadorDeScorePartidas,score);
+				callback(contadorDeScorePartidas,item);
 
 			});
 	}
-	_self.saveScoreCounter = function (counter,score) {
+	_self.saveScoreCounter = function (counter,item) {
 
 		var obj = null;
 		delete obj;
 
 		obj = {};
-		obj[counter] = score;
+		obj[counter] = item.score;
 
 		var uid = _self.getUserUid();
 		var path = "/" + uid + "/scores";
@@ -210,7 +262,14 @@ var Firebase = function() {
 		firebase
 			.database()
 			.ref(path)
-			.update(obj);
+			.update(obj, function(error) {
+				if (error) {
+					console.error(error);
+				} else {
+					// Chamar a funcao
+					_self.getHeroCounter(item, _self.saveNewHeroCounter)
+				}
+			});
 	}
 	_self.getScores = function (callback) {
 		
@@ -259,11 +318,6 @@ var Firebase = function() {
 			callback(snapshot.val());
 
 		});	
-
 	}
 
-	// --- User --- //
-	_self.verifyUser = function (login,senha) {
-
-	}
 }
