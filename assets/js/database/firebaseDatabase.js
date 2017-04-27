@@ -34,7 +34,8 @@ var Firebase = function() {
 
 	// User
 	_self.getUserUid = function () {
-		return firebase.auth().currentUser.uid;
+		//return firebase.auth().currentUser.uid;
+		return 'qnQdKgKH0yN2KsIxWhQHkWi2zkx1';
 	}
 
 	// Game Status
@@ -56,87 +57,79 @@ var Firebase = function() {
 
 		var uid = _self.getUserUid();
 		var path = "/" + uid + "/heroes/" + hero;
-		console.log(path);
-		console.dir(valor);
 
 		obj = {};
 		obj[_self.gameStatusLabel] = valor;
 
 		firebase.database().ref(path).update(obj);
-
 	}
-
-	_self.saveHeroCounterStart = function () {
-
-	}
-
 	_self.getHeroCounter = function (item, callback, contador = 0) {
 
 		var uid = _self.getUserUid();
-		
-		console.log("=== Get Hero Counter ===");
-		console.dir(item);
-
-		var counter = 10 || contador;
-
-		console.log("=== Counter ===");
-		console.dir(counter);
-
-		var heroes = '';
-		var valor = 0;
-
-		if (counter >= item.heroes.length) {
-
-		}
 
 		for (var i=0; i < item.heroes.length; i++) {
 			
 			var heroes = '';
 			var valor = 0;
 			
-			heroes = item.heroes[i];
-			console.log(heroes);
-			
+			heroes = item.heroes[i];		
 			var path = "/" + uid + "/heroes/" + heroes + "/" + _self.gameStatusLabel;
-			console.log(path);
 			
+			var objteste = function(heroes, uhuu) {
+				
+				var _self = this;
+				_self.heroes = heroes;
+				_self.uhuu = uhuu;
+
+				_self.abacate = function (snapshot) {
+				
+					var valor = 1;
+					if (snapshot.val() != null) {
+
+						valor = parseInt(snapshot.val())+1;
+					}
+
+					_self.uhuu.saveNewHeroCounter(_self.heroes, valor, _self.startMapCounter);
+
+				}
+
+			};
+
+			var a = new objteste(heroes, _self);
+
 			firebase
 				.database()
 				.ref(path)
-				.once("value", function(snapshot){
-				
-					if (snapshot.val() != null) {
-						valor = parseInt(snapshot.val())+1;
-						console.log("======");
-						console.log(valor);
-					}
-
-					_self.saveNewHeroCounter(heroes, valor);
-				});
+				.once("value", a.abacate);
 			
 			
 		}
-
 	}
 
 	// Map Counter
-	_self.saveMapCounter = function (map, value) {
+	_self.saveMapCounter = function (map, valor) {
 		var obj = null;
 		delete obj;
 
+		var uid = _self.getUserUid();
+		var path = "/" + uid + "/maps/" + map;
+
 		obj = {};
-		obj[map] = value;
+		obj[_self.gameStatusLabel] = valor;
 
 		firebase
 			.database()
-			.ref('/maps')
+			.ref(path)
 			.update(obj);
 	}
-	_self.getMapCounter = function (map, callback) {
+	_self.getMapCounter = function (item) {
+
+		var uid  = _self.getUserUid();
+		var path = "/" + uid + "/maps/" + item.map + "/" + _self.gameStatusLabel;
 
 		firebase
 			.database()
-			.ref('maps/'+map)
+			.ref(path)
 			.once("value", function(snapshot){
 				
 				var valor = 1;
@@ -144,28 +137,34 @@ var Firebase = function() {
 					valor = parseInt(snapshot.val())+1;
 				}
 
-				callback(map,valor);
+				_self.saveMapCounter(item.map,valor);
 			});
 	}
 
 	// Hour Counter
-	_self.saveHourCounter = function (hour, value) {
+	_self.saveHourCounter = function (hour, valor) {
+		var uid = _self.getUserUid();
+		var path = "/" + uid + "/hour/" + hour;
+
 		var obj = null;
 		delete obj;
 
 		obj = {};
-		obj[hour] = value;
+		obj[_self.gameStatusLabel] = valor;
 
 		firebase
 			.database()
-			.ref('/hours')
+			.ref(path)
 			.update(obj);
 	}
-	_self.getHourCounter = function (hour, callback) {
+	_self.getHourCounter = function (item) {
+
+		var uid  = _self.getUserUid();
+		var path = "/" + uid + "/hour/" + item.hour + "/" + _self.gameStatusLabel;
 
 		firebase
 			.database()
-			.ref('hours/'+hour)
+			.ref(path)
 			.once("value", function(snapshot){
 				
 				var valor = 1;
@@ -173,16 +172,19 @@ var Firebase = function() {
 					valor = parseInt(snapshot.val())+1;
 				}
 
-				callback(hour,valor);
+				_self.saveHourCounter(item.hour,valor);
 			});
 	}
 
 	// Save Game Entry
 	_self.saveEntry = function (obj, callback) {
 
+		var uid  = _self.getUserUid();
+		var path = "/" + uid + "/games";
+
 		firebase
 			.database()
-			.ref('games')
+			.ref(path)
 			.push(obj);
 
 		var msg = "Jogo Adicionado com Sucesso";
@@ -192,32 +194,20 @@ var Firebase = function() {
 
 	// Primeiro Acesso de Gravacao de Jogo
 	_self.saveNewGameEntry = function (item, callback) {
-
 		// 1 Save Score - OK
-		_self.getScoreCounter(item, _self.saveScoreCounter);
-		// 2 Save Heroes - 
-		// _self.getHeroCounter(item,_self.saveNewHeroCounter);
-		// 3 Save Maps
-		// _self.getMapCounter(item.map, _self.saveMapCounter);
-		// 4 Save Hours
-		// _self.getHourCounter(item.hour, _self.saveHourCounter)
-		// 5 Save Game Details
-		// _self.saveEntry(item, callback);
-		// 6 Callback
-		
-
-		// save heroes counter
-		/*
-		for (var i=0; i < item.heroes.length; i++) {
-			var heroes = '';
-			heroes = item.heroes[i];
-			_self.getHeroCounter(heroes,_self.saveNewHeroCounter);
-		}
-		*/
+		// Settando Game Status
+		_self.getScoreCounter(item, _self.continueSaving, callback);
 	}	
+	_self.continueSaving = function (item, callback) {
+		// Game Status Setted, agora salvar os dados
+		_self.getHeroCounter(item, _self.saveNewHeroCounter);
+		_self.getMapCounter (item);
+		_self.getHourCounter(item);
+		_self.saveEntry     (item, callback);
+	}
 
 	// Get Scores
-	_self.getScoreCounter = function (item, callback) {
+	_self.getScoreCounter = function (item, continueCallback, callback) {
 
 		var uid = _self.getUserUid();
 		var path = "/" + uid + "/scores";
@@ -244,11 +234,11 @@ var Firebase = function() {
 					_self.gameStatus(0);
 				}
 				
-				callback(contadorDeScorePartidas,item);
+				_self.saveScoreCounter(contadorDeScorePartidas, item, continueCallback, callback);
 
 			});
 	}
-	_self.saveScoreCounter = function (counter,item) {
+	_self.saveScoreCounter = function (counter, item, continueCallback, callback) {
 
 		var obj = null;
 		delete obj;
@@ -267,52 +257,84 @@ var Firebase = function() {
 					console.error(error);
 				} else {
 					// Chamar a funcao
-					_self.getHeroCounter(item, _self.saveNewHeroCounter)
+					continueCallback(item, callback);
 				}
 			});
 	}
 	_self.getScores = function (callback) {
 		
+		var uid  = _self.getUserUid();
+		var path = "/" + uid + "/scores"; 
+		
 		firebase
 			.database()
-			.ref('score/')
+			.ref(path)
 			.once("value", function(snapshot){
 				
 				callback(snapshot.val());
 
 			});
 	}
+
+	// Apenas para settar o score inicial
 	_self.setScoreInicial = function (val, callback) {
+		
 		var obj = null;
 		delete obj;
+
+		var uid  = _self.getUserUid();
+		var path = "/" + uid + "/scores"; 
 
 		obj = {};
 		obj[0] = val;
 
 		firebase
 			.database()
-			.ref('/score')
+			.ref(path)
 			.update(obj);
 
-		callback(val);		
+		_self.getScoreInicial(callback);
 	}
 	_self.getScoreInicial = function (callback) {
+		var uid  = _self.getUserUid();
+		var path = "/" + uid + "/scores"; 
+
 		firebase
 			.database()
-			.ref('score/')
+			.ref(path)
 			.once("value", function(snapshot){
 				
-				callback(snapshot.val()[0]);
+				var value = false;
+				if (snapshot.val() != null) {
+					value = snapshot.val()[0];
+				}
+				callback(value);
 
 			});				
 	}
 
 	_self.heroesNeverDie = function (callback) {
 		
+		var uid = _self.getUserUid();
+		var path = "/" + uid + "/heroes";
+
 		firebase
 		.database()
-		.ref('heroes')
-		.orderByChild('heroes')
+		.ref(path)
+		.once("value", function(snapshot){
+				
+			callback(snapshot.val());
+
+		});	
+	}
+	_self.mapsNeverDie = function (callback) {
+		
+		var uid = _self.getUserUid();
+		var path = "/" + uid + "/maps";
+
+		firebase
+		.database()
+		.ref(path)
 		.once("value", function(snapshot){
 				
 			callback(snapshot.val());

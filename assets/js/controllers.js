@@ -16,49 +16,60 @@ app.controller('NavController', ['$scope', function ($scope) {
 app.controller('MenuController', ['$scope', function($scope) {
 }])
 
-app.controller('HomeController', ['$scope','ViewControl','User','Score','Home', function($scope,ViewControl,User,Score,Home){
+app.controller('HomeController', function($scope,User,Score,Home,$timeout){
  	
- 	var checkEnterStatus = ViewControl.getInitial();
-	$scope.series = ['SR'];
-	$scope.labels = ['Start','Fim'];
-	$scope.data   = ['0','4000'];
 	$scope.showScoreInicial = false;
-	console.dir(User);
-
-	$scope.onClick = function (points, evt) {
-    	// Acao quando Clicar
-  	};
-  	$scope.datasetOverride = [{ yAxisID: 'abacate' }, {}];
-  	$scope.options = {
-    	scales: {
-      		yAxes: [
-        		{
-					id: 'abacate',
-					type: 'linear',
-					display: true,
-					position: 'right'
-				}
-      		]
-    	}
-  	};	
+	function maisJogados(a,b) {
+	  	if (a.sum > b.sum)
+	    	return -1;
+	  	if (a.sum < b.sum)
+	    	return 1;
+	  	return 0;
+	}
+	function maisVitorias(a,b) {
+	  	if (a.wins > b.wins)
+	    	return -1;
+	  	if (a.wins < b.wins)
+	    	return 1;
+	  	return 0;
+	}
+	function maisDerrotas(a,b) {
+	  	if (a.wins > b.wins)
+	    	return -1;
+	  	if (a.wins < b.wins)
+	    	return 1;
+	  	return 0;
+	}
 
  	var setGraphScore = function (valores) {
+ 		
+ 		$scope.series = ['SR'];
+  		$scope.datasetOverride = [{ xAxisID: 'jogos' }, { yAxisID: 'SR' }];
+		
+  		$scope.options = {
+    		scales: {
+      			yAxes: [
+	        		{
+						id: 'SR',
+						type: 'linear',
+						display: true,
+						position: 'left'
+					}
+      			]
+    		}
+  		};
 
  		if (valores != undefined ) {
 
 	 		$timeout(function(){
 
-			  	var a = [];
-			  	
-			  	$scope.labels.splice(0,2);
-			  	$scope.data.splice(0,2);
+			  	$scope.labels = [];
+				$scope.data   = [];
 
 		 		for (var i=0; i < valores.length; i++) {
 		 			$scope.labels.push(i);
-		 			a.push(valores[i]);
+		 			$scope.data.push(valores[i]);
 		 		}
-
-		 		$scope.data.push(a);
 
 			}, 200);
 
@@ -66,9 +77,16 @@ app.controller('HomeController', ['$scope','ViewControl','User','Score','Home', 
  	}
 
   	var scoreInicialCallback = function (value) {
-  		$scope.scoreInicialValue = value;
-  		$scope.showScoreInicial = true;
+  		
+  		if (value) {
+  			$scope.scoreInicialValue = value;
+	  		$scope.showScoreInicial = true;
+	  		if (!$scope.$$phase) {
+	  			$scope.$apply();
+	  		}	
+  		}
   	} 	
+
   	$scope.setScoreInicial = function () {
   		Score.setScoreInicial($scope.scoreInicialValue, scoreInicialCallback);
   	}
@@ -76,25 +94,115 @@ app.controller('HomeController', ['$scope','ViewControl','User','Score','Home', 
   		Score.getScoreInicial(scoreInicialCallback);
   	}
 
-	if (!checkEnterStatus) {
-		$scope.series = ['SR'];
-		$scope.labels = ['Start','Fim'];
-		$scope.data   = ['0','4000'];
-		$scope.showScoreInicial = false;
-		getScoreInicial();
-	  	ViewControl.setInitial();
+ 	var HeroesNeverDieCallback = function (data) {
+ 		
+ 		var heroes = [];
+ 		
+ 		for (var i=0; i < Object.keys(data).length; i++) {
+
+ 			var sum = 0;
+ 			var win = 0;
+ 			var draw = 0;
+ 			var loss = 0;
+ 			var hero = Object.keys(data)[i];
+ 			
+ 			if (data[hero].win != null || data[hero].win != undefined) {
+ 				win = data[hero].win;
+ 			}
+ 			if (data[hero].draw != null || data[hero].draw != undefined) {
+ 				draw = data[hero].draw;
+ 			}
+ 			if (data[hero].loss != null || data[hero].loss != undefined) {
+ 				loss = data[hero].loss;
+ 			}
+ 			
+ 			sum = win + draw + loss;
+
+ 			var obj = {};
+ 			obj = {
+ 				'hero': hero,
+ 				'sum': sum,
+ 				'wins' : win,
+ 				'draws' : draw,
+ 				'losses' : loss
+ 			}
+
+ 			heroes.push(obj);
+ 		}
+
+ 		console.dir(heroes);
+
+		$scope.maisJogados = heroes.sort(maisJogados);
+		$scope.maisVitorias = heroes.sort(maisVitorias);
+		$scope.maisDerrotas = heroes.sort(maisDerrotas);
+
+		if (!$scope.$$phase) {
+			$scope.$apply();
+		}
+
  	}
 
- 	var HeroesNeverDieCallback = function (data) {
- 		$scope.HeroesNeverDie = data;
+ 	var MapsNeverDieCallback = function (data) {
+ 		
+ 		var mapas = [];
+
+ 		for (var i=0; i < Object.keys(data).length; i++) {
+
+
+ 			var sum = 0;
+ 			var win = 0;
+ 			var draw = 0;
+ 			var loss = 0;
+ 			var mapa = Object.keys(data)[i];
+ 			
+ 			if (data[mapa].win != null || data[mapa].win != undefined) {
+ 				win = data[mapa].win;
+ 			}
+ 			if (data[mapa].draw != null || data[mapa].draw != undefined) {
+ 				draw = data[mapa].draw;
+ 			}
+ 			if (data[mapa].loss != null || data[mapa].loss != undefined) {
+ 				loss = data[mapa].loss;
+ 			}
+ 			
+ 			sum = win + draw + loss;
+
+ 			var obj = {};
+ 			obj = {
+ 				'mapa': mapa,
+ 				'sum': sum,
+ 				'wins' : win,
+ 				'draws' : draw,
+ 				'losses' : loss
+ 			}
+
+ 			mapas.push(obj);
+ 		}
+
+ 		console.dir(mapas);
+
+		$scope.mapasMaisJogados = mapas.sort(maisJogados);
+		$scope.mapasMaisVitorias = mapas.sort(maisVitorias);
+		$scope.mapasMaisDerrotas = mapas.sort(maisDerrotas);
+
+		if (!$scope.$$phase) {
+			$scope.$apply();
+		}
+
  	}
 
  	Home.heroesNeverDie(HeroesNeverDieCallback);
+ 	Home.mapsNeverDie(MapsNeverDieCallback);
+
   	Score.getScores(setGraphScore);
   	
-}])
+  	if (!$scope.showScoreInicial) {
+  		getScoreInicial();
+  	}
+  	
+})
 
-app.controller('GameController', ['$scope','Score','Heroes','Map','Game', function($scope,Score,Heroes,Map,Game){
+app.controller('GameController', function($scope,Score,Heroes,Map,Game,$location){
 	
 	$scope.startHour = "00:00";
 	$scope.heroList = [];
@@ -166,13 +274,18 @@ app.controller('GameController', ['$scope','Score','Heroes','Map','Game', functi
 
 	var resetarForm = function (msg) {
 
-		console.log("Resetar Form");
+		console.log("Jogo Adicionado com Sucesso");
 		$scope.msg 	   = msg;
 		$scope.showMsg = 'active';
 
+		if (!$scope.$$phase) {
+			$location.path('/');
+			$scope.$apply();
+		}
+
 	}
 	
-}])
+})
 
 app.controller('LoginController', ['$rootScope', '$scope','User','$location', function($rootScope,$scope,User,$location) {
 

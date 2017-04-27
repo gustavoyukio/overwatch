@@ -9,10 +9,11 @@ angular.module('myApp', [
 run(['$rootScope', 'User', '$location', function($rootScope, User, $location){
 
     $rootScope.$on("$locationChangeStart", function(event, next, current) { 
-        
+        /*
         if (!User.getLoggedStatus()) {
             $location.path('/login');
         }
+        */
         
     });
 

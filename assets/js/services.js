@@ -168,26 +168,6 @@ app.service('Game', ['Firebase', function(Firebase){
 	return new Game();
 }])
 
-app.service('ViewControl', function(){
-
-	var ViewControl = function () {
-
-		var _self = this;
-		
-		_self.initial = false;
-
-		_self.setInitial = function () {
-			_self.initial = true;			
-		}
-		_self.getInitial = function () {
-			return _self.initial;
-		}
-
-	}
-
-	return new ViewControl();
-})
-
 app.service('User', function () {
 
 	var User = function () {
@@ -235,6 +215,10 @@ app.service('Home', ['Firebase', function(Firebase) {
 
 		_self.heroesNeverDie = function (callback) {
 			Firebase.heroesNeverDie(callback);
+		}
+
+		_self.mapsNeverDie = function (callback) {
+			Firebase.mapsNeverDie(callback);
 		}
 	}
 	return new Home();
