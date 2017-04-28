@@ -19,6 +19,9 @@ app.controller('MenuController', ['$scope', function($scope) {
 app.controller('HomeController', function($scope,User,Score,Home,$timeout){
  	
 	$scope.showScoreInicial = false;
+
+	var filtrar = function sorting () {};
+
 	function maisJogados(a,b) {
 	  	if (a.sum > b.sum)
 	    	return -1;
@@ -26,20 +29,7 @@ app.controller('HomeController', function($scope,User,Score,Home,$timeout){
 	    	return 1;
 	  	return 0;
 	}
-	function maisVitorias(a,b) {
-	  	if (a.wins > b.wins)
-	    	return -1;
-	  	if (a.wins < b.wins)
-	    	return 1;
-	  	return 0;
-	}
-	function maisDerrotas(a,b) {
-	  	if (a.wins > b.wins)
-	    	return -1;
-	  	if (a.wins < b.wins)
-	    	return 1;
-	  	return 0;
-	}
+
 
  	var setGraphScore = function (valores) {
  		
@@ -95,43 +85,8 @@ app.controller('HomeController', function($scope,User,Score,Home,$timeout){
   	}
 
  	var HeroesNeverDieCallback = function (data) {
- 		
- 		var heroes = [];
- 		
- 		for (var i=0; i < Object.keys(data).length; i++) {
 
- 			var sum = 0;
- 			var win = 0;
- 			var draw = 0;
- 			var loss = 0;
- 			var hero = Object.keys(data)[i];
- 			
- 			if (data[hero].win != null || data[hero].win != undefined) {
- 				win = data[hero].win;
- 			}
- 			if (data[hero].draw != null || data[hero].draw != undefined) {
- 				draw = data[hero].draw;
- 			}
- 			if (data[hero].loss != null || data[hero].loss != undefined) {
- 				loss = data[hero].loss;
- 			}
- 			
- 			sum = win + draw + loss;
-
- 			var obj = {};
- 			obj = {
- 				'hero': hero,
- 				'sum': sum,
- 				'wins' : win,
- 				'draws' : draw,
- 				'losses' : loss
- 			}
-
- 			heroes.push(obj);
- 		}
-
- 		console.dir(heroes);
-
+ 		/*
 		$scope.maisJogados = heroes.sort(maisJogados);
 		$scope.maisVitorias = heroes.sort(maisVitorias);
 		$scope.maisDerrotas = heroes.sort(maisDerrotas);
@@ -139,48 +94,22 @@ app.controller('HomeController', function($scope,User,Score,Home,$timeout){
 		if (!$scope.$$phase) {
 			$scope.$apply();
 		}
+		*/
 
  	}
 
  	var MapsNeverDieCallback = function (data) {
  		
- 		var mapas = [];
+ 		var heroes = [];
 
  		for (var i=0; i < Object.keys(data).length; i++) {
 
-
- 			var sum = 0;
- 			var win = 0;
- 			var draw = 0;
- 			var loss = 0;
- 			var mapa = Object.keys(data)[i];
- 			
- 			if (data[mapa].win != null || data[mapa].win != undefined) {
- 				win = data[mapa].win;
- 			}
- 			if (data[mapa].draw != null || data[mapa].draw != undefined) {
- 				draw = data[mapa].draw;
- 			}
- 			if (data[mapa].loss != null || data[mapa].loss != undefined) {
- 				loss = data[mapa].loss;
- 			}
- 			
- 			sum = win + draw + loss;
-
- 			var obj = {};
- 			obj = {
- 				'mapa': mapa,
- 				'sum': sum,
- 				'wins' : win,
- 				'draws' : draw,
- 				'losses' : loss
- 			}
-
- 			mapas.push(obj);
+ 			heroes[Object.keys(data)[i]] = data[Object.keys(data)[i]];
  		}
 
- 		console.dir(mapas);
+ 		//console.dir(heroes);
 
+ 		/*
 		$scope.mapasMaisJogados = mapas.sort(maisJogados);
 		$scope.mapasMaisVitorias = mapas.sort(maisVitorias);
 		$scope.mapasMaisDerrotas = mapas.sort(maisDerrotas);
@@ -188,6 +117,7 @@ app.controller('HomeController', function($scope,User,Score,Home,$timeout){
 		if (!$scope.$$phase) {
 			$scope.$apply();
 		}
+		*/
 
  	}
 
