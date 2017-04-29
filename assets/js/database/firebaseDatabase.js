@@ -333,16 +333,25 @@ var Firebase = function() {
 		var array = arr;
 
 		function dynamicSort(property) {
-
-    		var sortOrder = 1;
-    		if(property[0] === "-") {
-        		sortOrder = -1;
-        		property = property.substr(1);
-    		}
     		
     		return function (a,b) {
-        		var result = (a[property] > b[property]) ? -1 : (a[property] < b[property]) ? 1 : 0;
-        		return result;
+    			
+    			//console.log('comparing => ' + a[property] + ' / ' + b[property]);
+
+    			if (a[property] !== undefined  && b[property] !== undefined) {
+    				if (a[property] < b[property]) {
+    					return 1;
+    				} else {
+    					return -1;
+    				}
+    			} else if (a[property] !== undefined) {
+    				return -11;
+    			} else if (b[property] !== undefined) {
+    				//console.log('A eh undefined');
+    				return 1;
+    			}
+    			return 0;
+        		
     		}
 		}
 

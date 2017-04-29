@@ -46,12 +46,12 @@
         </div>
         <div class="panel panel-success">
             <div class="panel-heading">
-                Melhor Herói :
+                Melhor Herói : <b> {{ maisVitorias[0].name}} </b>
             </div>
         </div>
         <div class="panel panel-warning">
             <div class="panel-heading">
-                Melhor Mapa :
+                Melhor Mapa : <b> {{ mapasMaisVitorias[0].name}} </b>
             </div>
         </div>
         <div class="panel panel-warning">
@@ -61,7 +61,7 @@
         </div>
         <div class="panel panel-danger">
             <div class="panel-heading">
-                Pior Herói :
+                Pior Herói : <b> {{ maisDerrotas[0].name}} </b>
             </div>
         </div>
     </div>
@@ -80,18 +80,20 @@
                     <th>Mapa</th>
                     <th>Jogos</th>
                     <th>Vitórias</th>
+                    <th>%(wins)</th>
                     <th>Empates</th>
                     <th>Derrotas</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="item in mapasMaisJogados | limitTo:5">
-                    <td>{{$index}}</td>
-                    <td>{{item.mapa}}</td>
-                    <td>{{item.sum}}</td>
-                    <td>{{item.wins}}</td>
-                    <td>{{item.draws}}</td>
-                    <td>{{item.losses}}</td>
+                    <td>{{$index+1}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.total}}</td>
+                    <td>{{item.win}}</td>
+                    <td>{{item.winPercentage | number:2}}</td>
+                    <td>{{item.draw}}</td>
+                    <td>{{item.loss}}</td>
                 </tr>
             </tbody>
         </table>
@@ -99,21 +101,23 @@
         <table class="table table-hover table-striped table-bordered">
             <thead">
                 <tr>
-                    <th colspan="4"> Mais Vitoriosos</th>
+                    <th colspan="5"> Mais Vitoriosos</th>
                 </tr>
                 <tr>
                     <th>#</th>
                     <th>Mapa</th>
+                    <th>%</th>
                     <th>Vitórias</th>
                     <th>Jogos</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="item in mapasMaisVitorias | limitTo:5">
-                    <td>{{$index}}</td>
-                    <td>{{item.mapa}}</td>
-                    <td>{{item.wins}}</td>
-                    <td>{{item.sum}}</td>
+                    <td>{{$index+1}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.winPercentage | number:2}}</td>
+                    <td>{{item.win}}</td>
+                    <td>{{item.total}}</td>
                 </tr>
             </tbody>
         </table>
@@ -121,21 +125,23 @@
         <table class="table table-hover table-striped table-bordered">
             <thead">
                 <tr>
-                    <th colspan="4"> Piores Mapas</th>
+                    <th colspan="5"> Piores Mapas</th>
                 </tr>
                 <tr>
                     <th>#</th>
                     <th>Mapa</th>
+                    <th>%</th>
                     <th>Derrotas</th>
                     <th>Jogos</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="item in mapasMaisDerrotas | limitTo:5">
-                    <td>{{$index}}</td>
-                    <td>{{item.mapa}}</td>
-                    <td>{{item.losses}}</td>
-                    <td>{{item.sum}}</td>
+                    <td>{{$index+1}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.lossPercentage | number:2}}</td>
+                    <td>{{item.loss}}</td>
+                    <td>{{item.total}}</td>
                 </tr>
             </tbody>
         </table>
@@ -147,25 +153,27 @@
         <table class="table table-hover table-striped table-bordered">
             <thead">
                 <tr>
-                    <th colspan='6'>Mais Jogados</th>
+                    <th colspan='7'>Mais Jogados</th>
                 </tr>
                 <tr>
                     <th>#</th>
                     <th>Herói</th>
                     <th>Jogos</th>
                     <th>Vitórias</th>
+                    <th>%(win)</th>
                     <th>Empates</th>
                     <th>Derrotas</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="item in maisJogados | limitTo:5">
-                    <td>{{$index}}</td>
-                    <td>{{item.hero}}</td>
-                    <td>{{item.sum}}</td>
-                    <td>{{item.wins}}</td>
-                    <td>{{item.draws}}</td>
-                    <td>{{item.losses}}</td>
+                    <td>{{$index+1}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.total}}</td>
+                    <td>{{item.win}}</td>
+                    <td>{{item.winPercentage | number:2}}</td>
+                    <td>{{item.draw}}</td>
+                    <td>{{item.loss}}</td>
                 </tr>
             </tbody>
         </table>
@@ -173,21 +181,23 @@
         <table class="table table-hover table-striped table-bordered">
             <thead">
                 <tr>
-                    <th colspan="4"> Mais Vitoriosos</th>
+                    <th colspan="5"> Mais Vitoriosos</th>
                 </tr>
                 <tr>
                     <th>#</th>
                     <th>Herói</th>
+                    <th>%(win)</th>
                     <th>Vitórias</th>
                     <th>Jogos</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="item in maisJogados | limitTo:5">
-                    <td>{{$index}}</td>
-                    <td>{{item.hero}}</td>
-                    <td>{{item.wins}}</td>
-                    <td>{{item.sum}}</td>
+                    <td>{{$index+1}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.winPercentage | number:2}}</td>
+                    <td>{{item.win}}</td>
+                    <td>{{item.total}}</td>
                 </tr>
             </tbody>
         </table>
@@ -195,21 +205,23 @@
         <table class="table table-hover table-striped table-bordered">
             <thead">
                 <tr>
-                    <th colspan="4"> Piores Heróis</th>
+                    <th colspan="5"> Piores Heróis</th>
                 </tr>
                 <tr>
                     <th>#</th>
                     <th>Herói</th>
+                    <th>%(loss)</th>
                     <th>Derrotas</th>
                     <th>Jogos</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="item in maisJogados | limitTo:5">
-                    <td>{{$index}}</td>
-                    <td>{{item.hero}}</td>
-                    <td>{{item.losses}}</td>
-                    <td>{{item.sum}}</td>
+                    <td>{{$index+1}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.lossPercentage | number:2}}</td>
+                    <td>{{item.loss}}</td>
+                    <td>{{item.total}}</td>
                 </tr>
             </tbody>
         </table>

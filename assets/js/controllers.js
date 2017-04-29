@@ -93,7 +93,6 @@ app.controller('HomeController', function($scope,User,Score,Home,$timeout){
  		//console.dir(data);
 
 		$scope.maisJogados  = data[0];
-		console.dir($scope.maisJogados);
 		$scope.maisVitorias = data[1];
 		$scope.maisDerrotas = data[2];
 
