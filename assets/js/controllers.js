@@ -19,6 +19,7 @@ app.controller('MenuController', ['$scope', function($scope) {
 app.controller('HomeController', function($scope,User,Score,Home,$timeout){
  	
 	$scope.showScoreInicial = false;
+	$scope.biggerScore = 0;
 
 	var filtrar = function sorting () {};
 
@@ -59,6 +60,9 @@ app.controller('HomeController', function($scope,User,Score,Home,$timeout){
 		 		for (var i=0; i < valores.length; i++) {
 		 			$scope.labels.push(i);
 		 			$scope.data.push(valores[i]);
+		 			if (valores[i] > $scope.biggerScore) {
+		 				$scope.biggerScore = valores[i];
+		 			}
 		 		}
 
 			}, 200);
@@ -86,38 +90,30 @@ app.controller('HomeController', function($scope,User,Score,Home,$timeout){
 
  	var HeroesNeverDieCallback = function (data) {
 
- 		/*
-		$scope.maisJogados = heroes.sort(maisJogados);
-		$scope.maisVitorias = heroes.sort(maisVitorias);
-		$scope.maisDerrotas = heroes.sort(maisDerrotas);
+ 		//console.dir(data);
+
+		$scope.maisJogados  = data[0];
+		console.dir($scope.maisJogados);
+		$scope.maisVitorias = data[1];
+		$scope.maisDerrotas = data[2];
 
 		if (!$scope.$$phase) {
 			$scope.$apply();
 		}
-		*/
 
  	}
 
  	var MapsNeverDieCallback = function (data) {
  		
- 		var heroes = [];
+ 		//console.dir(data);
 
- 		for (var i=0; i < Object.keys(data).length; i++) {
-
- 			heroes[Object.keys(data)[i]] = data[Object.keys(data)[i]];
- 		}
-
- 		//console.dir(heroes);
-
- 		/*
-		$scope.mapasMaisJogados = mapas.sort(maisJogados);
-		$scope.mapasMaisVitorias = mapas.sort(maisVitorias);
-		$scope.mapasMaisDerrotas = mapas.sort(maisDerrotas);
+		$scope.mapasMaisJogados  = data[0];
+		$scope.mapasMaisVitorias = data[1];
+		$scope.mapasMaisDerrotas = data[2];
 
 		if (!$scope.$$phase) {
 			$scope.$apply();
 		}
-		*/
 
  	}
 

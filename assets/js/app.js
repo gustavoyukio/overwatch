@@ -37,6 +37,6 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
       controller: "LoginController"
     })
 
-  	//.otherwise({redirectTo: '/login'});
+  	.otherwise({redirectTo: '/login'});
 
 }]);

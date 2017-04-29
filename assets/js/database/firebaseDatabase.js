@@ -332,15 +332,21 @@ var Firebase = function() {
 		
 		var array = arr;
 
-		function sorting(a,b) {
-			if (a[field] > b[field])
-				return 1;
-			if (a[field] < b[field])
-				return -1
-			return 0
+		function dynamicSort(property) {
+
+    		var sortOrder = 1;
+    		if(property[0] === "-") {
+        		sortOrder = -1;
+        		property = property.substr(1);
+    		}
+    		
+    		return function (a,b) {
+        		var result = (a[property] > b[property]) ? -1 : (a[property] < b[property]) ? 1 : 0;
+        		return result;
+    		}
 		}
 
-		array = array.sort(sorting);
+		array = array.sort(dynamicSort(field));
 
 		return array;
 
@@ -365,12 +371,11 @@ var Firebase = function() {
 				obj[i].name = Object.keys(result)[i];
 			}
 
-			ret.push('maisJogados');
-			ret['maisJogados'] = _self.sortByField('total',obj);
-			
-			console.dir(ret);
+			ret.push(_self.sortByField('total',obj));
+			ret.push(_self.sortByField('winPercentage',obj));
+			ret.push(_self.sortByField('lossPercentage',obj));
 
-			return obj;
+			callback(ret);
 
 		});	
 	}
@@ -384,7 +389,20 @@ var Firebase = function() {
 		.ref(path)
 		.once("value", function(snapshot){
 				
-			callback(snapshot.val());
+			var obj = [];
+			var ret = [];
+			var result = snapshot.val();
+
+			for (var i=0; i < Object.keys(result).length; i++) {
+				obj[i]      = result[Object.keys(result)[i]];
+				obj[i].name = Object.keys(result)[i];
+			}
+
+			ret.push(_self.sortByField('total',obj));
+			ret.push(_self.sortByField('winPercentage',obj));
+			ret.push(_self.sortByField('lossPercentage',obj));
+
+			callback(ret);
 
 		});	
 	}
