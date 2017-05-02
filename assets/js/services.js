@@ -161,7 +161,13 @@ app.service('Game', ['Firebase', function(Firebase){
 		}
 		_self.saveEntry = function (callback) {
 			//save obj
+			//console.dir(_self.obj);
 			Firebase.saveNewGameEntry(_self.obj, callback);
+		}
+
+		// Reset
+		_self.resetHeroes = function () {
+			_self.obj.heroes = [];
 		}
 	}
 

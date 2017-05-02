@@ -51,35 +51,38 @@ var Firebase = function() {
 
 	_self.dataSetup = function (arr) {
 
-		var obj = arr;
+		if (arr == undefined) {
+			arr = {};
+		}
 
-		if (obj['win'] == null) {
-			obj['win'] = 0;
+		if (arr['win'] == null) {
+			arr['win'] = 0;
 		}
-		if (obj['loss'] == null) {
-			obj['loss'] = 0;
+		if (arr['loss'] == null) {
+			arr['loss'] = 0;
 		}
-		if (obj['draw'] == null) {
-			obj['draw'] = 0;
+		if (arr['draw'] == null) {
+			arr['draw'] = 0;
 		}
-		if (obj['total'] == null) {
-			obj['total'] = 0;
+		if (arr['total'] == null) {
+			arr['total'] = 0;
 		}
-		if (obj['winPercentage'] == null) {
-			obj['winPercentage'] = 0;
+		if (arr['winPercentage'] == null) {
+			arr['winPercentage'] = 0;
 		}
-		if (obj['lossPercentage'] == null) {
-			obj['lossPercentage'] = 0;
+		if (arr['lossPercentage'] == null) {
+			arr['lossPercentage'] = 0;
 		}
 		// Adicionamos no status e no total
-		obj[_self.gameStatusLabel] = obj[_self.gameStatusLabel] + 1;
-		obj['total'] = obj['total'] + 1;
+		arr[_self.gameStatusLabel] = arr[_self.gameStatusLabel] + 1;
+		arr['total'] = arr['total'] + 1;
 
 		// agora alteramos as porcentagens
-		obj['lossPercentage'] = parseFloat(obj['loss'])/parseFloat(obj['total']);
-		obj['winPercentage'] = parseFloat(obj['win'])/parseFloat(obj['total']);
+		arr['lossPercentage'] = parseFloat(arr['loss'])/parseFloat(arr['total']);
+		arr['winPercentage'] = parseFloat(arr['win'])/parseFloat(arr['total']);
 
-		return obj;
+		return arr;
+
 	}
 
 	// Hero Counter
@@ -373,7 +376,7 @@ var Firebase = function() {
 
 			var obj = [];
 			var ret = [];
-			var result = snapshot.val();
+			var result = snapshot.val() || {};
 
 			for (var i=0; i < Object.keys(result).length; i++) {
 				obj[i]      = result[Object.keys(result)[i]];
@@ -400,7 +403,7 @@ var Firebase = function() {
 				
 			var obj = [];
 			var ret = [];
-			var result = snapshot.val();
+			var result = snapshot.val() || {};
 
 			for (var i=0; i < Object.keys(result).length; i++) {
 				obj[i]      = result[Object.keys(result)[i]];

@@ -156,14 +156,10 @@ app.controller('GameController', function($scope,Score,Heroes,Map,Game,$location
 	// adicionar hero
 	$scope.adicionarHero = function () {
 
-		if(
-			$scope.heroList.indexOf( $scope.HeroSelecionado ) == -1 ||
-			$scope.HeroSelecionado != undefined
-		){
+		if ($scope.heroList.indexOf( $scope.HeroSelecionado ) == -1 || $scope.HeroSelecionado != undefined) {
 			$scope.heroList.push($scope.HeroSelecionado);
 			Game.setHeroes($scope.HeroSelecionado);
-		}
-		
+		}	
 	}
 
 	$scope.salvarJogo = function () {
@@ -178,8 +174,7 @@ app.controller('GameController', function($scope,Score,Heroes,Map,Game,$location
 
 		} else {
 			console.log("Entradas Erradas")	
-		}
-		
+		}		
 	}
 
 	var verifyForm = function () {
@@ -199,7 +194,6 @@ app.controller('GameController', function($scope,Score,Heroes,Map,Game,$location
 
 	var resetarForm = function (msg) {
 
-		console.log("Jogo Adicionado com Sucesso");
 		$scope.msg 	   = msg;
 		$scope.showMsg = 'active';
 
@@ -207,7 +201,10 @@ app.controller('GameController', function($scope,Score,Heroes,Map,Game,$location
 			$location.path('/');
 			$scope.$apply();
 		}
+	}
 
+	$scope.startForm = function () {
+		Game.resetHeroes();
 	}
 	
 })
