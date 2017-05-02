@@ -148,8 +148,7 @@ app.controller('GameController', function($scope,Score,Heroes,Map,Game,$location
 	}
 
 	getHorario();
-
-	// select to choose hero
+	
 	$scope.optionsHero = Heroes.getHeroes();
 	$scope.optionsMaps = Map.getMaps();
 

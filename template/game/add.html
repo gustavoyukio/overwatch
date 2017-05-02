@@ -16,11 +16,46 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="row">
+		<div class="form-group col-xs-6 col-sm-4">
+			<label for="">Sr do seu Time:</label>
+			<input type="number" name="teamsr" value="0">
+		</div>
+		<div class="form-group col-xs-6 col-sm-4">
+			<label for="">Sr do Time Inimigo:</label>
+			<input type="number" name="enemysr" value="0">
+		</div>
+	</div>
 	
 	<div class="row">
 
-		<div class="col-xs-6">
+		<div class="col-xs-12">
+
 			<div class="row">
+				<h2 class="col-xs-12">
+					Selecione o Mapa
+				</h2>
+			</div>
+
+			<div class="row">
+
+				<div class="col-xs-3" ng-repeat="optionsMaps as item">
+					<div class="radio">
+	  					<label>
+	    					<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+	    					{{ item }}
+	  					</label>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+		<div class="col-xs-6">
+		<div class="row">
 			<h2 class="col-xs-12">
 				Selecione os Herois jogados
 			</h2>
@@ -50,26 +85,6 @@
 					</div>
 				</div>
 				
-			</div>
-			</div>
-		</div>
-
-		<div class="col-xs-6">
-		<div class="row">
-			<h2 class="col-xs-12">
-				Selecione o Mapa
-			</h2>
-			
-			<div class="col-xs-12">
-				<div class="form-group">
-					<label for="selectMap">Selecione o Heroi</label>
-					<select id="selectMap" class="form-control"
-						ng-model="MapaSelecionado">
-						<option value="{{item}}" ng-repeat="item in optionsMaps | orderBy : item">
-							{{item}}
-						</option>
-					</select>
-				</div>
 			</div>
 		</div>
 		</div>
