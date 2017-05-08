@@ -41,30 +41,55 @@ app.service("Heroes", function(){
 		var _self = this;
 
 		_self.heroesList = [
-			'Genji',
-			'McCree',
-			'Pharah',
-			'Reaper',
-			'Soldier76',
-			'Sombra',
-			'Tracer',
-			'Bastion',
-			'Hanzo',
-			'Junkrat',
-			'Mei',
-			'Torbjorn',
-			'Widowmaker',
-			'DVa',
-			'Orisa',
-			'Reinhardt',
-			'Roadhog',
-			'Winston',
-			'Zarya',
-			'Ana',
-			'Lucio',
-			'Mercy',
-			'Symmetra',
-			'Zenyatta'
+			{
+				'name' : 'Genji', 'type' : 'DPS' 
+			},{
+				'name' : 'McCree', 'type' : 'DPS' 
+			},{
+				'name' : 'Pharah', 'type' : 'DPS' 
+			},{
+				'name' : 'Reaper', 'type' : 'DPS' 
+			},{
+				'name' : 'Soldier76', 'type' : 'DPS' 
+			},{
+				'name' : 'Sombra', 'type' : 'DPS' 
+			},{
+				'name' : 'Tracer', 'type' : 'DPS' 
+			},{
+				'name' : 'Bastion', 'type' : 'Defense' 
+			},{
+				'name' : 'Hanzo', 'type' : 'Defense' 
+			},{
+				'name' : 'Junkrat', 'type' : 'Defense' 
+			},{
+				'name' : 'Mei', 'type' : 'Defense' 
+			},{
+				'name' : 'Torbjorn', 'type' : 'Defense' 
+			},{
+				'name' : 'Widowmaker', 'type' : 'Defense' 
+			},{
+				'name' : 'DVa', 'type' : 'Tank' 
+			},{
+				'name' : 'Orisa', 'type' : 'Tank' 
+			},{
+				'name' : 'Reinhardt', 'type' : 'Tank' 
+			},{
+				'name' : 'Roadhog', 'type' : 'Tank' 
+			},{
+				'name' : 'Winston', 'type' : 'Tank' 
+			},{
+				'name' : 'Zarya', 'type' : 'Tank' 
+			},{
+				'name' : 'Ana', 'type' : 'Support' 
+			},{
+				'name' : 'Lucio', 'type' : 'Support' 
+			},{
+				'name' : 'Mercy', 'type' : 'Support' 
+			},{
+				'name' : 'Symmetra', 'type' : 'Support' 
+			},{
+				'name' : 'Zenyatta', 'type' : 'Support' 
+			}
 		];
 
 		_self.getHeroes = function () {
@@ -144,14 +169,21 @@ app.service('Game', ['Firebase', function(Firebase){
 			'map':'',
 			'score': '',
 			'hour': '',
-			'heroes':[]
+			'heroes':[],
+			'types': [],
+			'srs': {
+				'team': 0,
+				'enemy': 0
+			}
 		}
 
 		_self.setMap = function (item) {
 			_self.obj.map = item;
 		}
 		_self.setHeroes = function (item) {
-			_self.obj.heroes.push(item);
+			var hero = JSON.parse(item);
+			_self.obj.heroes.push(hero.name);
+			_self.obj.types.push(hero.type);
 		}
 		_self.setScore = function (item) {
 			_self.obj.score = item;
@@ -159,16 +191,20 @@ app.service('Game', ['Firebase', function(Firebase){
 		_self.setHour = function (item) {
 			_self.obj.hour = item;
 		}
+		_self.setSRs = function (team, enemy) {
+			_self.obj.srs.team = team;
+			_self.obj.srs.enemy = enemy;
+		}
 		_self.saveEntry = function (callback) {
-			//save obj
-			//console.dir(_self.obj);
 			Firebase.saveNewGameEntry(_self.obj, callback);
 		}
-
-		// Reset
-		_self.resetHeroes = function () {
+		_self.resetGameObject = function () {
 			_self.obj.heroes = [];
+			_self.obj.types  = [];
+			_self.obj.srs.team = 0;
+			_self.obj.srs.enemy = 0;
 		}
+
 	}
 
 	return new Game();

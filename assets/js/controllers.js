@@ -129,65 +129,19 @@ app.controller('HomeController', function($scope,User,Score,Home,$timeout){
 
 app.controller('GameController', function($scope,Score,Heroes,Map,Game,$location){
 	
-	$scope.startHour = "00:00";
-	$scope.heroList = [];
-	$scope.showMsg = false;
-	$scope.SrInicial = Score.getScore();
-
-	var hour = 0;
-
-	var getHorario = function () {
-		
-		var a = new Date();
-		
-		hour = (a.getHours()<10?'0':'') + a.getHours();
-		var minutes = (a.getMinutes()<10?'0':'') + a.getMinutes();
-		// function to set hour to game
-		$scope.startHour = hour+':'+minutes;
-
-	}
-
-	getHorario();
-	
-	$scope.optionsHero = Heroes.getHeroes();
-	$scope.optionsMaps = Map.getMaps();
-
-	// adicionar hero
-	$scope.adicionarHero = function () {
-
-		if ($scope.heroList.indexOf( $scope.HeroSelecionado ) == -1 || $scope.HeroSelecionado != undefined) {
-			$scope.heroList.push($scope.HeroSelecionado);
-			Game.setHeroes($scope.HeroSelecionado);
-		}	
-	}
-
-	$scope.salvarJogo = function () {
-		
-		//verify
-		if (verifyForm()) {
-
-			Game.setMap($scope.MapaSelecionado);
-			Game.setScore($scope.SrFinal);
-			Game.setHour(hour);
-			Game.saveEntry(resetarForm);
-
-		} else {
-			console.log("Entradas Erradas")	
-		}		
-	}
-
 	var verifyForm = function () {
 		
 		var retorno = true;
+
 		if (
 			$scope.MapaSelecionado == undefined || 
 			$scope.MapaSelecionado == null || 
 			$scope.SrFinal == undefined || 
 			$scope.SrFinal == null
-			) 
-		{
-			retorno = false;
-		}
+			){
+				retorno = false;
+			}
+			
 		return retorno;
 	}
 
@@ -202,8 +156,65 @@ app.controller('GameController', function($scope,Score,Heroes,Map,Game,$location
 		}
 	}
 
+	var getHorario = function () {
+		
+		var a = new Date();
+		
+		hour = (a.getHours()<10?'0':'') + a.getHours();
+		var minutes = (a.getMinutes()<10?'0':'') + a.getMinutes();
+
+		var day 	= (a.getDate() < 10 ? '0' : '' ) + a.getDate();
+		var month 	= (a.getMonth() < 10 ? '0' : '') + a.getMonth();
+
+		$scope.startHour = hour+':'+minutes;
+		$scope.startDate = day+'/'+month;
+	}
+
+	var hour = 0;
+
+	$scope.startHour 	= "00:00";
+	$scope.heroList 	= [];
+	$scope.showMsg 		= false;
+	$scope.SrInicial 	= Score.getScore();
+	$scope.optionsHero 	= Heroes.getHeroes();
+	$scope.optionsMaps 	= Map.getMaps();
+	$scope.teamSR		= 0;
+	$scope.enemySR		= 0;
+
+	getHorario();
+
+	$scope.adicionarHero = function (a) {
+
+		if ($scope.heroList.indexOf( $scope.HeroSelecionado ) == -1 || $scope.HeroSelecionado != undefined) {
+			$scope.heroList.push(JSON.parse($scope.HeroSelecionado));
+			Game.setHeroes($scope.HeroSelecionado);
+		}	
+	}
+
+	$scope.salvarJogo = function () {
+		
+		if (verifyForm()) {
+
+			Game.setSRs($scope.teamSR,$scope.enemySR);
+			Game.setMap($scope.MapaSelecionado);
+			Game.setScore($scope.SrFinal);
+			Game.setHour(hour);
+			//Game.saveEntry(resetarForm);
+
+		} else {
+			console.log("Entradas Erradas")	
+		}
+	}
+	
+	$scope.SRs = function () {
+
+		var a = $scope.teamSR;
+		var b = $scope.enemySR;
+
+	}
+
 	$scope.startForm = function () {
-		Game.resetHeroes();
+		Game.resetGameObject();
 	}
 	
 })

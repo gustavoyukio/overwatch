@@ -82,8 +82,13 @@ var Firebase = function() {
 		arr['winPercentage'] = parseFloat(arr['win'])/parseFloat(arr['total']);
 
 		return arr;
+	}
+
+	_self.srSetup = function (item) {
 
 	}
+	// SR Setup
+	_self.getSr
 
 	// Hero Counter
 	_self.saveNewHeroCounter = function (hero, valor) {
@@ -93,7 +98,6 @@ var Firebase = function() {
 		var obj  = _self.dataSetup(valor);
 
 		firebase.database().ref(path).update(obj);
-
 	}
 	_self.getHeroCounter = function (item, callback, contador = 0) {
 
@@ -145,7 +149,6 @@ var Firebase = function() {
 		var obj  = _self.dataSetup(valor);
 
 		firebase.database().ref(path).update(obj);
-
 	}
 	_self.getMapCounter = function (item) {
 
@@ -173,7 +176,6 @@ var Firebase = function() {
 		var obj  = _self.dataSetup(valor);
 
 		firebase.database().ref(path).update(obj);
-
 	}
 	_self.getHourCounter = function (item) {
 
@@ -194,6 +196,59 @@ var Firebase = function() {
 			});
 	}
 
+	// Type Counter
+	_self.saveTypeCounter = function (type, valor) {
+		
+		var uid  = _self.getUserUid();
+		var path = "/" + uid + "/types/" + type;
+		var obj  = _self.dataSetup(valor);
+		console.log(path);
+
+		firebase.database().ref(path).update(obj);
+	}
+	_self.getTypeCounter = function (item) {
+
+		var uid  = _self.getUserUid();
+		console.dir(item);
+
+		for (var i=0; i < item.types.length; i++) {
+			
+			var type = '';
+			
+			type = item.types[i];		
+			var path = "/" + uid + "/type/" + type;
+			
+			var typeObj = function(type, firebaseValues) {
+				
+				var _self = this;
+				_self.type = type;
+				_self.firebaseValues = firebaseValues;
+
+				_self.abacate = function (snapshot) {
+				
+					if (snapshot.val() != null) {
+
+						var value = snapshot.val();
+
+					}
+
+					_self.firebaseValues.saveTypeCounter(_self.type, value, _self.startMapCounter);
+
+				}
+
+			};
+
+			var newTypeObj = new typeObj(type, _self);
+
+			firebase
+				.database()
+				.ref(path)
+				.once("value", newTypeObj.abacate);
+			
+			
+		}
+	}
+
 	// Save Game Entry
 	_self.saveEntry = function (obj, callback) {
 
@@ -207,7 +262,7 @@ var Firebase = function() {
 
 		var msg = "Jogo Adicionado com Sucesso";
 
-		callback(msg);
+		//callback(msg);
 	}
 
 	// Primeiro Acesso de Gravacao de Jogo
@@ -221,6 +276,7 @@ var Firebase = function() {
 		_self.getHeroCounter(item, _self.saveNewHeroCounter);
 		_self.getMapCounter (item);
 		_self.getHourCounter(item);
+		_self.getTypeCounter(item);
 		_self.saveEntry     (item, callback);
 	}
 

@@ -1,4 +1,5 @@
-<h1>Adicionar Novo Jogo Competitivo</h1>
+<!--<h1>Adicionar Novo Jogo Competitivo</h1>-->
+<h1>Abacate</h1>
 
 <div class="row"><div class="col-xs-12 game">
 	<div class="alert alert-success msg" ng-class="showMsg">
@@ -10,53 +11,60 @@
 	
 	<div class="row">
 		<div class="info start">
+			
 			<div class="col-xs-3">
 				<div class="form-group">
 					<h3>Horario de Inicio</h3>
 					<input type="text" name="startingHour" class="form-control" value="{{startHour}}" disabled>
 				</div>
 			</div>
+			<div class="col-xs-3">
+				<div class="form-group">
+					<h3>Data da Partida</h3>
+					<input type="text" name="startingDate" class="form-control" value="{{startDate}}" disabled>
+				</div>
+			</div>
+
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="form-group col-xs-4 col-sm-4">
 			<label for="">Sr do seu Time:</label>
-			<input type="number" name="teamsr" value="0" class="form-control">
+			<input type="number" name="teamsr" value="0" class="form-control" ng-model="teamSR" ng-change="SRs();">
 		</div>
 		<div class="form-group col-xs-4 col-sm-4">
 			<label for="">Sr do Time Inimigo:</label>
-			<input type="number" name="enemysr" value="0" class="form-control">
+			<input type="number" name="enemysr" value="0" class="form-control" ng-model="enemySR" ng-change="SRs();">
 		</div>
 	</div>
 	
 	<div class="row">
 
-		<div class="col-xs-12">
+		<div class="col-xs-4">
 
 			<div class="row">
+				
 				<h2 class="col-xs-12">
 					Selecione o Mapa
 				</h2>
-			</div>
-
-			<div class="row maps">
-
-				<div class="col-xs-12 col-sm-4 col-md-3" ng-repeat="item in optionsMaps">
-					<div class="radio">
-	  					<label>
-	    					<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-	    					{{ item }}
-	  					</label>
+				
+				<div class="col-xs-12">
+					<div class="form-group">
+						<select name="mapas" id="selectMap" class="form-control" ng-model="MapaSelecionado">
+							<option value="{{item}}" ng-repeat="item in optionsMaps | orderObjectBy">
+								{{item}}
+							</option>
+						</select>		
 					</div>
 				</div>
 
 			</div>
+
 		</div>
 
-	</div>
-	<div class="row">
-		<div class="col-xs-12">
+
+		<div class="col-xs-4">
 		<div class="row">
 			<h2 class="col-xs-12">
 				Selecione os Herois jogados
@@ -64,15 +72,14 @@
 			
 			<div class="col-xs-12 heroes">
 				<div class="form-group">
-					<label for="selectHero">Selecione o Heroi</label>
 					<div class="select">
 						<select id="selectHero" class="form-control"
-							ng-model="HeroSelecionado">
-							<option value="{{item}}" ng-repeat="item in optionsHero | orderBy : item">
-								{{item}}
+							ng-model="HeroSelecionado"
+							ng-change="adicionarHero(this.HeroSelecionado)">
+							<option value="{{item}}" ng-repeat="item in optionsHero | orderBy : item.name">
+								{{item.name}}
 							</option>
 						</select>
-						<i class="glyphicon glyphicon-plus" ng-click="adicionarHero();">adicionar</i>
 					</div>
 				</div>
 
@@ -81,7 +88,7 @@
 						<h3>Lista de Herois Selecionados</h3>
 						<ul>
 							<li ng-repeat="item in heroList">
-								{{item}}
+								{{item.name}}
 							</li>
 						</ul>		
 					</div>
