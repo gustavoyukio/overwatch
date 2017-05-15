@@ -305,12 +305,12 @@ var Firebase = function() {
 	}	
 	_self.continueSaving = function (item, callback) {
 		// Game Status Setted, agora salvar os dados
-		//_self.getHeroCounter(item, _self.saveNewHeroCounter);
-		//_self.getMapCounter (item);
-		//_self.getHourCounter(item);
-		//_self.getTypeCounter(item);
-		_self.getSRCounter(item);
-		//_self.saveEntry     (item, callback);
+		_self.getHeroCounter (item, _self.saveNewHeroCounter);
+		_self.getMapCounter (item);
+		_self.getHourCounter (item);
+		_self.getTypeCounter (item);
+		_self.getSRCounter (item);
+		_self.saveEntry (item, callback);
 	}
 
 	// Get Scores
