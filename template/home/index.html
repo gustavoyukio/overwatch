@@ -68,6 +68,52 @@
 </div>
 
 <div class="row">
+    <div class="col-xs-12">
+        <h1> Estatísticas Baseadas no Time </h1>
+    </div>
+    <div class="col-xs-12">
+        <table class="table table-hover table-striped table-bordered">
+            <thead">
+                <tr>
+                    <th colspan='6'> Maior SR do time </th>
+                </tr>
+                <tr>
+                    <th>Total</th>
+                    <th>Vitórias</th>
+                    <th>Empates</th>
+                    <th>Derrotas</th>
+                    <th>%(wins)</th>
+                    <th>%(derrotas)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{srMaior.total}}</td>
+                    <td>{{srMaior.win}}</td>
+                    <td>{{srMaior.draw}}</td>
+                    <td>{{srMaior.loss}}</td>
+                    <td>{{srMaior.winPercentage | number:2}}</td>
+                    <td>{{srMaior.lossPercentage | number:2}}</td>
+                </tr>
+            </tbody>
+             <thead">
+                <th colspan='6'> Menor SR do time </th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{srMenor.total}}</td>
+                    <td>{{srMenor.win}}</td>
+                    <td>{{srMenor.draw}}</td>
+                    <td>{{srMenor.loss}}</td>
+                    <td>{{srMenor.winPercentage | number:2}}</td>
+                    <td>{{srMenor.lossPercentage | number:2}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>    
+</div>
+
+<div class="row">
 
     <div class="col-xs-6">
         <table class="table table-hover table-striped table-bordered">

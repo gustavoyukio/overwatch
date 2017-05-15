@@ -192,8 +192,8 @@ app.service('Game', ['Firebase', function(Firebase){
 			_self.obj.hour = item;
 		}
 		_self.setSRs = function (team, enemy) {
-			_self.obj.srs.team = team;
-			_self.obj.srs.enemy = enemy;
+			var time    = _self.obj.srs.team = team;
+			var inimigo = _self.obj.srs.enemy = enemy;
 		}
 		_self.saveEntry = function (callback) {
 			Firebase.saveNewGameEntry(_self.obj, callback);
@@ -261,6 +261,10 @@ app.service('Home', ['Firebase', function(Firebase) {
 
 		_self.mapsNeverDie = function (callback) {
 			Firebase.mapsNeverDie(callback);
+		}
+
+		_self.srsNeverDie = function (callback) {
+			Firebase.srsNeverDie(callback);
 		}
 	}
 	return new Home();

@@ -84,11 +84,42 @@ var Firebase = function() {
 		return arr;
 	}
 
-	_self.srSetup = function (item) {
-
-	}
 	// SR Setup
-	_self.getSr
+	_self.saveSRCounter = function (item, valor) {
+		
+		var uid  = _self.getUserUid();
+		var path = "/" + uid + "/srs/" + item;
+		var obj  = _self.dataSetup(valor);
+
+		firebase.database().ref(path).update(obj);
+	}
+	_self.getSRCounter = function (item) {
+
+		var status = "bigger";
+
+		if (item.srs.team < item.srs.enemy) {
+			status = "smaller";
+		}
+
+		if (item.srs.team == item.srs.enemy) {
+			status = "equal";
+		}
+
+		var uid  = _self.getUserUid();
+		var path = "/" + uid + "/srs/" + status;
+
+		firebase
+			.database()
+			.ref(path)
+			.once("value", function(snapshot){
+				
+				if (snapshot.val() != null) {
+					var valor = snapshot.val();
+				}
+				_self.saveSRCounter(status,valor);
+
+			});
+	}
 
 	// Hero Counter
 	_self.saveNewHeroCounter = function (hero, valor) {
@@ -270,14 +301,16 @@ var Firebase = function() {
 		// 1 Save Score - OK
 		// Settando Game Status
 		_self.getScoreCounter(item, _self.continueSaving, callback);
+		console.log("Salvando um Jogo")
 	}	
 	_self.continueSaving = function (item, callback) {
 		// Game Status Setted, agora salvar os dados
-		_self.getHeroCounter(item, _self.saveNewHeroCounter);
-		_self.getMapCounter (item);
-		_self.getHourCounter(item);
-		_self.getTypeCounter(item);
-		_self.saveEntry     (item, callback);
+		//_self.getHeroCounter(item, _self.saveNewHeroCounter);
+		//_self.getMapCounter (item);
+		//_self.getHourCounter(item);
+		//_self.getTypeCounter(item);
+		_self.getSRCounter(item);
+		//_self.saveEntry     (item, callback);
 	}
 
 	// Get Scores
@@ -471,6 +504,23 @@ var Firebase = function() {
 			ret.push(_self.sortByField('lossPercentage',obj));
 
 			callback(ret);
+
+		});	
+	}
+	_self.srsNeverDie = function (callback) {
+		
+		var uid = _self.getUserUid();
+		var path = "/" + uid + "/srs";
+
+		firebase
+		.database()
+		.ref(path)
+		.once("value", function(snapshot){
+			
+			console.dir(snapshot.val());
+			var valor = snapshot.val();
+
+			callback(valor);
 
 		});	
 	}

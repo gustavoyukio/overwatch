@@ -116,6 +116,22 @@ app.controller('HomeController', function($scope,User,Score,Home,$timeout){
 
  	}
 
+ 	var SRsNeverDieCallback = function (data) {
+ 		
+ 		//console.dir(data);
+
+		$scope.srMaior  = data.smaller;
+		$scope.srMenor = data.bigger;
+
+		console.dir($scope.srMenor);
+
+		if (!$scope.$$phase) {
+			$scope.$apply();
+		}
+
+ 	}
+
+ 	Home.srsNeverDie(SRsNeverDieCallback);
  	Home.heroesNeverDie(HeroesNeverDieCallback);
  	Home.mapsNeverDie(MapsNeverDieCallback);
 
@@ -195,11 +211,12 @@ app.controller('GameController', function($scope,Score,Heroes,Map,Game,$location
 		
 		if (verifyForm()) {
 
+			console.log("Entrada Corretas");
 			Game.setSRs($scope.teamSR,$scope.enemySR);
 			Game.setMap($scope.MapaSelecionado);
 			Game.setScore($scope.SrFinal);
 			Game.setHour(hour);
-			//Game.saveEntry(resetarForm);
+			Game.saveEntry(resetarForm);
 
 		} else {
 			console.log("Entradas Erradas")	
