@@ -3,6 +3,26 @@
 // Declare app level module which depends on views, and components
 var app = angular.module('myApp.controllers', ["ngRoute","myApp.services","chart.js","myApp.filters"]);
 
+app.controller('HeaderController', function($rootScope, $scope, $window) {
+	
+	$scope.showArrow = false;
+	
+	$scope.$on('changeShowArrow', function (event, valor) {
+		
+		console.log(valor);
+		$scope.showArrow = valor;
+		
+		if (!$scope.$$phase) {
+			$scope.$apply();
+		}
+
+	});
+
+	$scope.voltar = function () {
+		$window.history.back();
+	}
+})
+
 app.controller('NavController', ['$scope', function ($scope) {
 	
 	$scope.showMenu = true;
@@ -10,14 +30,14 @@ app.controller('NavController', ['$scope', function ($scope) {
 	$scope.$on('abacate', function (event, valor) {
 		$scope.showMenu = valor;
 	});
-
 }])
 
 app.controller('MenuController', ['$scope', function($scope) {
 }])
 
-app.controller('HomeController', function($scope,User,Score,Home,$timeout){
+app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$timeout){
  	
+ 	$rootScope.$broadcast('changeShowArrow',false);
 	$scope.showScoreInicial = false;
 	$scope.biggerScore = 0;
 
@@ -146,11 +166,13 @@ app.controller('HomeController', function($scope,User,Score,Home,$timeout){
   	if (!$scope.showScoreInicial) {
   		getScoreInicial();
   	}
-  	
 })
 
-app.controller('GameController', function($scope,Score,Heroes,Map,Game,$location){
+app.controller('GameController', function($rootScope,$scope,Score,Heroes,Map,Game,$location){
 	
+	console.log("Game");
+	$rootScope.$broadcast('changeShowArrow',true);
+
 	var verifyForm = function () {
 		
 		var retorno = true;
@@ -233,19 +255,16 @@ app.controller('GameController', function($scope,Score,Heroes,Map,Game,$location
 
 		var a = $scope.teamSR;
 		var b = $scope.enemySR;
-
 	}
 
 	$scope.startForm = function () {
 		Game.resetGameObject();
 	}
-	
 })
 
 app.controller('LoginController', ['$rootScope', '$scope','User','$location', function($rootScope,$scope,User,$location) {
 
-
-	$rootScope.$broadcast('abacate',false);
+	$rootScope.$broadcast('changeShowArrow',false);
 
 	if (User.getLoggedStatus()) {
 
@@ -294,6 +313,5 @@ app.controller('LoginController', ['$rootScope', '$scope','User','$location', fu
 	    });
 
 	}
-    
 }])
 ;

@@ -68,13 +68,38 @@
 		.maps {
 			padding-left: 15px;
 		}
+
+		header a {
+			display: block;
+			cursor:pointer;
+			width: 60%;
+			margin: 15px auto 0 !important;
+			display: block !important;
+		}
+		header a:hover {
+			color: #9e9e9e;
+			text-decoration: none;
+		}
+		header a img {
+			height: 30%;
+			display: inline-block;
+			transform: rotateZ(180deg);
+			vertical-align: bottom;
+    		width: 20%;
+		}
 	</style>
 
 </head>
 <body>
 	
-	<header>
-		
+	<header ng-controller="HeaderController">
+		<div class="row">
+			<div class="col-xs-2">
+				<a ng-click="voltar();" ng-show="showArrow" class="btn btn-default">
+					<img src="/assets/img/arrow.jpg" alt="seta"> Voltar
+				</a>
+			</div>
+		</div>
 	</header>
 	
 	<nav ng-controller="NavController" class="col-xs-2">

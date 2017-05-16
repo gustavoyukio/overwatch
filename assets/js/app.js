@@ -15,6 +15,7 @@ run(['$rootScope', 'User', '$location', function($rootScope, User, $location){
         
     });
 
+
 }]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
 
