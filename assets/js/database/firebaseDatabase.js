@@ -233,14 +233,12 @@ var Firebase = function() {
 		var uid  = _self.getUserUid();
 		var path = "/" + uid + "/types/" + type;
 		var obj  = _self.dataSetup(valor);
-		console.log(path);
 
 		firebase.database().ref(path).update(obj);
 	}
 	_self.getTypeCounter = function (item) {
 
 		var uid  = _self.getUserUid();
-		console.dir(item);
 
 		for (var i=0; i < item.types.length; i++) {
 			
@@ -293,7 +291,7 @@ var Firebase = function() {
 
 		var msg = "Jogo Adicionado com Sucesso";
 
-		//callback(msg);
+		callback(msg);
 	}
 
 	// Primeiro Acesso de Gravacao de Jogo
@@ -517,7 +515,6 @@ var Firebase = function() {
 		.ref(path)
 		.once("value", function(snapshot){
 			
-			console.dir(snapshot.val());
 			var valor = snapshot.val();
 
 			callback(valor);

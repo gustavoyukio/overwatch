@@ -56,10 +56,18 @@ app.controller('HomeController', function($scope,User,Score,Home,$timeout){
 
 			  	$scope.labels = [];
 				$scope.data   = [];
+				var limit = valores.length;
+				var counter = 0;
 
-		 		for (var i=0; i < valores.length; i++) {
-		 			$scope.labels.push(i);
-		 			$scope.data.push(valores[i]);
+				if ( valores.length > 30 ) {
+					limit = 30;
+					counter = valores.length - 30;
+				}
+
+		 		for (var i=0; i < limit; i++) {
+		 			$scope.labels.push(counter + i);
+		 			$scope.data.push(valores[counter  + i]);
+
 		 			if (valores[i] > $scope.biggerScore) {
 		 				$scope.biggerScore = valores[i];
 		 			}
@@ -122,8 +130,6 @@ app.controller('HomeController', function($scope,User,Score,Home,$timeout){
 
 		$scope.srMaior  = data.smaller;
 		$scope.srMenor = data.bigger;
-
-		console.dir($scope.srMenor);
 
 		if (!$scope.$$phase) {
 			$scope.$apply();
