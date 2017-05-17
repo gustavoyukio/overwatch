@@ -135,3 +135,14 @@ header h1 {
     border-color: #d6e9c6;
     height: auto;
 }
+
+
+/*
+ *
+ *	Teste Para Login
+ *
+ */
+
+.main-panel.login {
+	width: 100%;
+}

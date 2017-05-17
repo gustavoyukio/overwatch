@@ -1,0 +1,13 @@
+.main-panel.login {
+    width: 100%;
+}
+.main-panel.login form {
+    text-align: center;
+}
+
+.main-panel.login form h1 {
+	font-size: 20px;
+}
+.main-panel.login form h1 small {
+	display: block;
+}

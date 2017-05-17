@@ -1,117 +1,150 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" ng-app="myApp">
 <head>
-	<meta charset="UTF-8">
-	<title>Overwe</title>
-	
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/assets/css/app.css">
-	<link rel="stylesheet" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+	<meta charset="utf-8" />
+	<link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png" />
+	<link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
+	<title>Teste</title>
+
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- Bootstrap core CSS     -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!--  Material Dashboard CSS    -->
+    <link href="assets/css/material-dashboard.css?v=1.2.0" rel="stylesheet"/>
+
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="assets/css/demo.css" rel="stylesheet" />
+
+    <!--     Fonts and icons     -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
+	
 	<!-- Firebase -->
-		<srcipt src="https://code.jquery.com/jquery-2.2.4.min.js"></srcipt>
-		<script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
-		<script src="https://apis.google.com/js/platform.js" async defer></script>
-		<script>
-		  // Initialize Firebase
-		  var config = {
-		    apiKey: "AIzaSyDoSNIZPh6vCKhO5U5YWMBmqMeyzCfBOXI",
-		    authDomain: "overwatch-17418.firebaseapp.com",
-		    databaseURL: "https://overwatch-17418.firebaseio.com",
-		    projectId: "overwatch-17418",
-		    storageBucket: "overwatch-17418.appspot.com",
-		    messagingSenderId: "413697016856"
-		  };
-		  
-		  firebase.initializeApp(config);
-		  // login with Google Api
-		  var provider = new firebase.auth.GoogleAuthProvider();
-		  provider.addScope('https://www.googleapis.com/auth/plus.login');
+	<script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<script>
+		// Initialize Firebase
+		var config = {
+			apiKey: "AIzaSyDoSNIZPh6vCKhO5U5YWMBmqMeyzCfBOXI",
+			authDomain: "overwatch-17418.firebaseapp.com",
+			databaseURL: "https://overwatch-17418.firebaseio.com",
+			projectId: "overwatch-17418",
+			storageBucket: "overwatch-17418.appspot.com",
+			messagingSenderId: "413697016856"
+		};
 
-		</script>
-	<!-- Firebase End -->
-	
+		firebase.initializeApp(config);
+		// login with Google Api
+		var provider = new firebase.auth.GoogleAuthProvider();
+		provider.addScope('https://www.googleapis.com/auth/plus.login');
+	</script>
+
 	<!-- Angular -->
-
-		<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.3/angular.min.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.3/angular-route.min.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.3/angular-resource.min.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.3/angular-cookies.min.js"></script>
-
-	<!-- Angular End -->
-
-	<!-- Javascript -->
-		<script src="/assets/js/database/firebaseDatabase.js"></script>
-		<script src="/node_modules/chart.js/dist/Chart.min.js"></script>
-		<script src="/node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
-		<!-- data -->
-		<script src="/assets/js/app.js"></script>
-		<script src="/assets/js/controllers.js"></script>
-		<script src="/assets/js/filters.js"></script>
-		<script src="/assets/js/services.js"></script>
-
-	<!-- End Javascript -->
-
-	<style>
-		.top-info {
-			min-height: 330px;
-			margin-bottom: 30px;
-		}
-
-		.radio {
-			background-color: #f8f8f8;
-			margin: 0;
-			padding: 5px;
-			border-radius: 3px;
-			border:1px solid #ccc;
-		}
-		.maps > div {
-			padding: 0;
-		}
-		.maps {
-			padding-left: 15px;
-		}
-
-		header a {
-			display: block;
-			cursor:pointer;
-			width: 60%;
-			margin: 15px auto 0 !important;
-			display: block !important;
-		}
-		header a:hover {
-			color: #9e9e9e;
-			text-decoration: none;
-		}
-		header a img {
-			height: 30%;
-			display: inline-block;
-			transform: rotateZ(180deg);
-			vertical-align: bottom;
-    		width: 20%;
-		}
-	</style>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.3/angular.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.3/angular-route.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.3/angular-resource.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.3/angular-cookies.min.js"></script>
+	<!-- Angular Modules -->
+	<script src="assets/js/database/firebaseDatabase.js"></script>
+	<script src="node_modules/chart.js/dist/Chart.min.js"></script>
+	<script src="node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
+	<!-- data -->
+	<script src="assets/js/app.js"></script>
+	<script src="assets/js/controllers.js"></script>
+	<script src="assets/js/filters.js"></script>
+	<script src="assets/js/services.js"></script>
 
 </head>
-<body>
-	
-	<header ng-controller="HeaderController">
-		<div class="row">
-			<div class="col-xs-2">
-				<a ng-click="voltar();" ng-show="showArrow" class="btn btn-default">
-					<img src="/assets/img/arrow.jpg" alt="seta"> Voltar
-				</a>
+<body ng-controller="BodyController">
+    <base href='/'>
+    
+    <div class="wrapper">
+
+    	<div class="sidebar" data-color="red" data-image="" ng-controller="NavController" ng-show="showMenu">
+    		<sidebar-cmp>
+    			<div class="logo">
+    				<a class="simple-text" href="/#!/">
+    					<div class="logo-img">
+    						<img src="/assets/img/angular2-logo-red.png">
+    					</div>
+    					Teste
+    				</a>
+    			</div>
+    			<div class="sidebar-wrapper">
+    				<div class="nav-container">
+    					<ul class="nav">
+    						<li routerlinkactive="active" class="active">
+    							<a href="#/dashboard">
+    								<i class="material-icons">dashboard</i>
+    								<p>Dashboard</p>
+    							</a>
+    						</li>
+    						<li routerlinkactive="active" class="">
+    							<a href="#/user">
+    								<i class="material-icons">person</i>
+    								<p>Lista de Jogos</p>
+    							</a>
+    						</li>
+    						<li routerlinkactive="active" class="">
+    							<a href="#/table">
+    								<i class="material-icons">content_paste</i>
+    								<p>Estatisticas</p>
+    							</a>
+    						</li>
+    						<li routerlinkactive="active" class="">
+    							<a href="#/typography">
+    								<i class="material-icons">library_books</i>
+    								<p>Melhores Dados</p>
+    							</a>
+    						</li>
+    					</ul>
+    					<div class="moving-tab" style="width: 230px; transform: translate3d(0px, 20px, 0px);">
+    						<i class="material-icons">dashboard</i>
+    						<p>Dashboard</p>
+    					</div>
+    				</div>
+    			</div>
+    		</sidebar-cmp>
+    		<div class="sidebar-background" style="background-image: url(../assets/img/sidebar-4.jpg)"></div>
+    	</div>
+    
+	    <div class="main-panel" ng-class="{{[class]}}">
+
+			<div class="main-content">
+				<header ng-controller="HeaderController">
+					<div class="row">
+						<div class="col-xs-2">
+							<a ng-click="voltar();" ng-show="showArrow" class="btn btn-default">
+								<img src="/assets/img/arrow.jpg" alt="seta"> Voltar
+							</a>
+						</div>
+					</div>
+				</header>
+				<ng-view />
 			</div>
+
 		</div>
-	</header>
-	
-	<nav ng-controller="NavController" class="col-xs-2">
-		<ul ng-show="showMenu">
-			<li><a href="/#!/adicionarJogo">Add game</a></li>
-		</ul>	
-	</nav>
-	
-	<ng-view class="col-xs-10"/>
+
+	</div>
 
 </body>
+<!--   Core JS Files   -->
+<script src="assets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
+<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="assets/js/material.min.js" type="text/javascript"></script>
+
+<!--  Charts Plugin -->
+<script src="assets/js/chartist.min.js"></script>
+
+<!--  Notifications Plugin    -->
+<script src="assets/js/bootstrap-notify.js"></script>
+
+<!-- Material Dashboard javascript methods -->
+<script src="assets/js/material-dashboard.js?v=1.2.0"></script>
+
 </html>

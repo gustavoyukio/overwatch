@@ -3,6 +3,26 @@
 // Declare app level module which depends on views, and components
 var app = angular.module('myApp.controllers', ["ngRoute","myApp.services","chart.js","myApp.filters",'ngCookies']);
 
+app.controller('BodyController', function ($rootScope, $scope) {
+
+	$scope.class = "login";
+
+	$scope.$on('$locationChangeStart', function (event, next, current) {
+
+		if (current.match('\/login')) {
+			console.log("Removendo classe e mostrando sidebar");
+			$('.main-panel').removeClass('login');
+			$rootScope.$broadcast('changeShowMenu',true);
+			
+			if (!$scope.$$phase) {
+				$scope.$apply();
+			}
+		}
+
+	});
+
+})
+
 app.controller('HeaderController', function($rootScope, $scope, $window) {
 	
 	$scope.showArrow = false;
@@ -24,11 +44,12 @@ app.controller('HeaderController', function($rootScope, $scope, $window) {
 
 app.controller('NavController', ['$scope', function ($scope) {
 	
-	$scope.showMenu = true;
+	$scope.showMenu = false;
 
-	$scope.$on('abacate', function (event, valor) {
+	$scope.$on('changeShowMenu', function (event, valor) {
 		$scope.showMenu = valor;
 	});
+
 }])
 
 app.controller('MenuController', ['$scope', function($scope) {
@@ -271,6 +292,7 @@ app.controller('GameController', function($rootScope,$scope,Score,Heroes,Map,Gam
 app.controller('LoginController', ['$rootScope', '$scope','User','$location', function($rootScope,$scope,User,$location) {
 
 	$rootScope.$broadcast('changeShowArrow',false);
+	$rootScope.$broadcast('changeShowMenu',false);
 
 	if (User.getLoggedStatus()) {
 
