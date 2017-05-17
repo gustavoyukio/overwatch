@@ -4,16 +4,19 @@
 angular.module('myApp', [
   'ngRoute',
   'myApp.services',
-  'myApp.controllers'
+  'myApp.controllers',
+  'ngCookies'
 ]).
 run(['$rootScope', 'User', '$location', function($rootScope, User, $location){
 
+    /*
     $rootScope.$on("$locationChangeStart", function(event, next, current) { 
         if (!User.getLoggedStatus()) {
             $location.path('/login');
         }
         
     });
+    */
 
 
 }]).

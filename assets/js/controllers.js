@@ -1,7 +1,7 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-var app = angular.module('myApp.controllers', ["ngRoute","myApp.services","chart.js","myApp.filters"]);
+var app = angular.module('myApp.controllers', ["ngRoute","myApp.services","chart.js","myApp.filters",'ngCookies']);
 
 app.controller('HeaderController', function($rootScope, $scope, $window) {
 	
@@ -9,7 +9,6 @@ app.controller('HeaderController', function($rootScope, $scope, $window) {
 	
 	$scope.$on('changeShowArrow', function (event, valor) {
 		
-		console.log(valor);
 		$scope.showArrow = valor;
 		
 		if (!$scope.$$phase) {
@@ -127,7 +126,6 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
 		if (!$scope.$$phase) {
 			$scope.$apply();
 		}
-
  	}
 
  	var MapsNeverDieCallback = function (data) {
@@ -141,7 +139,6 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
 		if (!$scope.$$phase) {
 			$scope.$apply();
 		}
-
  	}
 
  	var SRsNeverDieCallback = function (data) {
@@ -154,12 +151,16 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
 		if (!$scope.$$phase) {
 			$scope.$apply();
 		}
+ 	}
 
+ 	var SizesNeverDieCallback = function (data) {
+ 		$scope.partySizes = data;
  	}
 
  	Home.srsNeverDie(SRsNeverDieCallback);
  	Home.heroesNeverDie(HeroesNeverDieCallback);
  	Home.mapsNeverDie(MapsNeverDieCallback);
+ 	Home.sizesNeverDie(SizesNeverDieCallback)
 
   	Score.getScores(setGraphScore);
   	
@@ -168,23 +169,18 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
   	}
 })
 
-app.controller('GameController', function($rootScope,$scope,Score,Heroes,Map,Game,$location){
-	
-	console.log("Game");
+app.controller('GameController', function($rootScope,$scope,Score,Heroes,Map,Game,$location,$cookies){
+
 	$rootScope.$broadcast('changeShowArrow',true);
+	$scope.number = 6;
 
 	var verifyForm = function () {
 		
 		var retorno = true;
 
-		if (
-			$scope.MapaSelecionado == undefined || 
-			$scope.MapaSelecionado == null || 
-			$scope.SrFinal == undefined || 
-			$scope.SrFinal == null
-			){
-				retorno = false;
-			}
+		if ($scope.SrFinal == undefined || $scope.SrFinal == null ){
+			retorno = false;
+		}
 			
 		return retorno;
 	}
@@ -240,6 +236,7 @@ app.controller('GameController', function($rootScope,$scope,Score,Heroes,Map,Gam
 		if (verifyForm()) {
 
 			console.log("Entrada Corretas");
+			Game.setPartySize($scope.partySize);
 			Game.setSRs($scope.teamSR,$scope.enemySR);
 			Game.setMap($scope.MapaSelecionado);
 			Game.setScore($scope.SrFinal);
@@ -260,6 +257,15 @@ app.controller('GameController', function($rootScope,$scope,Score,Heroes,Map,Gam
 	$scope.startForm = function () {
 		Game.resetGameObject();
 	}
+
+	// Verificando Cookies
+	if ($cookies.get("party") != undefined ) {
+		$scope.partySize = $cookies.get("party");
+		if (!$scope.$$phase) {
+  			$scope.$apply();
+  		}
+	}
+	
 })
 
 app.controller('LoginController', ['$rootScope', '$scope','User','$location', function($rootScope,$scope,User,$location) {

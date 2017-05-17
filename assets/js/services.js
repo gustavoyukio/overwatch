@@ -159,19 +159,20 @@ app.service('Score', ['Firebase', function(Firebase){
 	return new Score();
 }])
 
-app.service('Game', ['Firebase', function(Firebase){
+app.service('Game', ['Firebase','$cookies', function(Firebase,$cookies){
 	
 	var Game = function () {
 
 		var _self = this;
 
 		_self.obj = {
-			'map':'',
-			'score': '',
-			'hour': '',
-			'heroes':[],
-			'types': [],
-			'srs': {
+			'map'   : '',
+			'score' : '',
+			'hour'  : '',
+			'heroes': [],
+			'types' : [],
+			'party' : '',
+			'srs'   : {
 				'team': 0,
 				'enemy': 0
 			}
@@ -194,6 +195,10 @@ app.service('Game', ['Firebase', function(Firebase){
 		_self.setSRs = function (team, enemy) {
 			var time    = _self.obj.srs.team = team;
 			var inimigo = _self.obj.srs.enemy = enemy;
+		}
+		_self.setPartySize =  function (value) {
+			_self.obj.party = value;
+			$cookies.put('party',value);
 		}
 		_self.saveEntry = function (callback) {
 			Firebase.saveNewGameEntry(_self.obj, callback);
@@ -265,6 +270,10 @@ app.service('Home', ['Firebase', function(Firebase) {
 
 		_self.srsNeverDie = function (callback) {
 			Firebase.srsNeverDie(callback);
+		}
+
+		_self.sizesNeverDie = function (callback) {
+			Firebase.sizesNeverDie(callback);
 		}
 	}
 	return new Home();

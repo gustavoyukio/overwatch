@@ -24,6 +24,14 @@
 					<input type="text" name="startingDate" class="form-control" value="{{startDate}}" disabled>
 				</div>
 			</div>
+			<div class="col-xs-3">
+				<div class="form-group">
+					<h3>Tamanho da Party</h3>
+					<select ng-model="partySize" ng-init="1">
+						<option ng-repeat="i in [1,2,3,4,5,6]" value="{{i}}">{{i}}</option>
+					</select>
+				</div>
+			</div>
 
 		</div>
 	</div>

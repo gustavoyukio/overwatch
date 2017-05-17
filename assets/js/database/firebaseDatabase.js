@@ -34,8 +34,9 @@ var Firebase = function() {
 
 	// User
 	_self.getUserUid = function () {
-		return firebase.auth().currentUser.uid;
-		//return 'qnQdKgKH0yN2KsIxWhQHkWi2zkx1';
+		//return firebase.auth().currentUser.uid;
+		//return 'qnQdKgKH0yN2KsIxWhQHkWi2zkx1'; GYCC
+		return 'uiIrBxxy95h6pew26nHIk7DnzoU2'; // GYCC2
 	}
 
 	// Game Status
@@ -227,6 +228,34 @@ var Firebase = function() {
 			});
 	}
 
+	// Party Size Counter
+	_self.savePartySizeCounter = function (party, valor) {
+		
+		var uid  = _self.getUserUid();
+		var path = "/" + uid + "/sizes/" + party;
+		var obj  = _self.dataSetup(valor);
+
+		firebase.database().ref(path).update(obj);
+	}
+	_self.getPartySizeCounter = function (item) {
+
+		var uid  = _self.getUserUid();
+		var path = "/" + uid + "/sizes/" + item.party;
+
+		firebase
+			.database()
+			.ref(path)
+			.once("value", function(snapshot){
+				
+				if (snapshot.val() != null) {
+					var valor = snapshot.val();
+				}
+
+				_self.savePartySizeCounter(item.party,valor);
+
+			});
+	}	
+
 	// Type Counter
 	_self.saveTypeCounter = function (type, valor) {
 		
@@ -308,6 +337,7 @@ var Firebase = function() {
 		_self.getHourCounter (item);
 		_self.getTypeCounter (item);
 		_self.getSRCounter (item);
+		_self.getPartySizeCounter(item);
 		_self.saveEntry (item, callback);
 	}
 
@@ -448,7 +478,6 @@ var Firebase = function() {
 		array = array.sort(dynamicSort(field));
 
 		return array;
-
 	}
 
 	_self.heroesNeverDie = function (callback) {
@@ -520,6 +549,48 @@ var Firebase = function() {
 			callback(valor);
 
 		});	
+	}
+
+	_self.sizesNeverDie = function (callback) {
+		
+		var uid = _self.getUserUid();
+		var path = "/" + uid + "/sizes";
+		var sizes = {
+			1: '',
+			2: '',
+			3: '',
+			4: '',
+			5: '',
+			6: ''
+		};		
+
+		var partySizer = function (index,result) {
+			var valor = '';
+
+			if (result == undefined) {
+				valor = '0';
+			} else {
+				valor = result.winPercentage;
+			}
+
+			sizes[index] = valor;
+		}
+
+		firebase
+		.database()
+		.ref(path)
+		.once("value", function(snapshot){
+
+			var valor = snapshot.val();
+
+			for (var i=0; i < 6; i++) {
+				partySizer(i+1,valor[i+1]);
+			}
+			console.dir(sizes);
+			callback(sizes);
+
+		});
+
 	}
 
 }
