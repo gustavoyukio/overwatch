@@ -34,9 +34,9 @@ var Firebase = function() {
 
 	// User
 	_self.getUserUid = function () {
-		//return firebase.auth().currentUser.uid;
+		return firebase.auth().currentUser.uid;
 		//return 'qnQdKgKH0yN2KsIxWhQHkWi2zkx1'; GYCC
-		return 'uiIrBxxy95h6pew26nHIk7DnzoU2'; // GYCC2
+		//return 'uiIrBxxy95h6pew26nHIk7DnzoU2'; // GYCC2
 	}
 
 	// Game Status
@@ -556,24 +556,46 @@ var Firebase = function() {
 		var uid = _self.getUserUid();
 		var path = "/" + uid + "/sizes";
 		var sizes = {
-			1: '',
-			2: '',
-			3: '',
-			4: '',
-			5: '',
-			6: ''
+			1: {
+				total: '',
+				win: ''
+			},
+			2: {
+				total: '',
+				win: ''
+			},
+			3: {
+				total: '',
+				win: ''
+			},
+			4: {
+				total: '',
+				win: ''
+			},
+			5: {
+				total: '',
+				win: ''
+			},
+			6: {
+				total: '',
+				win: ''
+			}
 		};		
 
 		var partySizer = function (index,result) {
 			var valor = '';
+			var win = '';
 
 			if (result == undefined) {
 				valor = '0';
+				win = '0';
 			} else {
-				valor = result.winPercentage;
+				valor = result.total;
+				win = result.winPercentage
 			}
 
-			sizes[index] = valor;
+			sizes[index].total = valor;
+			sizes[index].win = win;
 		}
 
 		firebase

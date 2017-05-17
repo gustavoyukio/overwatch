@@ -133,9 +133,10 @@
                         <table class="table table-hover table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th colspan='6'> Vitorias por Tamanho das Parties </th>
+                                    <th colspan='7'> Vitorias por Tamanho das Parties </th>
                                 </tr>
                                 <tr>
+                                    <th>Tamanho</th>
                                     <th>1</th>
                                     <th>2</th>
                                     <th>3</th>
@@ -146,12 +147,22 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>{{partySizes[1]}}</td>
-                                    <td>{{partySizes[2]}}</td>
-                                    <td>{{partySizes[3]}}</td>
-                                    <td>{{partySizes[4]}}</td>
-                                    <td>{{partySizes[5]}}</td>
-                                    <td>{{partySizes[6]}}</td>
+                                    <td>Jogos</td>
+                                    <td>{{partySizes[1].total}}</td>
+                                    <td>{{partySizes[2].total}}</td>
+                                    <td>{{partySizes[3].total}}</td>
+                                    <td>{{partySizes[4].total}}</td>
+                                    <td>{{partySizes[5].total}}</td>
+                                    <td>{{partySizes[6].total}}</td>
+                                </tr>
+                                <tr>
+                                    <td>%(win)</td>
+                                    <td>{{partySizes[1].win}}</td>
+                                    <td>{{partySizes[2].win}}</td>
+                                    <td>{{partySizes[3].win}}</td>
+                                    <td>{{partySizes[4].win}}</td>
+                                    <td>{{partySizes[5].win}}</td>
+                                    <td>{{partySizes[6].win}}</td>
                                 </tr>
                             </tbody>
                         </table>
