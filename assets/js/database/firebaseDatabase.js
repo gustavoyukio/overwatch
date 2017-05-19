@@ -34,8 +34,8 @@ var Firebase = function() {
 
 	// User
 	_self.getUserUid = function () {
-		return firebase.auth().currentUser.uid;
-		//return 'qnQdKgKH0yN2KsIxWhQHkWi2zkx1'; GYCC
+		//return firebase.auth().currentUser.uid;
+		return 'qnQdKgKH0yN2KsIxWhQHkWi2zkx1'; GYCC
 		//return 'uiIrBxxy95h6pew26nHIk7DnzoU2'; // GYCC2
 	}
 
@@ -447,6 +447,23 @@ var Firebase = function() {
 
 			});				
 	}
+	_self.getHeroesInicial = function (callback) {
+		var uid  = _self.getUserUid();
+		var path = "/" + uid + "/types"; 
+
+		firebase
+			.database()
+			.ref(path)
+			.once("value", function(snapshot){
+				
+				var value = null;
+				if (snapshot.val() != null) {
+					value = snapshot.val();
+				}
+				callback(value);
+
+			});			
+	}
 
 	_self.sortByField = function (field,arr) {
 		
@@ -606,9 +623,13 @@ var Firebase = function() {
 			var valor = snapshot.val();
 
 			for (var i=0; i < 6; i++) {
-				partySizer(i+1,valor[i+1]);
+				if (valor != null) {
+					partySizer(i+1,valor[i+1]);
+				} else {
+					partySizer(i+1,0);	
+				}
+				
 			}
-			console.dir(sizes);
 			callback(sizes);
 
 		});

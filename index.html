@@ -23,41 +23,6 @@
     <!--     Fonts and icons     -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
-	
-	<!-- Firebase -->
-	<script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
-	<script src="https://apis.google.com/js/platform.js" async defer></script>
-	<script>
-		// Initialize Firebase
-		var config = {
-			apiKey: "AIzaSyDoSNIZPh6vCKhO5U5YWMBmqMeyzCfBOXI",
-			authDomain: "overwatch-17418.firebaseapp.com",
-			databaseURL: "https://overwatch-17418.firebaseio.com",
-			projectId: "overwatch-17418",
-			storageBucket: "overwatch-17418.appspot.com",
-			messagingSenderId: "413697016856"
-		};
-
-		firebase.initializeApp(config);
-		// login with Google Api
-		var provider = new firebase.auth.GoogleAuthProvider();
-		provider.addScope('https://www.googleapis.com/auth/plus.login');
-	</script>
-
-	<!-- Angular -->
-	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.3/angular.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.3/angular-route.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.3/angular-resource.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.3/angular-cookies.min.js"></script>
-	<!-- Angular Modules -->
-	<script src="assets/js/database/firebaseDatabase.js"></script>
-	<script src="node_modules/chart.js/dist/Chart.min.js"></script>
-	<script src="node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
-	<!-- data -->
-	<script src="assets/js/app.js"></script>
-	<script src="assets/js/controllers.js"></script>
-	<script src="assets/js/filters.js"></script>
-	<script src="assets/js/services.js"></script>
 
 </head>
 <body ng-controller="BodyController">
@@ -70,9 +35,9 @@
     			<div class="logo">
     				<a class="simple-text" href="/#!/">
     					<div class="logo-img">
-    						<img src="/assets/img/angular2-logo-red.png">
+    						<img src="/assets/img/logo.jpg">
     					</div>
-    					Teste
+    					OverTrack
     				</a>
     			</div>
     			<div class="sidebar-wrapper">
@@ -85,19 +50,19 @@
     							</a>
     						</li>
     						<li routerlinkactive="active" class="">
-    							<a href="#/user">
+    							<a href="#!/listar-jogos">
     								<i class="material-icons">person</i>
     								<p>Lista de Jogos</p>
     							</a>
     						</li>
     						<li routerlinkactive="active" class="">
-    							<a href="#/table">
+    							<a>
     								<i class="material-icons">content_paste</i>
     								<p>Estatisticas</p>
     							</a>
     						</li>
     						<li routerlinkactive="active" class="">
-    							<a href="#/typography">
+    							<a>
     								<i class="material-icons">library_books</i>
     								<p>Melhores Dados</p>
     							</a>
@@ -113,16 +78,19 @@
     		<div class="sidebar-background" style="background-image: url(../assets/img/sidebar-4.jpg)"></div>
     	</div>
     
-	    <div class="main-panel" ng-class="{{[class]}}">
+	    <div class="main-panel">
 
 			<div class="main-content">
 				<header ng-controller="HeaderController">
 					<div class="row">
-						<div class="col-xs-2">
-							<a ng-click="voltar();" ng-show="showArrow" class="btn btn-default">
-								<img src="/assets/img/arrow.jpg" alt="seta"> Voltar
+						<div class="arrow">
+							<a ng-click="voltar();" ng-show="showArrow" class="btn btn-info">
+								<i class="material-icons">keyboard_arrow_left</i> Voltar
 							</a>
 						</div>
+                        <div class="col-xs-12">
+                            <h1>OverTrack</h1>
+                        </div>
 					</div>
 				</header>
 				<ng-view />
@@ -134,17 +102,54 @@
 
 </body>
 <!--   Core JS Files   -->
-<script src="assets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
-<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="assets/js/material.min.js" type="text/javascript"></script>
+<script src="assets/js/vendors/jquery-3.1.0.min.js" type="text/javascript"></script>
+<script src="assets/js/vendors/bootstrap.min.js" type="text/javascript"></script>
+<script src="assets/js/vendors/material.min.js" type="text/javascript"></script>
 
 <!--  Charts Plugin -->
-<script src="assets/js/chartist.min.js"></script>
+<script src="assets/js/nonangular/chartist.min.js"></script>
 
 <!--  Notifications Plugin    -->
-<script src="assets/js/bootstrap-notify.js"></script>
+<script src="assets/js/vendors/bootstrap-notify.js"></script>
 
 <!-- Material Dashboard javascript methods -->
-<script src="assets/js/material-dashboard.js?v=1.2.0"></script>
+<script src="assets/js/nonangular/material-dashboard.js?v=1.2.0"></script>
+
+<!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDoSNIZPh6vCKhO5U5YWMBmqMeyzCfBOXI",
+            authDomain: "overwatch-17418.firebaseapp.com",
+            databaseURL: "https://overwatch-17418.firebaseio.com",
+            projectId: "overwatch-17418",
+            storageBucket: "overwatch-17418.appspot.com",
+            messagingSenderId: "413697016856"
+        };
+
+        firebase.initializeApp(config);
+        // login with Google Api
+        var provider = new firebase.auth.GoogleAuthProvider();
+        provider.addScope('https://www.googleapis.com/auth/plus.login');
+    </script>
+
+    <!-- Angular -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.3/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.3/angular-route.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.3/angular-resource.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.3/angular-cookies.min.js"></script>
+    <!-- Angular Modules -->
+    <script src="assets/js/database/firebaseDatabase.js"></script>
+    <script src="node_modules/chart.js/dist/Chart.min.js"></script>
+    <script src="node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
+    <!-- data -->
+    <script src="assets/js/angular/app.js"></script>
+    <script src="assets/js/angular/controllers/controllers.js"></script>
+    <script src="assets/js/angular/controllers/login.js"></script>
+    <script src="assets/js/angular/controllers/game.js"></script>
+    <script src="assets/js/angular/filters.js"></script>
+    <script src="assets/js/angular/factories/services.js"></script>
 
 </html>

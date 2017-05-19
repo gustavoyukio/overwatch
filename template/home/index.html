@@ -1,4 +1,21 @@
-<h1>Dashboard Inicial</h1>
+<style>
+    .right {
+        float: right;
+    }
+    .right a {
+        font-size: 14px;
+    }
+</style>
+
+<ol class="breadcrumb">
+  <li>
+    <b>Score Inicial : </b> {{scoreInicialValue}} </li>
+  <li></li>
+  <li></li>
+  <li class="right">
+    <a href="#!/adicionar-jogo" class="label label-primary">Adicionar Jogo</a>
+    </li>
+</ol>
 
 <div class="row">
     <div class="col-xs-3">
@@ -38,6 +55,7 @@
             chart-click="onClick">
         </canvas>
     </div>
+
     <div class="col-xs-6">
         <div class="panel panel-info">
             <div class="panel-heading">

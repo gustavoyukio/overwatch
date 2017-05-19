@@ -1,3 +1,26 @@
+.main-panel .main-content {
+	padding: 0 20px;
+	margin: 0;
+}
+
+.sidebar .logo-img img, .off-canvas-sidebar .logo-img img {
+	width: 60px;
+}
+
+.arrow {
+	display: block;
+	position: absolute;
+	left: 20px;
+	width: 30px;
+	z-index: 999;
+	top: 10px;
+}
+
+.arrow img {
+	width: 40%;
+}
+
+
 .main-panel.login {
     width: 100%;
 }
@@ -10,4 +33,42 @@
 }
 .main-panel.login form h1 small {
 	display: block;
+}
+
+.main-content header h1 {
+	text-align: center;
+}
+.main-content h1 {
+	padding: 0;
+	margin: 0;
+}
+
+.form.form-add.card h2 {
+	padding: 0;
+	margin: 0;
+	font-size: 20px;
+}
+.form.form-add.card .card-content h2,
+.form.form-add.card .card-content h3 {
+	font-size: 16px;
+}
+.form.form-add.card .select-heroes h2 {
+	margin-top: 20px;
+}
+.form .select-heroes .form-group {
+	padding-top: 0;
+	margin: 0;
+}
+.form .select-heroes .heroes,
+.form .select-heroes .heroes-list {
+	width: 50%;
+	padding: 0 20px;
+	float: left;
+}
+.form .select-heroes .heroes {
+	padding-left: 0;
+}
+.form .select-heroes .heroes-list h3 {
+	padding: 0;
+	margin: 0;
 }

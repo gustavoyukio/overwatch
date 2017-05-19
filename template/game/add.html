@@ -1,63 +1,274 @@
-<!--<h1>Adicionar Novo Jogo Competitivo</h1>-->
-<h1>Abacate</h1>
+<!--
+<div class="card card-nav-tabs">
+                        <div class="card-header" data-background-color="purple">
+                            <div class="nav-tabs-navigation">
+                                <div class="nav-tabs-wrapper">
+                                    <span class="nav-tabs-title">Tasks:</span>
+                                    <ul class="nav nav-tabs" data-tabs="tabs">
+                                        <li class="active">
+                                            <a data-toggle="tab" href="#profile">
+                                                <i class="material-icons">bug_report</i>
+                                                Bugs
+                                            <div class="ripple-container"></div></a>
+                                        </li>
+                                        <li class="">
+                                            <a data-toggle="tab" href="#messages">
+                                                <i class="material-icons">code</i>
+                                                Website
+                                            <div class="ripple-container"></div></a>
+                                        </li>
+                                        <li class="">
+                                            <a data-toggle="tab" href="#settings">
+                                                <i class="material-icons">cloud</i>
+                                                Server
+                                            <div class="ripple-container"></div></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
 
-<div class="row"><div class="col-xs-12 game">
-	<div class="alert alert-success msg" ng-class="showMsg">
-		{{msg}}
-	</div>
-</div></div>
-
-<form action="#" class="form form-add" ng-init="startForm();">
+                        <div class="card-content">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="profile">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input checked="" name="optionsCheckboxes" type="checkbox"><span class="checkbox-material"><span class="check"></span></span>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                <td>Sign contract for "What are conference organizers afraid of?"</td>
+                                                <td class="td-actions text-right">
+                                                    <button class="btn btn-primary btn-simple btn-xs" rel="tooltip" title="" type="button" data-original-title="Edit Task">
+                                                        <i class="material-icons">edit</i>
+                                                    </button>
+                                                    <button class="btn btn-danger btn-simple btn-xs" rel="tooltip" title="" type="button" data-original-title="Remove">
+                                                        <i class="material-icons">close</i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input name="optionsCheckboxes" type="checkbox"><span class="checkbox-material"><span class="check"></span></span>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
+                                                <td class="td-actions text-right">
+                                                    <button class="btn btn-primary btn-simple btn-xs" rel="tooltip" title="" type="button" data-original-title="Edit Task">
+                                                        <i class="material-icons">edit</i>
+                                                    </button>
+                                                    <button class="btn btn-danger btn-simple btn-xs" rel="tooltip" title="" type="button" data-original-title="Remove">
+                                                        <i class="material-icons">close</i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input name="optionsCheckboxes" type="checkbox"><span class="checkbox-material"><span class="check"></span></span>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+                                                </td>
+                                                <td class="td-actions text-right">
+                                                    <button class="btn btn-primary btn-simple btn-xs" rel="tooltip" title="" type="button" data-original-title="Edit Task">
+                                                        <i class="material-icons">edit</i>
+                                                    </button>
+                                                    <button class="btn btn-danger btn-simple btn-xs" rel="tooltip" title="" type="button" data-original-title="Remove">
+                                                        <i class="material-icons">close</i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input checked="" name="optionsCheckboxes" type="checkbox"><span class="checkbox-material"><span class="check"></span></span>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                <td>Create 4 Invisible User Experiences you Never Knew About</td>
+                                                <td class="td-actions text-right">
+                                                    <button class="btn btn-primary btn-simple btn-xs" rel="tooltip" title="" type="button" data-original-title="Edit Task">
+                                                        <i class="material-icons">edit</i>
+                                                    </button>
+                                                    <button class="btn btn-danger btn-simple btn-xs" rel="tooltip" title="" type="button" data-original-title="Remove">
+                                                        <i class="material-icons">close</i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane" id="messages">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input checked="" name="optionsCheckboxes" type="checkbox"><span class="checkbox-material"><span class="check"></span></span>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+                                                </td>
+                                                <td class="td-actions text-right">
+                                                    <button class="btn btn-primary btn-simple btn-xs" rel="tooltip" title="" type="button" data-original-title="Edit Task">
+                                                        <i class="material-icons">edit</i>
+                                                    </button>
+                                                    <button class="btn btn-danger btn-simple btn-xs" rel="tooltip" title="" type="button" data-original-title="Remove">
+                                                        <i class="material-icons">close</i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input name="optionsCheckboxes" type="checkbox"><span class="checkbox-material"><span class="check"></span></span>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                <td>Sign contract for "What are conference organizers afraid of?"</td>
+                                                <td class="td-actions text-right">
+                                                    <button class="btn btn-primary btn-simple btn-xs" rel="tooltip" title="" type="button" data-original-title="Edit Task">
+                                                        <i class="material-icons">edit</i>
+                                                    </button>
+                                                    <button class="btn btn-danger btn-simple btn-xs" rel="tooltip" title="" type="button" data-original-title="Remove">
+                                                        <i class="material-icons">close</i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane" id="settings">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input name="optionsCheckboxes" type="checkbox"><span class="checkbox-material"><span class="check"></span></span>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
+                                                <td class="td-actions text-right">
+                                                    <button class="btn btn-primary btn-simple btn-xs" rel="tooltip" title="" type="button" data-original-title="Edit Task">
+                                                        <i class="material-icons">edit</i>
+                                                    </button>
+                                                    <button class="btn btn-danger btn-simple btn-xs" rel="tooltip" title="" type="button" data-original-title="Remove">
+                                                        <i class="material-icons">close</i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input checked="" name="optionsCheckboxes" type="checkbox"><span class="checkbox-material"><span class="check"></span></span>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+                                                </td>
+                                                <td class="td-actions text-right">
+                                                    <button class="btn btn-primary btn-simple btn-xs" rel="tooltip" title="" type="button" data-original-title="Edit Task">
+                                                        <i class="material-icons">edit</i>
+                                                    </button>
+                                                    <button class="btn btn-danger btn-simple btn-xs" rel="tooltip" title="" type="button" data-original-title="Remove">
+                                                        <i class="material-icons">close</i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input name="optionsCheckboxes" type="checkbox"><span class="checkbox-material"><span class="check"></span></span>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                <td>Sign contract for "What are conference organizers afraid of?"</td>
+                                                <td class="td-actions text-right">
+                                                    <button class="btn btn-primary btn-simple btn-xs" rel="tooltip" title="" type="button" data-original-title="Edit Task">
+                                                        <i class="material-icons">edit</i>
+                                                    </button>
+                                                    <button class="btn btn-danger btn-simple btn-xs" rel="tooltip" title="" type="button" data-original-title="Remove">
+                                                        <i class="material-icons">close</i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    -->
+<form action="#" class="form form-add card card-nav-tabs" ng-init="startForm();">
 	
-	<div class="row">
-		<div class="info start">
-			
-			<div class="col-xs-3">
-				<div class="form-group">
-					<h3>Horario de Inicio</h3>
-					<input type="text" name="startingHour" class="form-control" value="{{startHour}}" disabled>
-				</div>
-			</div>
-			<div class="col-xs-3">
-				<div class="form-group">
-					<h3>Data da Partida</h3>
-					<input type="text" name="startingDate" class="form-control" value="{{startDate}}" disabled>
-				</div>
-			</div>
-			<div class="col-xs-3">
-				<div class="form-group">
-					<h3>Tamanho da Party</h3>
-					<select ng-model="partySize" ng-init="1">
-						<option ng-repeat="i in [1,2,3,4,5,6]" value="{{i}}">{{i}}</option>
-					</select>
-				</div>
-			</div>
-
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="form-group col-xs-4 col-sm-4">
-			<label for="">Sr do seu Time:</label>
-			<input type="number" name="teamsr" class="form-control" ng-model="teamSR" ng-change="SRs();">
-		</div>
-		<div class="form-group col-xs-4 col-sm-4">
-			<label for="">Sr do Time Inimigo:</label>
-			<input type="number" name="enemysr" class="form-control" ng-model="enemySR" ng-change="SRs();">
-		</div>
-	</div>
+	<div class="card-header" data-background-color="purple">
+        <h2>Adicionar Novo Jogo Competitivo</h2>
+    </div>
 	
-	<div class="row">
+	<div class="card-content">
 
-		<div class="col-xs-4">
+		<div class="row">
+			<div class="info start">
+				
+				<div class="col-xs-3">
+					<div class="form-group">
+						<h3>Horario de Inicio</h3>
+						<input type="text" name="startingHour" class="form-control" value="{{startHour}}" disabled>
+					</div>
+				</div>
+				<div class="col-xs-3">
+					<div class="form-group">
+						<h3>Data da Partida</h3>
+						<input type="text" name="startingDate" class="form-control" value="{{startDate}}" disabled>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="form-group">
+						<h3>Tamanho da Party</h3>
+						<select ng-model="partySize" ng-init="1">
+							<option ng-repeat="i in [1,2,3,4,5,6]" value="{{i}}">{{i}}</option>
+						</select>
+					</div>
+				</div>
 
-			<div class="row">
-				
-				<h2 class="col-xs-12">
-					Selecione o Mapa
-				</h2>
-				
-				<div class="col-xs-12">
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="form-group col-xs-6 col-sm-5">
+				<label for="">Sr do seu Time:</label>
+				<input type="number" name="teamsr" class="form-control" ng-model="teamSR" ng-change="SRs();">
+			</div>
+			<div class="form-group col-xs-6 col-sm-5">
+				<label for="">Sr do Time Inimigo:</label>
+				<input type="number" name="enemysr" class="form-control" ng-model="enemySR" ng-change="SRs();">
+			</div>
+		</div>
+		
+		<div class="row">
+
+			<div class="col-xs-6 select-heroes">
+				<h2>Selecione o Mapa</h2>
+					
+				<div class="">
 					<div class="form-group">
 						<select name="mapas" id="selectMap" class="form-control" ng-model="MapaSelecionado">
 							<option value="{{item}}" ng-repeat="item in optionsMaps | orderObjectBy">
@@ -71,56 +282,53 @@
 
 		</div>
 
+			<div class="row">
 
-		<div class="col-xs-4">
-		<div class="row">
-			<h2 class="col-xs-12">
-				Selecione os Herois jogados
-			</h2>
 			
-			<div class="col-xs-12 heroes">
+				<div class="col-xs-12 select-heroes">
+					<h2>
+						Selecione os Herois jogados
+					</h2>
+					
+					<div class="heroes col-xs-6">
+						<div class="form-group">
+							<div class="select">
+								<select id="selectHero" class="form-control select-form-heroes"
+									ng-model="HeroSelecionado"
+									ng-change="adicionarHero(this.HeroSelecionado)">
+									<option value="{{item}}" ng-repeat="item in optionsHero | orderBy : item.name">
+										{{item.name}}
+									</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="heroes-list">
+						<div>
+							<h3>Lista de Herois Selecionados</h3>
+							<ul>
+								<li ng-repeat="item in heroList">
+									{{item.name}}
+								</li>
+							</ul>		
+						</div>
+					</div>
+				</div>
+
+
+		</div>
+
+		<div class="row">
+			<div class="col-xs-3">
 				<div class="form-group">
-					<div class="select">
-						<select id="selectHero" class="form-control"
-							ng-model="HeroSelecionado"
-							ng-change="adicionarHero(this.HeroSelecionado)">
-							<option value="{{item}}" ng-repeat="item in optionsHero | orderBy : item.name">
-								{{item.name}}
-							</option>
-						</select>
-					</div>
+					<label for="sr" class="sr">SR Final da Partida</label>
+					<input type="number" class="form-control" ng-model="SrFinal">
 				</div>
-
-				<div class="row">
-					<div class="col-xs-12">
-						<h3>Lista de Herois Selecionados</h3>
-						<ul>
-							<li ng-repeat="item in heroList">
-								{{item.name}}
-							</li>
-						</ul>		
-					</div>
-				</div>
-				
 			</div>
 		</div>
-		</div>
+
+		<a type="submit" class="btn btn-primary" ng-click="salvarJogo();">Submit</a>
 
 	</div>
-
-	<div class="row">
-		<div class="col-xs-3">
-			<div class="form-group">
-				<label for="sr" class="sr">SR Final | <span>[SR Inicial - {{SrInicial}}]</span></label>
-				<input type="number" class="form-control" ng-model="SrFinal">
-			</div>
-		</div>
-	</div>
-	
-	<div class="row">
-		<h1>Modo Avancado (Opcional)</h1>
-	</div>
-
-	<a type="submit" class="btn btn-primary" ng-click="salvarJogo();">Submit</a>
 
 </form>
