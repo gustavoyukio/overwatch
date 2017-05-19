@@ -98,5 +98,18 @@ app.controller('GameController', function($rootScope,$scope,Score,Heroes,Map,Gam
   			$scope.$apply();
   		}
 	}
+
+	$scope.removerHero = function (item) {
+		
+		console.dir(item);
+		console.dir($scope.heroList);
+
+		for (var i=0; i< $scope.heroList.length; i++) {
+			if ($scope.heroList[i].name.indexOf(item.name) > -1) {
+				$scope.heroList.splice(i,1);
+			}
+		}
+
+	}
 	
 })

@@ -73,6 +73,17 @@
 	margin: 0;
 }
 
+.li-heroes {
+	padding: 10px 20px;
+	transition: all 100ms 0s ease-out;
+}
+.li-heroes:hover {
+	background-color: #f8f8f8;
+}
+.li-heroes span {
+	float: right;
+}
+
 .right {
     float: right;
 }
