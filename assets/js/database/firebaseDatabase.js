@@ -34,8 +34,8 @@ var Firebase = function() {
 
 	// User
 	_self.getUserUid = function () {
-		return firebase.auth().currentUser.uid;
-		//return 'qnQdKgKH0yN2KsIxWhQHkWi2zkx1'; GYCC
+		//return firebase.auth().currentUser.uid;
+		return 'qnQdKgKH0yN2KsIxWhQHkWi2zkx1'; GYCC
 		//return 'uiIrBxxy95h6pew26nHIk7DnzoU2'; // GYCC2
 	}
 

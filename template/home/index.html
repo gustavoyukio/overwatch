@@ -77,105 +77,119 @@
     </div>
 </div>
 
-<ul class="nav nav-tabs">
-    <li class="active">
-        <a>Geral</a>
-    </li>
-    <li>
-        <a>Herois</a>
-    </li>
-    <li>
-        <a>Mapas</a>
-    </li>
-</ul>
-
 <div class="row">
     <div class="col-xs-12">
-        <h1> Estatísticas Baseadas no Time </h1>
+
+        <div class="card card-plain">
+            <div class="card-header" data-background-color="red">
+                <h1> Estatísticas Baseadas no Time </h1>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-xs-6">
                 <div class="row">
                     <div class="col-xs-12">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th colspan='6'> Maior SR do time </th>
-                                </tr>
-                                <tr>
-                                    <th>Total</th>
-                                    <th>Vitórias</th>
-                                    <th>Empates</th>
-                                    <th>Derrotas</th>
-                                    <th>%(wins)</th>
-                                    <th>%(derrotas)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>{{srMaior.total}}</td>
-                                    <td>{{srMaior.win}}</td>
-                                    <td>{{srMaior.draw}}</td>
-                                    <td>{{srMaior.loss}}</td>
-                                    <td>{{srMaior.winPercentage | number:2}}</td>
-                                    <td>{{srMaior.lossPercentage | number:2}}</td>
-                                </tr>
-                            </tbody>
-                             <thead>
-                                <th colspan='6'> Menor SR do time </th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>{{srMenor.total}}</td>
-                                    <td>{{srMenor.win}}</td>
-                                    <td>{{srMenor.draw}}</td>
-                                    <td>{{srMenor.loss}}</td>
-                                    <td>{{srMenor.winPercentage | number:2}}</td>
-                                    <td>{{srMenor.lossPercentage | number:2}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+
+                        <div class="card">
+                            <div class="card-header" >Seu time com SR Maior</div>
+                            <div class="card-content">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Total</th>
+                                            <th>Vitórias</th>
+                                            <th>Empates</th>
+                                            <th>Derrotas</th>
+                                            <th>%(wins)</th>
+                                            <th>%(derrotas)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{srMaior.total}}</td>
+                                            <td>{{srMaior.win}}</td>
+                                            <td>{{srMaior.draw}}</td>
+                                            <td>{{srMaior.loss}}</td>
+                                            <td>{{srMaior.winPercentage | number:2}}</td>
+                                            <td>{{srMaior.lossPercentage | number:2}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" data-background-color="orange">Seu time com SR Menor </div>
+                                <div class="card-content">
+                                <table class="table table-hover">
+                                     <thead>
+                                        <tr>
+                                            <th>Total</th>
+                                            <th>Vitórias</th>
+                                            <th>Empates</th>
+                                            <th>Derrotas</th>
+                                            <th>%(wins)</th>
+                                            <th>%(derrotas)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{srMenor.total}}</td>
+                                            <td>{{srMenor.win}}</td>
+                                            <td>{{srMenor.draw}}</td>
+                                            <td>{{srMenor.loss}}</td>
+                                            <td>{{srMenor.winPercentage | number:2}}</td>
+                                            <td>{{srMenor.lossPercentage | number:2}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
             <div class="col-xs-6">
                 <div class="row">
                     <div class="col-xs-12">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th colspan='7'> Vitorias por Tamanho das Parties </th>
-                                </tr>
-                                <tr>
-                                    <th>Tamanho</th>
-                                    <th>1</th>
-                                    <th>2</th>
-                                    <th>3</th>
-                                    <th>4</th>
-                                    <th>5</th>
-                                    <th>6</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Jogos</td>
-                                    <td>{{partySizes[1].total}}</td>
-                                    <td>{{partySizes[2].total}}</td>
-                                    <td>{{partySizes[3].total}}</td>
-                                    <td>{{partySizes[4].total}}</td>
-                                    <td>{{partySizes[5].total}}</td>
-                                    <td>{{partySizes[6].total}}</td>
-                                </tr>
-                                <tr>
-                                    <td>%(win)</td>
-                                    <td>{{partySizes[1].win}}</td>
-                                    <td>{{partySizes[2].win}}</td>
-                                    <td>{{partySizes[3].win}}</td>
-                                    <td>{{partySizes[4].win}}</td>
-                                    <td>{{partySizes[5].win}}</td>
-                                    <td>{{partySizes[6].win}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="card">
+                            <div class="card-header" data-background-color="purple">Vitorias por Tamanho das Parties </div>
+                                <div class="card-content">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Tamanho</th>
+                                            <th>1</th>
+                                            <th>2</th>
+                                            <th>3</th>
+                                            <th>4</th>
+                                            <th>5</th>
+                                            <th>6</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Jogos</td>
+                                            <td>{{partySizes[1].total}}</td>
+                                            <td>{{partySizes[2].total}}</td>
+                                            <td>{{partySizes[3].total}}</td>
+                                            <td>{{partySizes[4].total}}</td>
+                                            <td>{{partySizes[5].total}}</td>
+                                            <td>{{partySizes[6].total}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>%(win)</td>
+                                            <td>{{partySizes[1].win}}</td>
+                                            <td>{{partySizes[2].win}}</td>
+                                            <td>{{partySizes[3].win}}</td>
+                                            <td>{{partySizes[4].win}}</td>
+                                            <td>{{partySizes[5].win}}</td>
+                                            <td>{{partySizes[6].win}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -187,92 +201,107 @@
     
     <div class="col-xs-6">
         
-        <h1>Estatisticas Baseadas em Mapas</h1>
+        <div class="card card-plain">
+            <div class="card-header" data-background-color="red">
+                <h1>Estatisticas Baseadas em Mapas</h1>
+            </div>
+        </div>
 
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th colspan='7'>Mais Jogados</th>
-                </tr>
-                <tr>
-                    <th>#</th>
-                    <th>Mapa</th>
-                    <th>Jogos</th>
-                    <th>Vitórias</th>
-                    <th>%(wins)</th>
-                    <th>Empates</th>
-                    <th>Derrotas</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="item in mapasMaisJogados | limitTo:5">
-                    <td>{{$index+1}}</td>
-                    <td>{{item.name}}</td>
-                    <td>{{item.total}}</td>
-                    <td>{{item.win}}</td>
-                    <td>{{item.winPercentage | number:2}}</td>
-                    <td>{{item.draw}}</td>
-                    <td>{{item.loss}}</td>
-                </tr>
-            </tbody>
-        </table>
+        
 
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th colspan="5"> Mais Vitoriosos</th>
-                </tr>
-                <tr>
-                    <th>#</th>
-                    <th>Mapa</th>
-                    <th>%</th>
-                    <th>Vitórias</th>
-                    <th>Jogos</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="item in mapasMaisVitorias | limitTo:5">
-                    <td>{{$index+1}}</td>
-                    <td>{{item.name}}</td>
-                    <td>{{item.winPercentage | number:2}}</td>
-                    <td>{{item.win}}</td>
-                    <td>{{item.total}}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="card">
+            <div class="card-header" data-background-color="blue">Mapas Mais Jogados</div>
+            <div class="card-content">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Mapa</th>
+                        <th>Jogos</th>
+                        <th>Vitórias</th>
+                        <th>Empates</th>
+                        <th>Derrotas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in mapasMaisJogados | limitTo:5">
+                        <td>{{$index+1}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.total}}</td>
+                        <td>{{item.win}}</td>
+                        <td>{{item.draw}}</td>
+                        <td>{{item.loss}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
 
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th colspan="5"> Piores Mapas</th>
-                </tr>
-                <tr>
-                    <th>#</th>
-                    <th>Mapa</th>
-                    <th>%</th>
-                    <th>Derrotas</th>
-                    <th>Jogos</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="item in mapasMaisDerrotas | limitTo:5">
-                    <td>{{$index+1}}</td>
-                    <td>{{item.name}}</td>
-                    <td>{{item.lossPercentage | number:2}}</td>
-                    <td>{{item.loss}}</td>
-                    <td>{{item.total}}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="card">
+            <div class="card-header" data-background-color="blue">Mais Vitoriosos</div>
+            <div class="card-content">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Mapa</th>
+                        <th>%</th>
+                        <th>Vitórias</th>
+                        <th>Jogos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in mapasMaisVitorias | limitTo:5">
+                        <td>{{$index+1}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.winPercentage | number:2}}</td>
+                        <td>{{item.win}}</td>
+                        <td>{{item.total}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header" data-background-color="blue">Piores Mapas</div>
+            <div class="card-content">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Mapa</th>
+                        <th>%</th>
+                        <th>Derrotas</th>
+                        <th>Jogos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in mapasMaisDerrotas | limitTo:5">
+                        <td>{{$index+1}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.lossPercentage | number:2}}</td>
+                        <td>{{item.loss}}</td>
+                        <td>{{item.total}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
 
     </div>
 
     <div class="col-xs-6">
         
-        <h1>Estatisticas Baseadas nos Herois</h1>
+        
+        <div class="card card-plain">
+            <div class="card-header" data-background-color="red">
+                <h1>Estatisticas Baseadas nos Herois</h1>
+            </div>
+        </div>
         
         <div class="card">
-            <div class="card-header">Herois Mais Vitoriosos</div>
+            <div class="card-header" data-background-color="orange">Herois Mais Jogados</div>
             <div class="card-content">
             <table class="table table-hover">
                 <thead>
@@ -301,53 +330,57 @@
             </div>
         </div>
 
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th colspan="5"> Mais Vitoriosos</th>
-                </tr>
-                <tr>
-                    <th>#</th>
-                    <th>Herói</th>
-                    <th>%(win)</th>
-                    <th>Vitórias</th>
-                    <th>Jogos</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="item in maisJogados | limitTo:5">
-                    <td>{{$index+1}}</td>
-                    <td>{{item.name}}</td>
-                    <td>{{item.winPercentage | number:2}}</td>
-                    <td>{{item.win}}</td>
-                    <td>{{item.total}}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="card">
+            <div class="card-header" data-background-color="orange">Mais Vitoriosos</div>
+            <div class="card-content">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Herói</th>
+                        <th>%(win)</th>
+                        <th>Vitórias</th>
+                        <th>Jogos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in maisJogados | limitTo:5">
+                        <td>{{$index+1}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.winPercentage | number:2}}</td>
+                        <td>{{item.win}}</td>
+                        <td>{{item.total}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
 
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th colspan="5"> Piores Heróis</th>
-                </tr>
-                <tr>
-                    <th>#</th>
-                    <th>Herói</th>
-                    <th>%(loss)</th>
-                    <th>Derrotas</th>
-                    <th>Jogos</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="item in maisJogados | limitTo:5">
-                    <td>{{$index+1}}</td>
-                    <td>{{item.name}}</td>
-                    <td>{{item.lossPercentage | number:2}}</td>
-                    <td>{{item.loss}}</td>
-                    <td>{{item.total}}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="card">
+            <div class="card-header" data-background-color="orange">Piores Heróis</div>
+            <div class="card-content">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Herói</th>
+                        <th>%(loss)</th>
+                        <th>Derrotas</th>
+                        <th>Jogos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in maisJogados | limitTo:5">
+                        <td>{{$index+1}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.lossPercentage | number:2}}</td>
+                        <td>{{item.loss}}</td>
+                        <td>{{item.total}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
 
     </div>
 </div>
