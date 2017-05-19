@@ -69,24 +69,26 @@
 
 			
 				<div class="col-xs-12 select-heroes">
+					
 					<div class="col-xs-6">
 						<label for="selectHero"><h2>Selecione os Herois jogados</h2></label>
-					</div>
-					
-					<div class="heroes col-xs-6">
-						<div class="form-group">
-							<div class="select">
-								<select id="selectHero" class="form-control select-form-heroes"
-									ng-model="HeroSelecionado"
-									ng-change="adicionarHero(this.HeroSelecionado)">
-									<option value="{{item}}" ng-repeat="item in optionsHero | orderBy : item.name">
-										{{item.name}}
-									</option>
-								</select>
+						
+						<div class="heroes">
+							<div class="form-group">
+								<div class="select">
+									<select id="selectHero" class="form-control select-form-heroes"
+										ng-model="HeroSelecionado"
+										ng-change="adicionarHero(this.HeroSelecionado)">
+										<option value="{{item}}" ng-repeat="item in optionsHero | orderBy : item.name">
+											{{item.name}}
+										</option>
+									</select>
+								</div>
 							</div>
 						</div>
 					</div>
-					<div class="heroes-list">
+
+					<div class="heroes-list col-xs-6">
 						<div>
 							<h3>Lista de Herois Selecionados</h3>
 							<ul>
