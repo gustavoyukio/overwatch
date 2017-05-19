@@ -94,3 +94,22 @@
 .home h1 {
 	font-size: 16px;
 }
+
+.login {
+	text-align: center;
+}
+.login .main-panel {
+	width: 100%;
+}
+.login .main-panel form {
+	margin-top: 100px;
+}
+.login h1 {
+	font-size: 26px;
+}
+.login h1 small {
+	display: block;
+}
+.login .sidebar {
+	display: none;
+}

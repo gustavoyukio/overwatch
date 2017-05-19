@@ -7,6 +7,10 @@ app.controller('LoginController', ['$rootScope', '$scope','User','$location', fu
 	$rootScope.$broadcast('changeShowArrow',false);
 	$rootScope.$broadcast('changeShowMenu',false);
 
+	$scope.loginClass = function () {
+		$scope.loginClass = 'login-wrapper';
+	}
+
 	if (User.getLoggedStatus()) {
 
         $location.path('/adicionarJogo');

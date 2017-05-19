@@ -7,19 +7,14 @@ app.controller('BodyController', function ($rootScope, $scope) {
 
 	$scope.class = "login";
 
-	$scope.$on('$locationChangeStart', function (event, next, current) {
-
-		if (current.match('\/login')) {
-			console.log("Removendo classe e mostrando sidebar");
-			$('.main-panel').removeClass('login');
-			$rootScope.$broadcast('changeShowMenu',true);
-			
-			if (!$scope.$$phase) {
-				$scope.$apply();
-			}
-		}
-
+	$scope.$on("$routeChangeSuccess", function($currentRoute, $previousRoute) {
+    	if ($previousRoute.$$route.controller == "LoginController") {
+    		$scope.class = "login"
+    	} else {
+    		$scope.class = ""
+    	}
 	});
+
 
 })
 
@@ -123,9 +118,6 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
  		$scope.labelHeroes = [];
  		$scope.heroes 	   = [];
 
- 		console.dir(valores);
- 		console.dir(Object.keys(valores));
-
  		var tamanho = Object.keys(valores);
 
  		for (var i=0; i<tamanho;i++) {
@@ -205,9 +197,6 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
 })
 
 app.controller('LoginController', ['$rootScope', '$scope','User','$location', function($rootScope,$scope,User,$location) {
-
-	$rootScope.$broadcast('changeShowArrow',false);
-	$rootScope.$broadcast('changeShowMenu',false);
 
 	if (User.getLoggedStatus()) {
 
