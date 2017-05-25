@@ -111,5 +111,13 @@ app.controller('GameController', function($rootScope,$scope,Score,Heroes,Map,Gam
 		}
 
 	}
+
+	var data = {
+        countries: [],
+        country: [],
+        countriesTest: []
+    };
+
+    $scope.countries = [{'code':1, 'name':'abacate'}]
 	
 })
