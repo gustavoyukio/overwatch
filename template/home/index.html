@@ -35,7 +35,7 @@
 <hr/>
 
 <div class="row">
-    <div class="col-xs-6 top-info">
+    <div class="col-xs-12 col-md-6 top-info">
         <canvas 
             id="line" 
             class="chart chart-line" 
@@ -48,7 +48,7 @@
         </canvas>
     </div>
 
-    <div class="col-xs-6">
+    <div class="col-xs-12 col-md-6">
         <div class="panel panel-info">
             <div class="panel-heading">
                 Maior SR: <b>{{ biggerScore }}</b>
@@ -81,18 +81,18 @@
     <div class="col-xs-12">
 
         <div class="card card-plain">
-            <div class="card-header" data-background-color="red">
+            <div class="card-header" data-background-color="title">
                 <h1> Estatísticas Baseadas no Time </h1>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-xs-6">
+            <div class="col-xs-12 col-md-6">
                 <div class="row">
                     <div class="col-xs-12">
 
                         <div class="card">
-                            <div class="card-header" >Seu time com SR Maior</div>
+                            <div class="card-header" data-background-color="default">Seu time com SR Maior</div>
                             <div class="card-content">
                                 <table class="table table-hover">
                                     <thead>
@@ -119,7 +119,7 @@
                             </div>
                         </div>
                         <div class="card">
-                            <div class="card-header" data-background-color="orange">Seu time com SR Menor </div>
+                            <div class="card-header" data-background-color="green">Seu time com SR Menor </div>
                                 <div class="card-content">
                                 <table class="table table-hover">
                                      <thead>
@@ -149,11 +149,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-6">
+            <div class="col-xs-12 col-md-6">
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="card">
-                            <div class="card-header" data-background-color="purple">Vitorias por Tamanho das Parties </div>
+                            <div class="card-header" data-background-color="party">Vitorias por Tamanho das Parties </div>
                                 <div class="card-content">
                                 <table class="table table-hover">
                                     <thead>
@@ -198,11 +198,58 @@
 </div>
 
 <div class="row">
+    <div class="col-xs-12">
+
+        <div class="card card-plain">
+            <div class="card-header" data-background-color="title">
+                <h1> Estatísticas Baseadas nas Classes </h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+
+                <div class="card">
+                    <div class="card-header" data-background-color="default">Dados por Por classes</div>
+                    <div class="card-content">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Classe</th>
+                                    <th>Total</th>
+                                    <th>Vitórias</th>
+                                    <th>Empates</th>
+                                    <th>Derrotas</th>
+                                    <th>%(wins)</th>
+                                    <th>%(derrotas)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in classes">
+                                    <td> {{item.name}} </td>
+                                    <td> {{item.total}} </td>
+                                    <td> {{item.win}} </td>
+                                    <td> {{item.draw}} </td>
+                                    <td> {{item.loss}} </td>
+                                    <td> {{item.winPercentage | number:2}} </td>
+                                    <td> {{item.lossPercentage | number:2}} </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
     
-    <div class="col-xs-6">
+    <div class="col-xs-12 col-md-6">
         
         <div class="card card-plain">
-            <div class="card-header" data-background-color="red">
+            <div class="card-header" data-background-color="title">
                 <h1>Estatisticas Baseadas em Mapas</h1>
             </div>
         </div>
@@ -224,7 +271,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in mapasMaisJogados | limitTo:5">
+                    <tr ng-repeat="item in mapasMaisJogados | orderBy:total">
                         <td>{{$index+1}}</td>
                         <td>{{item.name}}</td>
                         <td>{{item.total}}</td>
@@ -238,7 +285,7 @@
         </div>
 
         <div class="card">
-            <div class="card-header" data-background-color="blue">Mais Vitoriosos</div>
+            <div class="card-header" data-background-color="green">Mais Vitoriosos</div>
             <div class="card-content">
             <table class="table table-hover">
                 <thead>
@@ -264,7 +311,7 @@
         </div>
 
         <div class="card">
-            <div class="card-header" data-background-color="blue">Piores Mapas</div>
+            <div class="card-header" data-background-color="red">Piores Mapas</div>
             <div class="card-content">
             <table class="table table-hover">
                 <thead>
@@ -291,17 +338,17 @@
 
     </div>
 
-    <div class="col-xs-6">
+    <div class="col-xs-12 col-md-6">
         
         
         <div class="card card-plain">
-            <div class="card-header" data-background-color="red">
+            <div class="card-header" data-background-color="title">
                 <h1>Estatisticas Baseadas nos Herois</h1>
             </div>
         </div>
         
         <div class="card">
-            <div class="card-header" data-background-color="orange">Herois Mais Jogados</div>
+            <div class="card-header" data-background-color="blue">Herois Mais Jogados</div>
             <div class="card-content">
             <table class="table table-hover">
                 <thead>
@@ -331,7 +378,7 @@
         </div>
 
         <div class="card">
-            <div class="card-header" data-background-color="orange">Mais Vitoriosos</div>
+            <div class="card-header" data-background-color="green">Mais Vitoriosos</div>
             <div class="card-content">
             <table class="table table-hover">
                 <thead>
@@ -357,7 +404,7 @@
         </div>
 
         <div class="card">
-            <div class="card-header" data-background-color="orange">Piores Heróis</div>
+            <div class="card-header" data-background-color="red">Piores Heróis</div>
             <div class="card-content">
             <table class="table table-hover">
                 <thead>

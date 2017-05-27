@@ -14,8 +14,6 @@ app.controller('BodyController', function ($rootScope, $scope) {
     		$scope.class = ""
     	}
 	});
-
-
 })
 
 app.controller('HeaderController', function($rootScope, $scope, $window) {
@@ -44,7 +42,6 @@ app.controller('NavController', ['$scope', function ($scope) {
 	$scope.$on('changeShowMenu', function (event, valor) {
 		$scope.showMenu = valor;
 	});
-
 }])
 
 app.controller('MenuController', ['$scope', function($scope) {
@@ -56,16 +53,16 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
 	$scope.showScoreInicial = false;
 	$scope.biggerScore = 0;
 
-	var filtrar = function sorting () {};
-
-	function maisJogados(a,b) {
-	  	if (a.sum > b.sum)
-	    	return -1;
-	  	if (a.sum < b.sum)
-	    	return 1;
-	  	return 0;
-	}
-
+    var sortFunc = function (a,b) {
+        console.log(a.total);
+        console.log(b.total);
+        if (a.total < b.total) {
+            console.log('menor')
+            return -1;
+        }
+        if (b.total > a.total) return 1;
+        return 0;
+    }
 
  	var setGraphScore = function (valores) {
  		
@@ -136,12 +133,9 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
   		}
   	} 	
 
+    // callbacks
   	$scope.setScoreInicial = function () {
   		Score.setScoreInicial($scope.scoreInicialValue, scoreInicialCallback);
-  	}
-
-  	var getScoreInicial = function () {
-  		Score.getScoreInicial(scoreInicialCallback);
   	}
  	var HeroesNeverDieCallback = function (data) {
 
@@ -156,8 +150,6 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
 		}
  	}
  	var MapsNeverDieCallback = function (data) {
- 		
- 		//console.dir(data);
 
 		$scope.mapasMaisJogados  = data[0];
 		$scope.mapasMaisVitorias = data[1];
@@ -182,68 +174,24 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
  		$scope.partySizes = data;
  	}
 
+    var typesNeverDieCallbacl = function (valor) {
+        $scope.classes = valor;
+    }
+
+    //Start Function
+    var getScoreInicial = function () {
+        Score.getScoreInicial(scoreInicialCallback);
+    }    
  	Home.srsNeverDie(SRsNeverDieCallback);
  	Home.heroesNeverDie(HeroesNeverDieCallback);
  	Home.mapsNeverDie(MapsNeverDieCallback);
- 	Home.sizesNeverDie(SizesNeverDieCallback)
-
+ 	Home.sizesNeverDie(SizesNeverDieCallback);
+    Home.typesNeverDie(typesNeverDieCallbacl);
   	Score.getScores(setGraphScore);
-
-  	Score.getHeroesInicial(setGraphHeroes)
+  	Score.getHeroesInicial(setGraphHeroes);
   	
   	if (!$scope.showScoreInicial) {
   		getScoreInicial();
   	}
 })
-
-app.controller('LoginController', ['$rootScope', '$scope','User','$location', function($rootScope,$scope,User,$location) {
-
-	if (User.getLoggedStatus()) {
-
-        $location.path('/adicionarJogo');
-
-    } else {
-
-	    var logIn = function (valor) {
-			if (valor == true || valor) {
-				$rootScope.$broadcast('abacate',true);
-				if (!$scope.$$phase) {
-					$location.path('/');
-					$scope.$apply();
-				}
-			}
-		}
-
-    }
-
-	
-
-	$scope.googleLogin = function () {
-
-		firebase.auth().signInWithPopup(provider).then(function(result) {
-	        // This gives you a Google Access Token. You can use it to access the Google API.
-	        var token = result.credential.accessToken;
-	        // The signed-in user info.
-	        var user = result.user;
-
-	        if (user.uid != null) {
-	          	User.setLoggedStatus(user, logIn)  
-	          	// Mais pra frente, guardar dados
-	          	//$location.path('/adicionarJogo');
-	        }
-	        // ...
-	    }).catch(function(error) {
-	        // Handle Errors here.
-	        var errorCode = error.code;
-	        var errorMessage = error.message;
-	        // The email of the user's account used.
-	        var email = error.email;
-	        // The firebase.auth.AuthCredential type that was used.
-	        var credential = error.credential;
-	        // ...
-	        console.dir(error);
-	    });
-
-	}
-}])
 ;

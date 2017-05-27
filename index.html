@@ -6,7 +6,7 @@
 	<link rel="icon" type="image/png" href="../assets/img/favicon.png" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Teste</title>
+	<title>Overtrack</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -19,8 +19,7 @@
 
     <!--  CSS for Demo Purpose, don't include it in your project     -->
     <link href="assets/css/demo.css" rel="stylesheet" />
-    <link href="assets/css/chosen.min.css" rel="stylesheet" />
-    <link href="assets/css/prism.css" rel="stylesheet" />
+    <link href="node_modules/angular-chosen/dist/chose.min.css" rel="stylesheet" />
 
     <!--     Fonts and icons     -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
@@ -45,35 +44,19 @@
     			<div class="sidebar-wrapper">
     				<div class="nav-container">
     					<ul class="nav">
-    						<li routerlinkactive="active" class="active">
-    							<a href="#/dashboard">
+    						<li class="">
+    							<a href="#!/">
     								<i class="material-icons">dashboard</i>
     								<p>Dashboard</p>
     							</a>
     						</li>
-    						<li routerlinkactive="active" class="">
+    						<li class="">
     							<a href="#!/listar-jogos">
     								<i class="material-icons">person</i>
     								<p>Lista de Jogos</p>
     							</a>
     						</li>
-    						<li routerlinkactive="active" class="">
-    							<a>
-    								<i class="material-icons">content_paste</i>
-    								<p>Estatisticas</p>
-    							</a>
-    						</li>
-    						<li routerlinkactive="active" class="">
-    							<a>
-    								<i class="material-icons">library_books</i>
-    								<p>Melhores Dados</p>
-    							</a>
-    						</li>
     					</ul>
-    					<div class="moving-tab" style="width: 230px; transform: translate3d(0px, 20px, 0px);">
-    						<i class="material-icons">dashboard</i>
-    						<p>Dashboard</p>
-    					</div>
     				</div>
     			</div>
     		</sidebar-cmp>
@@ -103,17 +86,13 @@
 	</div>
 
 </body>
+
 <!--   Core JS Files   -->
 <script src="assets/js/vendors/jquery-3.1.0.min.js" type="text/javascript"></script>
 <script src="assets/js/vendors/bootstrap.min.js" type="text/javascript"></script>
 <script src="assets/js/vendors/material.min.js" type="text/javascript"></script>
-
 <!--  Charts Plugin -->
 <script src="assets/js/nonangular/chartist.min.js"></script>
-
-<!--  Notifications Plugin    -->
-<script src="assets/js/vendors/bootstrap-notify.js"></script>
-
 <!-- Material Dashboard javascript methods -->
 <script src="assets/js/nonangular/material-dashboard.js?v=1.2.0"></script>
 
@@ -137,30 +116,26 @@
         provider.addScope('https://www.googleapis.com/auth/plus.login');
     </script>
 
-    <!-- Angular -->
+<!-- Angular -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.3/angular.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.3/angular-route.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.3/angular-resource.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.3/angular-cookies.min.js"></script>
     <!-- Angular Modules -->
     <script src="assets/js/database/firebaseDatabase.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.jquery.min.js"></script>
     <script src="node_modules/chart.js/dist/Chart.min.js"></script>
     <script src="node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
-    <!-- vendors -->
-    <script src="assets/js/vendors/angular-chosen.min.js"></script>
-    <!-- data -->
+
+<!-- vendors -->
+    <script src="node_modules/angular-chosen/dist/chosen.js"></script>
+
+<!-- data -->
     <script src="assets/js/angular/app.js"></script>
     <script src="assets/js/angular/controllers/controllers.js"></script>
     <script src="assets/js/angular/controllers/login.js"></script>
     <script src="assets/js/angular/controllers/game.js"></script>
+    <script src="assets/js/angular/controllers/gamelist.js"></script>
     <script src="assets/js/angular/filters.js"></script>
     <script src="assets/js/angular/factories/services.js"></script>
-
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $('#abacate').chosen();
-        })
-    </script>
 
 </html>

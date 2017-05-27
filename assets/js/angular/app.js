@@ -6,19 +6,21 @@ angular.module('myApp', [
   'myApp.services',
   'myApp.controllers',
   'myApp.loginController',
+  'myApp.GameController',
+  'myApp.GameListController',
   'ngCookies'
 ]).
-run(['$rootScope', 'User', '$location', function($rootScope, User, $location){
+run(['$rootScope', 'User', '$location', function($rootScope, User, $location, $cookies){
 
-    /*
+    
     $rootScope.$on("$locationChangeStart", function(event, next, current) { 
+
         if (!User.getLoggedStatus()) {
             $location.path('/login');
         }
         
     });
-    */
-
+    
 }]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
 
@@ -36,7 +38,7 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 
     .when("/listar-jogos", {
       templateUrl: "template/game/list.html",
-      controller: "GameController"
+      controller: "GameListController"
     })
 
     .when("/login", {

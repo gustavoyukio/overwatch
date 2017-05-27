@@ -125,7 +125,17 @@ app.service('Map', function(){
 		];
 
 		_self.getMaps = function () {
-			return _self.Maps;
+
+			var uva = _self.Maps.sort(function(a, b){
+ 				
+ 				if (a < b) //sort string ascending
+  					return -1;
+ 				if (a > b)
+  					return 1;
+ 				return 0; //default return value (no sorting)
+			});
+
+			return uva;
 		}
 
 	}
@@ -212,6 +222,9 @@ app.service('Game', ['Firebase','$cookies', function(Firebase,$cookies){
 			_self.obj.srs.team = 0;
 			_self.obj.srs.enemy = 0;
 		}
+		_self.getGamesList = function (callback) {
+			Firebase.getGamesList(callback);
+		}
 
 	}
 
@@ -278,6 +291,11 @@ app.service('Home', ['Firebase', function(Firebase) {
 		_self.sizesNeverDie = function (callback) {
 			Firebase.sizesNeverDie(callback);
 		}
+
+		_self.typesNeverDie = function (callback) {
+			Firebase.typesNeverDie(callback);
+		}
+
 	}
 	return new Home();
 }])

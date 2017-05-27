@@ -34,10 +34,11 @@ var Firebase = function() {
 
 	// User
 	_self.getUserUid = function () {
-		//return firebase.auth().currentUser.uid;
+		return firebase.auth().currentUser.uid;
 		//return 'qnQdKgKH0yN2KsIxWhQHkWi2zkx1'; GYCC
 		//return 'uiIrBxxy95h6pew26nHIk7DnzoU2'; // GYCC2
-		return 'TaN3G9CWUGZan2ex0WNKy4DOIuB3'; // GYCC3
+		//return 'TaN3G9CWUGZan2ex0WNKy4DOIuB3'; // GYCC3
+		//return 'UEsnD1eSGgRzc6NVURCZge0F4fR2';
 	}
 
 	// Game Status
@@ -323,13 +324,33 @@ var Firebase = function() {
 
 		callback(msg);
 	}
+	_self.getGamesList = function (callback) {
+
+		var uid  = _self.getUserUid();
+		var path = "/" + uid + "/games";
+
+		firebase
+			.database()
+			.ref(path)
+			.once("value", function(snapshot){
+				
+				// tratar dados
+				var array = $.map(snapshot.val(), function(value, index) {
+    				return [value];
+				});
+				callback(array);
+
+			}, function (error) {
+				console.dir(error);
+			})
+	}
 
 	// Primeiro Acesso de Gravacao de Jogo
 	_self.saveNewGameEntry = function (item, callback) {
 		// 1 Save Score - OK
 		// Settando Game Status
 		_self.getScoreCounter(item, _self.continueSaving, callback);
-		console.log("Salvando um Jogo")
+		item.label = _self.gameStatusLabel;
 	}	
 	_self.continueSaving = function (item, callback) {
 		// Game Status Setted, agora salvar os dados
@@ -464,38 +485,6 @@ var Firebase = function() {
 				callback(value);
 
 			});			
-	}
-
-	_self.sortByField = function (field,arr) {
-		
-		var array = arr;
-
-		function dynamicSort(property) {
-    		
-    		return function (a,b) {
-    			
-    			//console.log('comparing => ' + a[property] + ' / ' + b[property]);
-
-    			if (a[property] !== undefined  && b[property] !== undefined) {
-    				if (a[property] < b[property]) {
-    					return 1;
-    				} else {
-    					return -1;
-    				}
-    			} else if (a[property] !== undefined) {
-    				return -11;
-    			} else if (b[property] !== undefined) {
-    				//console.log('A eh undefined');
-    				return 1;
-    			}
-    			return 0;
-        		
-    		}
-		}
-
-		array = array.sort(dynamicSort(field));
-
-		return array;
 	}
 
 	_self.heroesNeverDie = function (callback) {
@@ -634,7 +623,59 @@ var Firebase = function() {
 			callback(sizes);
 
 		});
-
 	}
+
+	_self.typesNeverDie = function (callback) {
+		
+		var uid = _self.getUserUid();
+		var path = "/" + uid + "/types";
+
+		firebase
+		.database()
+		.ref(path)
+		.once("value", function(snapshot){
+
+			var valor = snapshot.val();
+
+			for (var i in valor) {
+				valor[i].name = i;
+			}
+
+			callback(valor);
+
+		});		
+	}
+
+	// Sorting Function
+	_self.sortByField = function (field,arr) {
+
+		var array = arr;
+		function dynamicSort(property) {
+    		
+    		return function (a,b) {
+    			
+    			//console.log('comparing => ' + a[property] + ' / ' + b[property]);
+
+    			if (a[property] !== undefined  && b[property] !== undefined) {
+    				if (a[property] < b[property]) {
+    					return 1;
+    				} else {
+    					return -1;
+    				}
+    			} else if (a[property] !== undefined) {
+    				return -11;
+    			} else if (b[property] !== undefined) {
+    				//console.log('A eh undefined');
+    				return 1;
+    			}
+    			return 0;
+        		
+    		}
+		}
+
+		array = array.sort(dynamicSort(field));
+
+		return array;
+	}	
 
 }

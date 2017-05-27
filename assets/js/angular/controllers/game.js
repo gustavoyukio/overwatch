@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('myApp.loginController', ["ngRoute","myApp.services"]);
+var app = angular.module('myApp.GameController', ["ngRoute","myApp.services"]);
 
 app.controller('GameController', function($rootScope,$scope,Score,Heroes,Map,Game,$location,$cookies){
 
@@ -118,6 +118,6 @@ app.controller('GameController', function($rootScope,$scope,Score,Heroes,Map,Gam
         countriesTest: []
     };
 
-    $scope.countries = [{'code':1, 'name':'abacate'}]
+    $scope.countries = [{'code':1, 'name':'abacate'}];
 	
 })
