@@ -185,6 +185,7 @@ app.service('Game', ['Firebase','$cookies', function(Firebase,$cookies){
 			'heroes': [],
 			'types' : [],
 			'party' : '',
+			'side'  : '',
 			'srs'   : {
 				'team': 0,
 				'enemy': 0
@@ -194,6 +195,9 @@ app.service('Game', ['Firebase','$cookies', function(Firebase,$cookies){
 		_self.setMap = function (item) {
 			_self.obj.map = item;
 		}
+		_self.setSide = function (item) {
+			_self.obj.side = item;
+		}		
 		_self.setHeroes = function (item) {
 			var hero = JSON.parse(item);
 			_self.obj.heroes.push(hero.name);

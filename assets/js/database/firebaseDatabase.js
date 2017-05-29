@@ -284,7 +284,7 @@ var Firebase = function() {
 				_self.type = type;
 				_self.firebaseValues = firebaseValues;
 
-				_self.abacate = function (snapshot) {
+				_self.getTypeValue = function (snapshot) {
 				
 					if (snapshot.val() != null) {
 
@@ -303,7 +303,7 @@ var Firebase = function() {
 			firebase
 				.database()
 				.ref(path)
-				.once("value", newTypeObj.abacate);
+				.once("value", newTypeObj.getTypeValue);
 			
 			
 		}
@@ -345,6 +345,34 @@ var Firebase = function() {
 			})
 	}
 
+	// Save Side Entry
+	_self.saveSideCounter = function (party, valor) {
+		
+		var uid  = _self.getUserUid();
+		var path = "/" + uid + "/sides/" + item.side;
+		var obj  = _self.dataSetup(valor);
+
+		firebase.database().ref(path).update(obj);
+	}
+	_self.getSideCounter = function (item) {
+
+		var uid  = _self.getUserUid();
+		var path = "/" + uid + "/sides/" + item.side;
+
+		firebase
+			.database()
+			.ref(path)
+			.once("value", function(snapshot){
+				
+				if (snapshot.val() != null) {
+					var valor = snapshot.val();
+				}
+
+				_self.saveSideCounter(item.side,valor);
+
+			});
+	}
+
 	// Primeiro Acesso de Gravacao de Jogo
 	_self.saveNewGameEntry = function (item, callback) {
 		// 1 Save Score - OK
@@ -360,6 +388,7 @@ var Firebase = function() {
 		_self.getTypeCounter (item);
 		_self.getSRCounter (item);
 		_self.getPartySizeCounter(item);
+		_self.getSideCounter(item);
 		_self.saveEntry (item, callback);
 	}
 

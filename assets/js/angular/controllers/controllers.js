@@ -47,11 +47,21 @@ app.controller('NavController', ['$scope', function ($scope) {
 app.controller('MenuController', ['$scope', function($scope) {
 }])
 
-app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$timeout){
+app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$timeout,$http){
  	
  	$rootScope.$broadcast('changeShowArrow',false);
 	$scope.showScoreInicial = false;
 	$scope.biggerScore = 0;
+
+    $http({
+        method: 'GET',
+        url: '/heroes',
+        params: {'data':1},
+    }).then(function successCallback(res) {
+        console.log(res.data);
+    }, function errorCallback(res) {
+        console.log(res);
+    });
 
     var sortFunc = function (a,b) {
         console.log(a.total);
@@ -68,6 +78,9 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
  		
  		$scope.series = ['SR'];
   		$scope.datasetOverride = [{ xAxisID: 'jogos' }, { yAxisID: 'SR' }];
+        $scope.onClick = function (points, evt) {
+            console.log(points, evt);
+        };
 		
   		$scope.options = {
     		scales: {

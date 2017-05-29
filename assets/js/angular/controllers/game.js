@@ -53,6 +53,7 @@ app.controller('GameController', function($rootScope,$scope,Score,Heroes,Map,Gam
 	$scope.optionsMaps 	= Map.getMaps();
 	$scope.teamSR		= 0;
 	$scope.enemySR		= 0;
+	$scope.side  		= '';
 
 	getHorario();
 
@@ -75,6 +76,7 @@ app.controller('GameController', function($rootScope,$scope,Score,Heroes,Map,Gam
 			Game.setScore($scope.SrFinal);
 			Game.setHour(hour);
 			Game.saveEntry(resetarForm);
+			Gane.setSide($scope.side);
 
 		} else {
 			console.log("Entradas Erradas")	

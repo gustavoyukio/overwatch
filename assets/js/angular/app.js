@@ -12,7 +12,7 @@ angular.module('myApp', [
 ]).
 run(['$rootScope', 'User', '$location', function($rootScope, User, $location, $cookies){
 
-    
+/*    
     $rootScope.$on("$locationChangeStart", function(event, next, current) { 
 
         if (!User.getLoggedStatus()) {
@@ -20,6 +20,7 @@ run(['$rootScope', 'User', '$location', function($rootScope, User, $location, $c
         }
         
     });
+    */
     
 }]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
