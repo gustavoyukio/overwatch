@@ -53,27 +53,6 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
 	$scope.showScoreInicial = false;
 	$scope.biggerScore = 0;
 
-    $http({
-        method: 'GET',
-        url: '/heroes',
-        params: {'data':1},
-    }).then(function successCallback(res) {
-        console.log(res.data);
-    }, function errorCallback(res) {
-        console.log(res);
-    });
-
-    var sortFunc = function (a,b) {
-        console.log(a.total);
-        console.log(b.total);
-        if (a.total < b.total) {
-            console.log('menor')
-            return -1;
-        }
-        if (b.total > a.total) return 1;
-        return 0;
-    }
-
  	var setGraphScore = function (valores) {
  		
  		$scope.series = ['SR'];
@@ -174,10 +153,9 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
  	}
  	var SRsNeverDieCallback = function (data) {
  		
- 		//console.dir(data);
+ 		console.dir(data);
 
-		$scope.srMaior  = data.smaller;
-		$scope.srMenor = data.bigger;
+		$scope.scores  = data;
 
 		if (!$scope.$$phase) {
 			$scope.$apply();
@@ -187,24 +165,27 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
  		$scope.partySizes = data;
  	}
 
-    var typesNeverDieCallbacl = function (valor) {
+    var typesNeverDieCallback = function (valor) {
         $scope.classes = valor;
     }
 
     //Start Function
     var getScoreInicial = function () {
         Score.getScoreInicial(scoreInicialCallback);
-    }    
+    } 
+
  	Home.srsNeverDie(SRsNeverDieCallback);
  	Home.heroesNeverDie(HeroesNeverDieCallback);
  	Home.mapsNeverDie(MapsNeverDieCallback);
  	Home.sizesNeverDie(SizesNeverDieCallback);
-    Home.typesNeverDie(typesNeverDieCallbacl);
+    Home.typesNeverDie(typesNeverDieCallback);
+
   	Score.getScores(setGraphScore);
   	Score.getHeroesInicial(setGraphHeroes);
   	
   	if (!$scope.showScoreInicial) {
   		getScoreInicial();
   	}
+
 })
 ;

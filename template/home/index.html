@@ -7,7 +7,7 @@
         <b>Score Atual : </b> {{scoreInicialValue}}   
     </li>
     <li>
-        <b>Score Maior : </b> {{scoreInicialValue}} 
+        <b>Score Maior : </b> <span ng-repeat="item in scores | orderBy: '-item' | limitTo: 1">{{item}}</span> 
     </li>
     <li class="right">
         <a href="#!/adicionar-jogo" class="label label-primary">Adicionar Jogo</a>
@@ -236,8 +236,8 @@
                                     <td> {{item.win}} </td>
                                     <td> {{item.draw}} </td>
                                     <td> {{item.loss}} </td>
-                                    <td> {{item.winPercentage | number:2}} </td>
-                                    <td> {{item.lossPercentage | number:2}} </td>
+                                    <td> {{(item.winPercentage * 100) | number:1}}% </td>
+                                    <td> {{(item.lossPercentage * 100) | number:1}}% </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -276,7 +276,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in mapasMaisJogados | orderBy:total">
+                    <tr ng-repeat="item in mapasMaisJogados | orderBy: '-total' ">
                         <td>{{$index+1}}</td>
                         <td>{{item.name}}</td>
                         <td>{{item.total}}</td>
@@ -298,17 +298,17 @@
                         <th>#</th>
                         <th>Mapa</th>
                         <th>%</th>
-                        <th>Vitórias</th>
                         <th>Jogos</th>
+                        <th>Vitórias</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in mapasMaisVitorias | limitTo:5">
+                    <tr ng-repeat="item in mapasMaisVitorias |  orderBy: '-winPercentage'">
                         <td>{{$index+1}}</td>
                         <td>{{item.name}}</td>
-                        <td>{{item.winPercentage | number:2}}</td>
-                        <td>{{item.win}}</td>
+                        <td>{{(item.winPercentage * 100) | number:1}}%</td>
                         <td>{{item.total}}</td>
+                        <td>{{item.win}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -324,17 +324,17 @@
                         <th>#</th>
                         <th>Mapa</th>
                         <th>%</th>
-                        <th>Derrotas</th>
                         <th>Jogos</th>
+                        <th>Derrotas</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in mapasMaisDerrotas | limitTo:5">
+                    <tr ng-repeat="item in mapasMaisDerrotas |  orderBy: '-lossPercentage' ">
                         <td>{{$index+1}}</td>
                         <td>{{item.name}}</td>
-                        <td>{{item.lossPercentage | number:2}}</td>
-                        <td>{{item.loss}}</td>
+                        <td>{{(item.lossPercentage * 100) | number:1}}%</td>
                         <td>{{item.total}}</td>
+                        <td>{{item.loss}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -368,12 +368,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in maisJogados | limitTo:5">
+                    <tr ng-repeat="item in maisJogados |  orderBy: '-total'">
                         <td>{{$index+1}}</td>
                         <td>{{item.name}}</td>
                         <td>{{item.total}}</td>
                         <td>{{item.win}}</td>
-                        <td>{{item.winPercentage | number:2}}</td>
+                        <td>{{(item.winPercentage * 100) | number:1}}%</td>
                         <td>{{item.draw}}</td>
                         <td>{{item.loss}}</td>
                     </tr>
@@ -391,17 +391,17 @@
                         <th>#</th>
                         <th>Herói</th>
                         <th>%(win)</th>
-                        <th>Vitórias</th>
                         <th>Jogos</th>
+                        <th>Vitórias</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in maisJogados | limitTo:5">
+                    <tr ng-repeat="item in maisJogados | orderBy: '-winPercentage'">
                         <td>{{$index+1}}</td>
                         <td>{{item.name}}</td>
-                        <td>{{item.winPercentage | number:2}}</td>
-                        <td>{{item.win}}</td>
+                        <td>{{(item.winPercentage * 100) | number:1}}%</td>
                         <td>{{item.total}}</td>
+                        <td>{{item.win}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -417,17 +417,17 @@
                         <th>#</th>
                         <th>Herói</th>
                         <th>%(loss)</th>
-                        <th>Derrotas</th>
                         <th>Jogos</th>
+                        <th>Derrotas</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in maisJogados | limitTo:5">
+                    <tr ng-repeat="item in maisJogados |  orderBy: '-lossPercentage'">
                         <td>{{$index+1}}</td>
                         <td>{{item.name}}</td>
-                        <td>{{item.lossPercentage | number:2}}</td>
-                        <td>{{item.loss}}</td>
+                        <td>{{(item.lossPercentage * 100) | number:1}}%</td>
                         <td>{{item.total}}</td>
+                        <td>{{item.loss}}</td>
                     </tr>
                 </tbody>
             </table>

@@ -1,42 +1,55 @@
 // server.js
 
 // set up ========================
-var express  = require('express');
-var app      = express();                               // create our app w/ express
-var bodyParser = require('body-parser');    // pull information from HTML POST (express4)
-var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
+var express  		= require('express');
+var app      		= express();                               // create our app w/ express
+var bodyParser 		= require('body-parser');    // pull information from HTML POST (express4)
+var methodOverride 	= require('method-override'); // simulate DELETE and PUT (express4)
+var admin 			= require("firebase-admin");
 
-// firebase
-var firebase = require('firebase');
+// Firebase Json File
+var serviceAccount = require("./firebase.json");
 
-// Initialize Firebase
-var config = {
-    apiKey: "AIzaSyDoSNIZPh6vCKhO5U5YWMBmqMeyzCfBOXI",
-    authDomain: "overwatch-17418.firebaseapp.com",
-    databaseURL: "https://overwatch-17418.firebaseio.com",
-    projectId: "overwatch-17418",
-    storageBucket: "overwatch-17418.appspot.com",
-    messagingSenderId: "413697016856"
-};
-
-firebase.initializeApp(config);
-// login with Google Api
-var provider = new firebase.auth.GoogleAuthProvider();
-provider.addScope('https://www.googleapis.com/auth/plus.login');
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://overwatch-17418.firebaseio.com"
+});
 
 // configuration =================
-
 app.set('port', (process.env.PORT || 5000))
 
+// Config Express
 app.use(express.static(__dirname));                 // set the static files location /public/img will be /img for users
 app.use(bodyParser.urlencoded({'extended':'true'}));            // parse application/x-www-form-urlencoded
 app.use(bodyParser.json());                                     // parse application/json
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 app.use(methodOverride());
 
-app.get("/heroes", function(req, res) {
-    console.dir(req);
-    res.send(req.params);
+// Config User
+//var User = new User();
+
+// Rotas
+app.post("/heroes/:id", function(req, res) {
+	
+	/*
+    var path = "/qnQdKgKH0yN2KsIxWhQHkWi2zkx1/games";
+    console.log(path);
+
+    console.dir(admin);
+
+    var a = admin
+			.database()
+			.ref(path)
+			.once("value", function(snapshot){
+				
+				res.send(snapshot.val());
+
+			}, function (error) {
+				res.send (error);
+			});
+	*/
+
+	res.send("OK");
 });
 
 // listen (start app with node server.js) ======================================

@@ -16,8 +16,8 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="item in gameList">
-							<td>{{[index]}}</td>
+						<tr ng-repeat="item in gameList | orderBy: '-score' ">
+							<td>{{$index+1}}</td>
 							<td>{{item.map}}</td>
 							<td>{{item.party}}</td>
 							<td>
