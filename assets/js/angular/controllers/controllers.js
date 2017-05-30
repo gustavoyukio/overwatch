@@ -55,6 +55,18 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
 
  	var setGraphScore = function (valores) {
  		
+        $scope.scoreHighest = 0;
+        $scope.scoreCurrent = 0;
+        $scope.scireInitial = 0;
+
+        for (var a in valores) {
+            if (valores[a] > $scope.scoreHighest) {
+                $scope.scoreHighest = valores[a];
+            }
+        }
+
+        $scope.scoreCurrent = valores[valores.length - 1];
+
  		$scope.series = ['SR'];
   		$scope.datasetOverride = [{ xAxisID: 'jogos' }, { yAxisID: 'SR' }];
         $scope.onClick = function (points, evt) {

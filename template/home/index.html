@@ -4,10 +4,10 @@
         <b>Score Inicial : </b> {{scoreInicialValue}} 
     </li>
     <li>
-        <b>Score Atual : </b> {{scoreInicialValue}}   
+         <b>Score Maior : </b> {{scoreHighest}}
     </li>
     <li>
-        <b>Score Maior : </b> <span ng-repeat="item in scores | orderBy: '-item' | limitTo: 1">{{item}}</span> 
+        <b>Score Atual : </b> {{scoreCurrent}} 
     </li>
     <li class="right">
         <a href="#!/adicionar-jogo" class="label label-primary">Adicionar Jogo</a>
