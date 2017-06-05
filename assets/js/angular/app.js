@@ -12,15 +12,17 @@ angular.module('myApp', [
 ]).
 run(['$rootScope', 'User', '$location', function($rootScope, User, $location, $cookies){
 
-/*    
-    $rootScope.$on("$locationChangeStart", function(event, next, current) { 
+  var test = false;
 
-        if (!User.getLoggedStatus()) {
-            $location.path('/login');
-        }
-        
-    });
-    */
+    if (!test) {
+      $rootScope.$on("$locationChangeStart", function(event, next, current) { 
+
+          if (!User.getLoggedStatus()) {
+              $location.path('/login');
+          }
+          
+      });
+    }
     
 }]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
