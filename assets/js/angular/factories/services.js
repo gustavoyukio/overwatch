@@ -300,6 +300,10 @@ app.service('Home', ['Firebase', function(Firebase) {
 			Firebase.typesNeverDie(callback);
 		}
 
+		_self.setNewSeason = function () {
+			Firebase.setNewSeason();
+		}
+
 	}
 	return new Home();
 }])

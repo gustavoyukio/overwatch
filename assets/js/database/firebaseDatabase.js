@@ -34,7 +34,8 @@ var Firebase = function() {
 
 	// User
 	_self.getUserUid = function () {
-		return firebase.auth().currentUser.uid;
+		return "season5/" + firebase.auth().currentUser.uid;
+		//return firebase.auth().currentUser.uid;
 		//return 'qnQdKgKH0yN2KsIxWhQHkWi2zkx1'; //GYCC
 		//return 'uiIrBxxy95h6pew26nHIk7DnzoU2'; // GYCC2
 		//return 'TaN3G9CWUGZan2ex0WNKy4DOIuB3'; // GYCC3
@@ -705,6 +706,31 @@ var Firebase = function() {
 		array = array.sort(dynamicSort(field));
 
 		return array;
-	}	
+	}
+
+	_self.setNewSeason = function () {
+
+		var path = "/";
+		console.log("OI");
+
+		firebase
+		.database()
+		.ref(path)
+		.once("value", function(snapshot){
+
+			var pathInterno = "/season4/";
+			console.log(pathInterno);
+
+			obj = snapshot.val();
+
+			firebase
+				.database()
+				.ref(pathInterno)
+				.update(obj);			
+
+		}, function (Error) {
+			console.log(Error);
+		});
+	}
 
 }

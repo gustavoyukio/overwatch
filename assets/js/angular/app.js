@@ -8,6 +8,7 @@ angular.module('myApp', [
   'myApp.loginController',
   'myApp.GameController',
   'myApp.GameListController',
+  'myApp.StreamController',
   'ngCookies'
 ]).
 run(['$rootScope', 'User', '$location', function($rootScope, User, $location, $cookies){
@@ -40,6 +41,11 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
     .when("/listar-jogos", {
       templateUrl: "template/game/list.html",
       controller: "GameListController"
+    })
+
+    .when("/streamers", {
+      templateUrl: "template/stream/list.html",
+      controller: "StreamController"
     })
 
     .when("/login", {

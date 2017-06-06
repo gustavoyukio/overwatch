@@ -53,6 +53,8 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
 	$scope.showScoreInicial = false;
 	$scope.biggerScore = 0;
 
+    //Home.setNewSeason();
+
  	var setGraphScore = function (valores) {
  		
         $scope.scoreHighest = 0;
