@@ -76,7 +76,7 @@ app.controller('GameController', function($rootScope,$scope,Score,Heroes,Map,Gam
 			Game.setScore($scope.SrFinal);
 			Game.setHour(hour);
 			Game.saveEntry(resetarForm);
-			Gane.setSide($scope.side);
+			Game.setSide($scope.side);
 
 		} else {
 			console.log("Entradas Erradas")	

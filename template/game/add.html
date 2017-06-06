@@ -47,7 +47,7 @@
 				<div class="">
 					<div class="form-group">
 						<select name="mapas" id="selectMap" class="form-control" ng-model="MapaSelecionado" required>
-							<option value="{{item}}" ng-repeat="item in optionsMaps | orderObjectBy">
+							<option value="{{item}}" ng-repeat="item in optionsMaps | orderBy: item">
 								{{item}}
 							</option>
 						</select>		
@@ -72,7 +72,7 @@
 									<select id="selectHero" class="form-control select-form-heroes"
 										ng-model="HeroSelecionado"
 										ng-change="adicionarHero(this.HeroSelecionado)">
-										<option value="{{item}}" ng-repeat="item in optionsHero | orderBy : item.name">
+										<option value="{{item}}" ng-repeat="item in optionsHero | orderBy : '+name'">
 											{{item.name}}
 										</option>
 									</select>

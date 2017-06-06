@@ -5,15 +5,6 @@ var express  		= require('express');
 var app      		= express();                               // create our app w/ express
 var bodyParser 		= require('body-parser');    // pull information from HTML POST (express4)
 var methodOverride 	= require('method-override'); // simulate DELETE and PUT (express4)
-var admin 			= require("firebase-admin");
-
-// Firebase Json File
-var serviceAccount = require("./firebase.json");
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://overwatch-17418.firebaseio.com"
-});
 
 // configuration =================
 app.set('port', (process.env.PORT || 5000))

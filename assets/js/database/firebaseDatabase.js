@@ -34,12 +34,15 @@ var Firebase = function() {
 
 	// User
 	_self.getUserUid = function () {
-		return "season5/" + firebase.auth().currentUser.uid;
-		//return firebase.auth().currentUser.uid;
-		//return 'qnQdKgKH0yN2KsIxWhQHkWi2zkx1'; //GYCC
-		//return 'uiIrBxxy95h6pew26nHIk7DnzoU2'; // GYCC2
-		//return 'TaN3G9CWUGZan2ex0WNKy4DOIuB3'; // GYCC3
-		//return 'UEsnD1eSGgRzc6NVURCZge0F4fR2';
+
+		var user = firebase.auth().currentUser.uid;
+		//var user = 'qnQdKgKH0yN2KsIxWhQHkWi2zkx1'; // GYCC
+		//var user = 'uiIrBxxy95h6pew26nHIk7DnzoU2'; // GYCC2
+		//var user = 'TaN3G9CWUGZan2ex0WNKy4DOIuB3'; // GYCC3
+		//var user = 'UEsnD1eSGgRzc6NVURCZge0F4fR2'; // GYCC4
+		//console.log(user);
+		return user;
+
 	}
 
 	// Game Status
@@ -52,7 +55,6 @@ var Firebase = function() {
 			_self.gameStatusLabel = 'draw';
 		}
 	}
-
 	_self.dataSetup = function (arr) {
 
 		if (arr == undefined) {
@@ -262,6 +264,9 @@ var Firebase = function() {
 	// Type Counter
 	_self.saveTypeCounter = function (type, valor) {
 		
+		console.log("type = " + type);
+		console.dir(valor);
+
 		var uid  = _self.getUserUid();
 		var path = "/" + uid + "/types/" + type;
 		var obj  = _self.dataSetup(valor);
@@ -272,12 +277,15 @@ var Firebase = function() {
 
 		var uid  = _self.getUserUid();
 
+		console.dir(item.types);
+		console.dir(item.types.length);
+
 		for (var i=0; i < item.types.length; i++) {
 			
 			var type = '';
 			
 			type = item.types[i];		
-			var path = "/" + uid + "/type/" + type;
+			var path = "/" + uid + "/types/" + type;
 			
 			var typeObj = function(type, firebaseValues) {
 				
@@ -293,7 +301,7 @@ var Firebase = function() {
 
 					}
 
-					_self.firebaseValues.saveTypeCounter(_self.type, value, _self.startMapCounter);
+					_self.firebaseValues.saveTypeCounter(_self.type, value);
 
 				}
 
@@ -347,7 +355,7 @@ var Firebase = function() {
 	}
 
 	// Save Side Entry
-	_self.saveSideCounter = function (party, valor) {
+	_self.saveSideCounter = function (item, valor) {
 		
 		var uid  = _self.getUserUid();
 		var path = "/" + uid + "/sides/" + item.side;
@@ -388,8 +396,8 @@ var Firebase = function() {
 		_self.getHourCounter (item);
 		_self.getTypeCounter (item);
 		_self.getSRCounter (item);
-		_self.getPartySizeCounter(item);
-		_self.getSideCounter(item);
+		_self.getPartySizeCounter (item);
+		_self.getSideCounter (item);
 		_self.saveEntry (item, callback);
 	}
 
@@ -517,6 +525,7 @@ var Firebase = function() {
 			});			
 	}
 
+	// Home Callbacks
 	_self.heroesNeverDie = function (callback) {
 		
 		var uid = _self.getUserUid();
@@ -587,7 +596,6 @@ var Firebase = function() {
 
 		});	
 	}
-
 	_self.sizesNeverDie = function (callback) {
 		
 		var uid = _self.getUserUid();
@@ -654,7 +662,6 @@ var Firebase = function() {
 
 		});
 	}
-
 	_self.typesNeverDie = function (callback) {
 		
 		var uid = _self.getUserUid();
