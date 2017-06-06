@@ -1,0 +1,54 @@
+<style>
+    
+    .stream-list .card-header {
+        background-color: #27a4ca;
+        font-size: 16px;
+        color: #fff;
+    }
+
+    .stream-list ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+    .stream-list ul li .row div {
+        text-align: center;
+        line-height: 80px;
+    }
+    .stream-list ul li:hover {
+        background-color: #f8f8f8;
+    }
+    .stream-list ul li .row div:nth-child(1) {
+        font-weight: bold;
+        font-size: 12px;
+    }
+    .stream-list ul li .row div:nth-child(2) {
+        font-size: 16px; 
+    }
+</style>
+
+<div class="row">
+    <div class="col-xs-12">
+
+        <div class="card stream-list" data-background-color="orange">
+            <div class="card-header" >Lista de Streamers</div>
+            <div class="card-content">
+                <ul>
+                    <li ng-repeat="item in streamers | orderBy: 'name' " >
+                        <div class="row">
+                            <div class="col-xs-3">{{item.platform}}</div>
+                            <div class="col-xs-3">{{item.name}}</div>
+                            <div class="col-xs-3">{{item.role}}</div>
+                            <div class="col-xs-3">
+                                <a href="{{item.url}}" target="_blank" class="btn btn-info">
+                                    Assistir
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>

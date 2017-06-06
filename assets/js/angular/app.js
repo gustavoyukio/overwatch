@@ -45,7 +45,7 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
       controller: "GameListController"
     })
 
-    .when("/streamers", {
+    .when("/Streamers", {
       templateUrl: "template/stream/list.html",
       controller: "StreamController"
     })
