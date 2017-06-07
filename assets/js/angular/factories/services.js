@@ -203,6 +203,9 @@ app.service('Game', ['Firebase','$cookies', function(Firebase,$cookies){
 			_self.obj.heroes.push(hero.name);
 			_self.obj.types.push(hero.type);
 		}
+		_self.setTypes = function (item) {
+
+		}
 		_self.setScore = function (item) {
 			_self.obj.score = item;
 		}
@@ -290,8 +293,7 @@ app.service('Statistics', function () {
 			var estatisticaDoMapa = function (game, callback) {
 
 				var _obj = this;
-				this.map = game.map;
-				this.victory = 0;
+				this.win = 0;
 				this.draw = 0;
 				this.loss = 0;
 
@@ -299,57 +301,255 @@ app.service('Statistics', function () {
 					if (game.label == 'win') this.win++;
 					if (game.label == 'loss') this.loss++;
 					if (game.label == 'draw') this.draw++;
-					console.dir(game);
-					callback(listaDeMapas);
+					//console.dir(listaDeMapas);
+					//callback(listaDeMapas);
+				}
+
+				this.add(game);
+
+			}
+			this.getData = function () {
+				return listaDeMapas;
+			}
+			this.process = function (game, callback) {
+
+				if (listaDeMapas[game.map] == null) {
+					listaDeMapas[game.map] = new estatisticaDoMapa(game, callback)
+				} else {
+					listaDeMapas[game.map].add(game, callback);
+				}
+			}
+		}
+
+		_self.herois = function () {
+
+			var listaDeHerois = [];
+
+			var estatisticaDoHeroi = function (game,callback) {
+
+				var _obj = this;
+
+				this.win = 0;
+				this.draw = 0;
+				this.loss = 0;
+
+				this.add = function (game) {
+					if (game.label == 'win') this.win++;
+					if (game.label == 'loss') this.loss++;
+					if (game.label == 'draw') this.draw++;
+					//console.dir(listaDeHerois);
+					//callback(listaDeHerois);
 				}
 
 				this.add(game);
 
 			}
 
-			this.process = function (game, callback) {
-
-				if (listaDeMapas[game.maps] == null) {
-					listaDeMapas[game.maps] = new estatisticaDoMapa(game, callback)
-				} else {
-					listaDeMapas[game.maps].add(game, callback);
-				}
+			this.getData = function () {
+				return listaDeHerois;
 			}
 
+			this.process = function (game,callback) {
+
+				for (var i = 0; i < game.heroes.length; i++) {
+
+					if (listaDeHerois[game.heroes[i]] == null) {
+						listaDeHerois[game.heroes[i]] = new estatisticaDoHeroi(game,callback)
+					} else {
+						listaDeHerois[game.heroes[i]].add(game,callback);
+					}
+
+				}
+			}
 		}
 
-		_self.herois = function () {
+		_self.heroisPorMapa = function () {
+			var listaDeHeroisPorMapas = [];
 
-			var listaDeMapas = [];
+			var estatisticaDoHeroiPorMapa = function (game, callback) {
 
-			var estatisticaDoMapa = function (game) {
+				var _obj = this;
+				this.map = game.map;
+				this.win = 0;
+				this.draw = 0;
+				this.loss = 0;
+
+				this.add = function () {
+					if (game.label == 'win') this.win++;
+					if (game.label == 'loss') this.loss++;
+					if (game.label == 'draw') this.draw++;
+					//console.dir(listaDeHeroisPorMapas);
+					//callback(listaDeHeroisPorMapas);
+				}
+
+				this.add(game);
+
+			}
+			
+			this.getData = function () {
+				return listaDeHeroisPorMapas;
+			}
+			this.process = function (game, callback) {
+
+				if (listaDeHeroisPorMapas[game.map] == null) {
+					listaDeHeroisPorMapas[game.map] = {};
+				}
+
+				for (var i = 0; i < game.heroes.length; i++) {
+					if (listaDeHeroisPorMapas[game.map][game.heroes[i]] == null) {
+						listaDeHeroisPorMapas[game.map][game.heroes[i]] = new estatisticaDoHeroiPorMapa(game, callback)
+					} else {
+						listaDeHeroisPorMapas[game.map][game.heroes[i]].add(game, callback);
+					}
+				}
+			}			
+		}
+
+		_self.mapasPorHeroi = function () {
+			var listaDeMapasPorHeroi = [];
+
+			var estatisticaDeMapaPorHeroi = function (game, callback) {
+
+				var _obj = this;
+				this.map = game.map;
+				this.win = 0;
+				this.draw = 0;
+				this.loss = 0;
+
+				this.add = function () {
+					if (game.label == 'win') this.win++;
+					if (game.label == 'loss') this.loss++;
+					if (game.label == 'draw') this.draw++;
+					//console.dir(listaDeMapasPorHeroi);
+					//callback(listaDeMapasPorHeroi);
+				}
+
+				this.add(game);
+
+			}
+
+			this.getData = function () {
+				return listaDeMapasPorHeroi;
+			}				
+
+			this.process = function (game, callback) {
+
+				for (var i = 0; i < game.heroes.length; i++) {
+
+					if (listaDeMapasPorHeroi[game.heroes[i]] == null) {
+						listaDeMapasPorHeroi[game.heroes[i]] = {}
+					}
+
+					if (listaDeMapasPorHeroi[game.heroes[i]][game.map] == null) {
+						listaDeMapasPorHeroi[game.heroes[i]][game.map] = new estatisticaDeMapaPorHeroi(game,callback)
+					} else {
+						listaDeMapasPorHeroi[game.heroes[i]][game.map].add(game,callback);
+					}
+
+				}
+
+			}			
+		}
+
+		_self.tipos = function () {
+			var tipos = [];
+
+			var estatisticaDoHeroi = function (game,callback) {
 
 				var _obj = this;
 
-				this.map = game.map;
-				this.victory = 0;
+				this.win = 0;
 				this.draw = 0;
 				this.loss = 0;
+
+				this.add = function (game) {
+					if (game.label == 'win') this.win++;
+					if (game.label == 'loss') this.loss++;
+					if (game.label == 'draw') this.draw++;
+					//console.dir(tipos);
+					//callback(tipos);
+				}
+
+				this.add(game);
+
 			}
 
-			this.process = function (game) {
-				if (listaDeMapas[game.heroes] == null) {
-					listaDeMapas[game.heroes] = new estatisticaDoMapa(game)
-				} else {
-					listaDeMapas[game.heroes].add(game);
+			this.getData = function () {
+				return tipos;
+			}
+
+			this.process = function (game,callback) {
+
+				for (var i = 0; i < game.types.length; i++) {
+
+					if (tipos[game.types[i]] == null) {
+						tipos[game.types[i]] = new estatisticaDoHeroi(game,callback)
+					} else {
+						tipos[game.types[i]].add(game,callback);
+					}
+
 				}
+			}			
+		}
+
+		_self.scores = function () {
+
+			var listaScores = [];
+			var _self = this;
+
+			var resultados = function (game) {
+
+				this.scores = [];
+
+				this.add = function (game) {
+					this.scores.push(game.score);
+				}
+
+				this.add(game);
+			}
+
+			this.getData = function () {
+				return listaScores;
+			}
+
+			this.process = function (game, callback) {
+				if (listaScores['scores'] == null) {
+					listaScores['scores'] = new resultados(game);
+				} else {
+					listaScores['scores'].add(game);
+				}
+			}			
+		}
+
+		// Instancias dos Objetos
+		_self.mapas 		= new _self.mapas();
+		_self.herois 		= new _self.herois();
+		_self.heroisPorMapa = new _self.heroisPorMapa();
+		_self.mapasPorHeroi = new _self.mapasPorHeroi();
+		_self.tipos			= new _self.tipos();
+		_self.scores 		= new _self.scores();
+
+		// Start Calling
+		_self.start = function (dados, callback) {
+			
+			for (_self.i=0; _self.i < dados.length; _self.i++) {
+				_self.mapas.process(dados[_self.i], callback);
+				_self.tipos.process(dados[_self.i], callback);
+				_self.herois.process(dados[_self.i], callback);
+				_self.heroisPorMapa.process(dados[_self.i], callback);
+				_self.mapasPorHeroi.process(dados[_self.i], callback);
+				_self.scores.process(dados[_self.i]);
 			}
 		}
 
-		_self.mapas = new _self.mapas();
-		_self.herois = new _self.herois();
-
-		_self.start = function (dados, callback) {
-
-			for (_self.i=0; _self.i < dados.length; _self.i++) {
-				_self.mapas.process(dados[_self.i], callback);	
-			}
-			
+		_self.getData = function () {
+			_self.data['tipos'] = _self.tipos.getData();
+			_self.data['mapas'] = _self.mapas.getData();
+			_self.data['herois'] = _self.herois.getData();
+			_self.data['heroisPorMapa'] = _self.heroisPorMapa.getData();
+			_self.data['mapasPorHeroi'] = _self.mapasPorHeroi.getData();
+			_self.data['scores'] = _self.scores.getData();
+			return _self.data;
 		}
 
 	}
@@ -388,8 +588,8 @@ app.service('Home', function(Firebase,Statistics) {
 			Firebase.setNewSeason();
 		}
 
-		_self.getStatistics = function (callback) {
-			Firebase.getGamesList(Statistics.start, callback);
+		_self.getStatistics = function () {
+			Firebase.getGamesList(Statistics.start);
 		}
 
 	}

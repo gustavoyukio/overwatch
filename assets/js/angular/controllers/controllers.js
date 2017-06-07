@@ -47,10 +47,12 @@ app.controller('NavController', ['$scope', function ($scope) {
 app.controller('MenuController', ['$scope', function($scope) {
 }])
 
-app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$timeout,$http){
+app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$timeout,$http,Statistics){
  	
     // Apenas quando trocar de temporada
     //Home.setNewSeason();
+    // Data calling
+    Home.getStatistics();
 
     $rootScope.$broadcast('changeShowArrow',false);
     $scope.showScoreInicial = false;
@@ -130,7 +132,14 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
  		}
  	}
 
-  	var scoreInicialCallback = function (value) {
+    // Score
+  	$scope.setScoreInicial = function () {
+  		Score.setScoreInicial($scope.scoreInicialValue, scoreInicialCallback);
+  	}
+    var getScoreInicial = function () {
+        Score.getScoreInicial(scoreInicialCallback);
+ 	}
+	var scoreInicialCallback = function (value) {
   		
   		if (value) {
   			$scope.scoreInicialValue = value;
@@ -141,69 +150,10 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
   		}
   	} 	
 
-    // callbacks
-  	$scope.setScoreInicial = function () {
-  		Score.setScoreInicial($scope.scoreInicialValue, scoreInicialCallback);
-  	}
- 	var HeroesNeverDieCallback = function (data) {
-
- 		//console.dir(data);
-
-		$scope.maisJogados  = data[0];
-		$scope.maisVitorias = data[1];
-		$scope.maisDerrotas = data[2];
-
-		if (!$scope.$$phase) {
-			$scope.$apply();
-		}
- 	}
- 	var MapsNeverDieCallback = function (data) {
-
-		$scope.mapasMaisJogados  = data[0];
-		$scope.mapasMaisVitorias = data[1];
-		$scope.mapasMaisDerrotas = data[2];
-
-		if (!$scope.$$phase) {
-			$scope.$apply();
-		}
- 	}
- 	var SRsNeverDieCallback = function (data) {
- 		
- 		//console.dir(data);
-
-		$scope.scores  = data;
-
-		if (!$scope.$$phase) {
-			$scope.$apply();
-		}
- 	}
- 	var SizesNeverDieCallback = function (data) {
- 		$scope.partySizes = data;
- 	}
-
-    var typesNeverDieCallback = function (valor) {
-        $scope.classes = valor;
-    }
-
-    //Start Function
-    var getScoreInicial = function () {
-        Score.getScoreInicial(scoreInicialCallback);
-    } 
-
-    var getStatisticsCallback = function (a) {
-        //console.dir(a);
-    }
-
-    Home.getStatistics(getStatisticsCallback);
-
- 	Home.srsNeverDie(SRsNeverDieCallback);
- 	Home.heroesNeverDie(HeroesNeverDieCallback);
- 	Home.mapsNeverDie(MapsNeverDieCallback);
- 	Home.sizesNeverDie(SizesNeverDieCallback);
-    Home.typesNeverDie(typesNeverDieCallback);
-
-  	Score.getScores(setGraphScore);
-  	Score.getHeroesInicial(setGraphHeroes);
+    $timeout(function(){
+    	var data = Statistics.getData();
+    	console.dir(data);
+    }, 1000);
   	
   	if (!$scope.showScoreInicial) {
   		getScoreInicial();
