@@ -49,11 +49,13 @@ app.controller('MenuController', ['$scope', function($scope) {
 
 app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$timeout,$http){
  	
- 	$rootScope.$broadcast('changeShowArrow',false);
-	$scope.showScoreInicial = false;
-	$scope.biggerScore = 0;
-
+    // Apenas quando trocar de temporada
     //Home.setNewSeason();
+
+    $rootScope.$broadcast('changeShowArrow',false);
+    $scope.showScoreInicial = false;
+    $scope.biggerScore = 0;
+
 
  	var setGraphScore = function (valores) {
  		
@@ -167,7 +169,7 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
  	}
  	var SRsNeverDieCallback = function (data) {
  		
- 		console.dir(data);
+ 		//console.dir(data);
 
 		$scope.scores  = data;
 
@@ -187,6 +189,12 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
     var getScoreInicial = function () {
         Score.getScoreInicial(scoreInicialCallback);
     } 
+
+    var getStatisticsCallback = function (a) {
+        //console.dir(a);
+    }
+
+    Home.getStatistics(getStatisticsCallback);
 
  	Home.srsNeverDie(SRsNeverDieCallback);
  	Home.heroesNeverDie(HeroesNeverDieCallback);

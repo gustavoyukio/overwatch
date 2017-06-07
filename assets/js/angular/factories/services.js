@@ -275,7 +275,91 @@ app.service('Firebase', function(){
 	return new Firebase();
 })
 
-app.service('Home', ['Firebase', function(Firebase) {
+app.service('Statistics', function () {
+
+	var Statistics = function () {
+
+		var _self = this;
+
+		_self.data = {};
+
+		_self.mapas = function () {
+
+			var listaDeMapas = [];
+
+			var estatisticaDoMapa = function (game, callback) {
+
+				var _obj = this;
+				this.map = game.map;
+				this.victory = 0;
+				this.draw = 0;
+				this.loss = 0;
+
+				this.add = function () {
+					if (game.label == 'win') this.win++;
+					if (game.label == 'loss') this.loss++;
+					if (game.label == 'draw') this.draw++;
+					console.dir(game);
+					callback(listaDeMapas);
+				}
+
+				this.add(game);
+
+			}
+
+			this.process = function (game, callback) {
+
+				if (listaDeMapas[game.maps] == null) {
+					listaDeMapas[game.maps] = new estatisticaDoMapa(game, callback)
+				} else {
+					listaDeMapas[game.maps].add(game, callback);
+				}
+			}
+
+		}
+
+		_self.herois = function () {
+
+			var listaDeMapas = [];
+
+			var estatisticaDoMapa = function (game) {
+
+				var _obj = this;
+
+				this.map = game.map;
+				this.victory = 0;
+				this.draw = 0;
+				this.loss = 0;
+			}
+
+			this.process = function (game) {
+				if (listaDeMapas[game.heroes] == null) {
+					listaDeMapas[game.heroes] = new estatisticaDoMapa(game)
+				} else {
+					listaDeMapas[game.heroes].add(game);
+				}
+			}
+		}
+
+		_self.mapas = new _self.mapas();
+		_self.herois = new _self.herois();
+
+		_self.start = function (dados, callback) {
+
+			for (_self.i=0; _self.i < dados.length; _self.i++) {
+				_self.mapas.process(dados[_self.i], callback);	
+			}
+			
+		}
+
+	}
+
+	return new Statistics();
+
+})
+
+app.service('Home', function(Firebase,Statistics) {
+
 	var Home = function () {
 
 		var _self = this;
@@ -304,7 +388,13 @@ app.service('Home', ['Firebase', function(Firebase) {
 			Firebase.setNewSeason();
 		}
 
-	}
-	return new Home();
-}])
+		_self.getStatistics = function (callback) {
+			Firebase.getGamesList(Statistics.start, callback);
+		}
 
+	}
+
+	return new Home();
+
+})
+;

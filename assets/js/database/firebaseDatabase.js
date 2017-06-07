@@ -34,289 +34,15 @@ var Firebase = function() {
 
 	// User
 	_self.getUserUid = function () {
-
-		var user = firebase.auth().currentUser.uid;
+		//var user = firebase.auth().currentUser.uid;
 		//var user = 'qnQdKgKH0yN2KsIxWhQHkWi2zkx1'; // GYCC
 		//var user = 'uiIrBxxy95h6pew26nHIk7DnzoU2'; // GYCC2
-		//var user = 'TaN3G9CWUGZan2ex0WNKy4DOIuB3'; // GYCC3
+		var user = 'TaN3G9CWUGZan2ex0WNKy4DOIuB3'; // GYCC3
 		//var user = 'UEsnD1eSGgRzc6NVURCZge0F4fR2'; // GYCC4
 		//console.log(user);
 		return user;
-
 	}
 
-	// Game Status
-	_self.gameStatus = function (value) {
-		if (value == 0) {
-			_self.gameStatusLabel = 'loss';
-		} else if (value == 2){
-			_self.gameStatusLabel = 'win';
-		} else {
-			_self.gameStatusLabel = 'draw';
-		}
-	}
-	_self.dataSetup = function (arr) {
-
-		if (arr == undefined) {
-			arr = {};
-		}
-
-		if (arr['win'] == null) {
-			arr['win'] = 0;
-		}
-		if (arr['loss'] == null) {
-			arr['loss'] = 0;
-		}
-		if (arr['draw'] == null) {
-			arr['draw'] = 0;
-		}
-		if (arr['total'] == null) {
-			arr['total'] = 0;
-		}
-		if (arr['winPercentage'] == null) {
-			arr['winPercentage'] = 0;
-		}
-		if (arr['lossPercentage'] == null) {
-			arr['lossPercentage'] = 0;
-		}
-		// Adicionamos no status e no total
-		arr[_self.gameStatusLabel] = arr[_self.gameStatusLabel] + 1;
-		arr['total'] = arr['total'] + 1;
-
-		// agora alteramos as porcentagens
-		arr['lossPercentage'] = parseFloat(arr['loss'])/parseFloat(arr['total']);
-		arr['winPercentage'] = parseFloat(arr['win'])/parseFloat(arr['total']);
-
-		return arr;
-	}
-
-	// SR Setup
-	_self.saveSRCounter = function (item, valor) {
-		
-		var uid  = _self.getUserUid();
-		var path = "/" + uid + "/srs/" + item;
-		var obj  = _self.dataSetup(valor);
-
-		firebase.database().ref(path).update(obj);
-	}
-	_self.getSRCounter = function (item) {
-
-		var status = "bigger";
-
-		if (item.srs.team < item.srs.enemy) {
-			status = "smaller";
-		}
-
-		if (item.srs.team == item.srs.enemy) {
-			status = "equal";
-		}
-
-		var uid  = _self.getUserUid();
-		var path = "/" + uid + "/srs/" + status;
-
-		firebase
-			.database()
-			.ref(path)
-			.once("value", function(snapshot){
-				
-				if (snapshot.val() != null) {
-					var valor = snapshot.val();
-				}
-				_self.saveSRCounter(status,valor);
-
-			});
-	}
-
-	// Hero Counter
-	_self.saveNewHeroCounter = function (hero, valor) {
-
-		var uid  = _self.getUserUid();
-		var path = "/" + uid + "/heroes/" + hero;
-		var obj  = _self.dataSetup(valor);
-
-		firebase.database().ref(path).update(obj);
-	}
-	_self.getHeroCounter = function (item, callback, contador = 0) {
-
-		var uid = _self.getUserUid();
-
-		for (var i=0; i < item.heroes.length; i++) {
-			
-			var heroes = '';
-			
-			heroes = item.heroes[i];		
-			var path = "/" + uid + "/heroes/" + heroes;
-			
-			var objteste = function(heroes, uhuu) {
-				
-				var _self = this;
-				_self.heroes = heroes;
-				_self.uhuu = uhuu;
-
-				_self.abacate = function (snapshot) {
-				
-					if (snapshot.val() != null) {
-
-						var value = snapshot.val();
-
-					}
-
-					_self.uhuu.saveNewHeroCounter(_self.heroes, value, _self.startMapCounter);
-
-				}
-
-			};
-
-			var a = new objteste(heroes, _self);
-
-			firebase
-				.database()
-				.ref(path)
-				.once("value", a.abacate);
-			
-			
-		}
-	}
-
-	// Map Counter
-	_self.saveMapCounter = function (map, valor) {
-		
-		var uid  = _self.getUserUid();
-		var path = "/" + uid + "/maps/" + map;
-		var obj  = _self.dataSetup(valor);
-
-		firebase.database().ref(path).update(obj);
-	}
-	_self.getMapCounter = function (item) {
-
-		var uid  = _self.getUserUid();
-		var path = "/" + uid + "/maps/" + item.map;
-
-		firebase
-			.database()
-			.ref(path)
-			.once("value", function(snapshot){
-				
-				if (snapshot.val() != null) {
-					var valor = snapshot.val();
-				}
-				_self.saveMapCounter(item.map,valor);
-
-			});
-	}
-
-	// Hour Counter
-	_self.saveHourCounter = function (hour, valor) {
-		
-		var uid  = _self.getUserUid();
-		var path = "/" + uid + "/hour/" + hour;
-		var obj  = _self.dataSetup(valor);
-
-		firebase.database().ref(path).update(obj);
-	}
-	_self.getHourCounter = function (item) {
-
-		var uid  = _self.getUserUid();
-		var path = "/" + uid + "/hour/" + item.hour;
-
-		firebase
-			.database()
-			.ref(path)
-			.once("value", function(snapshot){
-				
-				if (snapshot.val() != null) {
-					var valor = snapshot.val();
-				}
-
-				_self.saveHourCounter(item.hour,valor);
-
-			});
-	}
-
-	// Party Size Counter
-	_self.savePartySizeCounter = function (party, valor) {
-		
-		var uid  = _self.getUserUid();
-		var path = "/" + uid + "/sizes/" + party;
-		var obj  = _self.dataSetup(valor);
-
-		firebase.database().ref(path).update(obj);
-	}
-	_self.getPartySizeCounter = function (item) {
-
-		var uid  = _self.getUserUid();
-		var path = "/" + uid + "/sizes/" + item.party;
-
-		firebase
-			.database()
-			.ref(path)
-			.once("value", function(snapshot){
-				
-				if (snapshot.val() != null) {
-					var valor = snapshot.val();
-				}
-
-				_self.savePartySizeCounter(item.party,valor);
-
-			});
-	}	
-
-	// Type Counter
-	_self.saveTypeCounter = function (type, valor) {
-		
-		console.log("type = " + type);
-		console.dir(valor);
-
-		var uid  = _self.getUserUid();
-		var path = "/" + uid + "/types/" + type;
-		var obj  = _self.dataSetup(valor);
-
-		firebase.database().ref(path).update(obj);
-	}
-	_self.getTypeCounter = function (item) {
-
-		var uid  = _self.getUserUid();
-
-		console.dir(item.types);
-		console.dir(item.types.length);
-
-		for (var i=0; i < item.types.length; i++) {
-			
-			var type = '';
-			
-			type = item.types[i];		
-			var path = "/" + uid + "/types/" + type;
-			
-			var typeObj = function(type, firebaseValues) {
-				
-				var _self = this;
-				_self.type = type;
-				_self.firebaseValues = firebaseValues;
-
-				_self.getTypeValue = function (snapshot) {
-				
-					if (snapshot.val() != null) {
-
-						var value = snapshot.val();
-
-					}
-
-					_self.firebaseValues.saveTypeCounter(_self.type, value);
-
-				}
-
-			};
-
-			var newTypeObj = new typeObj(type, _self);
-
-			firebase
-				.database()
-				.ref(path)
-				.once("value", newTypeObj.getTypeValue);
-			
-			
-		}
-	}
 
 	// Save Game Entry
 	_self.saveEntry = function (obj, callback) {
@@ -333,7 +59,7 @@ var Firebase = function() {
 
 		callback(msg);
 	}
-	_self.getGamesList = function (callback) {
+	_self.getGamesList = function (callback, callbackHome) {
 
 		var uid  = _self.getUserUid();
 		var path = "/" + uid + "/games";
@@ -347,62 +73,21 @@ var Firebase = function() {
 				var array = $.map(snapshot.val(), function(value, index) {
     				return [value];
 				});
-				callback(array);
+				callback(array,callbackHome);
 
 			}, function (error) {
 				console.dir(error);
 			})
 	}
 
-	// Save Side Entry
-	_self.saveSideCounter = function (item, valor) {
-		
-		var uid  = _self.getUserUid();
-		var path = "/" + uid + "/sides/" + item.side;
-		var obj  = _self.dataSetup(valor);
-
-		firebase.database().ref(path).update(obj);
-	}
-	_self.getSideCounter = function (item) {
-
-		var uid  = _self.getUserUid();
-		var path = "/" + uid + "/sides/" + item.side;
-
-		firebase
-			.database()
-			.ref(path)
-			.once("value", function(snapshot){
-				
-				if (snapshot.val() != null) {
-					var valor = snapshot.val();
-				}
-
-				_self.saveSideCounter(item.side,valor);
-
-			});
-	}
-
 	// Primeiro Acesso de Gravacao de Jogo
 	_self.saveNewGameEntry = function (item, callback) {
-		// 1 Save Score - OK
-		// Settando Game Status
-		_self.getScoreCounter(item, _self.continueSaving, callback);
-		item.label = _self.gameStatusLabel;
+		_self.getScoreCounter(item, callback);
 	}	
-	_self.continueSaving = function (item, callback) {
-		// Game Status Setted, agora salvar os dados
-		_self.getHeroCounter (item, _self.saveNewHeroCounter);
-		_self.getMapCounter (item);
-		_self.getHourCounter (item);
-		_self.getTypeCounter (item);
-		_self.getSRCounter (item);
-		_self.getPartySizeCounter (item);
-		_self.getSideCounter (item);
-		_self.saveEntry (item, callback);
-	}
+
 
 	// Get Scores
-	_self.getScoreCounter = function (item, continueCallback, callback) {
+	_self.getScoreCounter = function (item, callback) {
 
 		var uid = _self.getUserUid();
 		var path = "/" + uid + "/scores";
@@ -412,7 +97,6 @@ var Firebase = function() {
 			.ref(path)
 			.once("value", function(snapshot){
 				
-				var contadorDeScorePartidas = 0;
 				var valor = 0;
 
 				if (snapshot.val() != null ) {
@@ -422,40 +106,18 @@ var Firebase = function() {
 				}
 
 				if (item.score > valor) {
-					_self.gameStatus(2);
+					item.label = 'win';
 				} else if (item.score == valor){
-					_self.gameStatus(1);
+					item.label = 'draw';
 				} else {
-					_self.gameStatus(0);
+					item.label = 'loss';
 				}
 				
-				_self.saveScoreCounter(contadorDeScorePartidas, item, continueCallback, callback);
+				_self.saveEntry(item, callback);
 
 			});
 	}
-	_self.saveScoreCounter = function (counter, item, continueCallback, callback) {
 
-		var obj = null;
-		delete obj;
-
-		obj = {};
-		obj[counter] = item.score;
-
-		var uid = _self.getUserUid();
-		var path = "/" + uid + "/scores";
-
-		firebase
-			.database()
-			.ref(path)
-			.update(obj, function(error) {
-				if (error) {
-					console.error(error);
-				} else {
-					// Chamar a funcao
-					continueCallback(item, callback);
-				}
-			});
-	}
 	_self.getScores = function (callback) {
 		
 		var uid  = _self.getUserUid();
@@ -545,11 +207,7 @@ var Firebase = function() {
 				obj[i].name = Object.keys(result)[i];
 			}
 
-			ret.push(_self.sortByField('total',obj));
-			ret.push(_self.sortByField('winPercentage',obj));
-			ret.push(_self.sortByField('lossPercentage',obj));
-
-			callback(ret);
+			callback(obj);
 
 		});	
 	}
@@ -572,11 +230,7 @@ var Firebase = function() {
 				obj[i].name = Object.keys(result)[i];
 			}
 
-			ret.push(_self.sortByField('total',obj));
-			ret.push(_self.sortByField('winPercentage',obj));
-			ret.push(_self.sortByField('lossPercentage',obj));
-
-			callback(ret);
+			callback(obj);
 
 		});	
 	}
@@ -681,38 +335,6 @@ var Firebase = function() {
 			callback(valor);
 
 		});		
-	}
-
-	// Sorting Function
-	_self.sortByField = function (field,arr) {
-
-		var array = arr;
-		function dynamicSort(property) {
-    		
-    		return function (a,b) {
-    			
-    			//console.log('comparing => ' + a[property] + ' / ' + b[property]);
-
-    			if (a[property] !== undefined  && b[property] !== undefined) {
-    				if (a[property] < b[property]) {
-    					return 1;
-    				} else {
-    					return -1;
-    				}
-    			} else if (a[property] !== undefined) {
-    				return -11;
-    			} else if (b[property] !== undefined) {
-    				//console.log('A eh undefined');
-    				return 1;
-    			}
-    			return 0;
-        		
-    		}
-		}
-
-		array = array.sort(dynamicSort(field));
-
-		return array;
 	}
 
 	_self.setNewSeason = function () {
