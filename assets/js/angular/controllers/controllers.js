@@ -157,10 +157,10 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
         if (!$scope.$$phase) {
 
             $scope.data = data;
-            console.dir($scope.data);
-            console.dir($scope.data.herois.Ana)
 
-            $scope.data.herois = data.herois;
+            $scope.data.herois = Object.keys(data.herois).map(function (key,value) { return key; });
+
+            console.dir($scope.data.herois);
 
             $scope.$apply();
         }

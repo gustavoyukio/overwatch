@@ -293,6 +293,7 @@ app.service('Statistics', function () {
 			var estatisticaDoMapa = function (game, callback) {
 
 				var _obj = this;
+				this.map = game.map;
 				this.win = 0;
 				this.draw = 0;
 				this.loss = 0;
