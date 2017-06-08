@@ -86,6 +86,8 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
 
                 $scope.labels = [];
 				$scope.data   = [];
+                $scope.scoreHighest = 0;
+                $scope.scoreCurrent = 0;
 				var limit = data.length;
 				var counter = 0;
 
@@ -99,8 +101,12 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
 		 			$scope.data.push(data[counter  + i]);
 
 		 			if (data[i] > $scope.biggerScore) {
-		 				$scope.biggerScore = data[i];
+		 				$scope.scoreHighest = data[i];
 		 			}
+
+                    if (i == limit) {
+                        $scope.scoreCurrent = data[i];
+                    }
 		 		}
 
 			}, 200);
