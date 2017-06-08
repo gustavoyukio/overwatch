@@ -56,22 +56,8 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
 
     $rootScope.$broadcast('changeShowArrow',false);
     $scope.showScoreInicial = false;
-    $scope.biggerScore = 0;
-
 
  	var setGraphScore = function (valores) {
- 		
-        $scope.scoreHighest = 0;
-        $scope.scoreCurrent = 0;
-        $scope.scireInitial = 0;
-
-        for (var a in valores) {
-            if (valores[a] > $scope.scoreHighest) {
-                $scope.scoreHighest = valores[a];
-            }
-        }
-
-        $scope.scoreCurrent = valores[valores.length - 1];
 
  		$scope.series = ['SR'];
   		$scope.datasetOverride = [{ xAxisID: 'jogos' }, { yAxisID: 'SR' }];
@@ -96,40 +82,31 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
 
 	 		$timeout(function(){
 
-			  	$scope.labels = [];
+                var data = valores[0].scores;
+
+                $scope.labels = [];
 				$scope.data   = [];
-				var limit = valores.length;
+				var limit = data.length;
 				var counter = 0;
 
-				if ( valores.length > 30 ) {
+				if ( data.length > 30 ) {
 					limit = 30;
-					counter = valores.length - 30;
+					counter = data.length - 30;
 				}
 
 		 		for (var i=0; i < limit; i++) {
 		 			$scope.labels.push(counter + i);
-		 			$scope.data.push(valores[counter  + i]);
+		 			$scope.data.push(data[counter  + i]);
 
-		 			if (valores[i] > $scope.biggerScore) {
-		 				$scope.biggerScore = valores[i];
+		 			if (data[i] > $scope.biggerScore) {
+		 				$scope.biggerScore = data[i];
 		 			}
 		 		}
 
 			}, 200);
 
- 		}		
- 	}
-
- 	var setGraphHeroes = function (valores) {
- 		
- 		$scope.labelHeroes = [];
- 		$scope.heroes 	   = [];
-
- 		var tamanho = Object.keys(valores);
-
- 		for (var i=0; i<tamanho;i++) {
-
  		}
+
  	}
 
     // Score
@@ -152,16 +129,86 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
 
     $timeout(function(){
 
-    	var data = Statistics.getData();       
+    	var data = Statistics.getData();
+        console.dir(data);
+
+        $scope.dados = {};
+        
+        // Herois
+        $scope.dados.herois = [];
+        for (var a in data.herois) {
+            
+            data.herois[a].hero = a;
+            
+            var win = parseInt(data.herois[a].win);
+            var draw = parseInt(data.herois[a].draw);
+            var loss = parseInt(data.herois[a].loss);
+
+            var total = win + draw + loss;
+
+            var winPercentage = (win / total) * 100;
+            var lossPercentage = (loss / total) * 100;
+
+            data.herois[a].total = total;
+            data.herois[a].winPercentage = winPercentage;
+            data.herois[a].lossPercentage = lossPercentage;
+            $scope.dados.herois.push(data.herois[a]);
+        }
+
+        // Mapas
+        $scope.dados.mapas = [];
+        for (var a in data.mapas) {
+                       
+            var win = parseInt(data.mapas[a].win);
+            var draw = parseInt(data.mapas[a].draw);
+            var loss = parseInt(data.mapas[a].loss);
+
+            var total = win + draw + loss;
+
+            var winPercentage = (win / total) * 100;
+            var lossPercentage = (loss / total) * 100;
+
+            data.mapas[a].total = total;
+            data.mapas[a].winPercentage = winPercentage;
+            data.mapas[a].lossPercentage = lossPercentage;
+            $scope.dados.mapas.push(data.mapas[a]);
+        }
+
+        // Score
+        $scope.dados.scores = [];
+        for (var a in data.scores) {
+            var b = {};
+            b[a] = data.scores[a].scores;
+            $scope.dados.scores.push(b);
+            setGraphScore($scope.dados.scores);
+        }
+
+        // Classes
+        $scope.dados.classes = [];
+        for (var a in data.tipos) {
+
+            var b = {};
+            b = data.tipos[a];
+
+            var win = parseInt(data.tipos[a].win);
+            var draw = parseInt(data.tipos[a].draw);
+            var loss = parseInt(data.tipos[a].loss);
+
+            var total = win + draw + loss;
+
+            var winPercentage = (win / total) * 100;
+            var lossPercentage = (loss / total) * 100;
+
+            b.classe = a;
+            b.total = total;
+            b.winPercentage = winPercentage;
+            b.lossPercentage = lossPercentage;
+
+            $scope.dados.classes.push(b);
+        }
+        console.dir($scope.dados.classes);
 
         if (!$scope.$$phase) {
-
-            $scope.data = data;
-
-            $scope.data.herois = Object.keys(data.herois).map(function (key,value) { return key; });
-
-            console.dir($scope.data.herois);
-
             $scope.$apply();
         }
 

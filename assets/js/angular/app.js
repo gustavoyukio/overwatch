@@ -13,9 +13,9 @@ angular.module('myApp', [
 ]).
 run(['$rootScope', 'User', '$location', function($rootScope, User, $location, $cookies){
 
-  var test = false;
+  $rootScope.test = false;
 
-    if (!test) {
+    if (!$rootScope.test) {
       $rootScope.$on("$locationChangeStart", function(event, next, current) { 
 
           if (!User.getLoggedStatus()) {

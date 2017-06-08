@@ -274,8 +274,8 @@ app.service('User', function () {
 	return new User();
 })
 
-app.service('Firebase', function(){
-	return new Firebase();
+app.service('Firebase', function($rootScope){
+	return new Firebase($rootScope);
 })
 
 app.service('Statistics', function () {
