@@ -41,6 +41,9 @@
 
 <div class="row">
     <div class="col-xs-12 col-md-6 top-info">
+
+        {{data}}
+        {{data.herois}}
         <canvas 
             id="line" 
             class="chart chart-line" 
@@ -259,7 +262,7 @@
             </div>
         </div>
 
-        
+        {{datas.mapas}}
 
         <div class="card">
             <div class="card-header" data-background-color="blue">Mapas Mais Jogados</div>
@@ -276,8 +279,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in mapasMaisJogados ">
-                        <td>{{$index+1}}</td>
+                    <tr ng-repeat="item in data.mapas">
+                        <td>{{item}}</td>
                         <td>{{item.name}}</td>
                         <td>{{item.total}}</td>
                         <td>{{item.win}}</td>
@@ -303,7 +306,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in mapasMaisVitorias ">
+                    <tr ng-repeat="item in data.mapas | orderBy: 'item.wins' ">
                         <td>{{$index+1}}</td>
                         <td>{{item.name}}</td>
                         <td>{{(item.winPercentage * 100) | number:1}}%</td>

@@ -34,10 +34,10 @@ var Firebase = function() {
 
 	// User
 	_self.getUserUid = function () {
-		//var user = firebase.auth().currentUser.uid;
+		var user = firebase.auth().currentUser.uid;
 		//var user = 'qnQdKgKH0yN2KsIxWhQHkWi2zkx1'; // GYCC
 		//var user = 'uiIrBxxy95h6pew26nHIk7DnzoU2'; // GYCC2
-		var user = 'TaN3G9CWUGZan2ex0WNKy4DOIuB3'; // GYCC3
+		//var user = 'TaN3G9CWUGZan2ex0WNKy4DOIuB3'; // GYCC3
 		//var user = 'UEsnD1eSGgRzc6NVURCZge0F4fR2'; // GYCC4
 		//console.log(user);
 		return user;

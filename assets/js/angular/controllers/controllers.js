@@ -151,8 +151,21 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
   	} 	
 
     $timeout(function(){
-    	var data = Statistics.getData();
-    	console.dir(data);
+
+    	var data = Statistics.getData();       
+
+        if (!$scope.$$phase) {
+
+            $scope.data = data;
+            console.dir($scope.data);
+            console.dir($scope.data.herois.Ana)
+
+            $scope.data.herois = data.herois;
+
+            $scope.$apply();
+        }
+
+    	
     }, 1000);
   	
   	if (!$scope.showScoreInicial) {
