@@ -90,7 +90,7 @@ var Firebase = function($rootScope) {
 	_self.getScoreCounter = function (item, callback) {
 
 		var uid = _self.getUserUid();
-		var path = "/" + uid + "/scores";
+		var path = "/" + uid + "/games";
 
 		firebase
 			.database()
@@ -100,9 +100,14 @@ var Firebase = function($rootScope) {
 				var valor = 0;
 
 				if (snapshot.val() != null ) {
-					valor = snapshot.val();
+
 					contadorDeScorePartidas = Object.keys(snapshot.val()).length;
-					valor = valor[contadorDeScorePartidas-1];
+
+					var array = $.map(snapshot.val(), function(value, index) {
+    					return [value];
+					});
+
+					valor = array[contadorDeScorePartidas-1].score;
 				}
 
 				if (item.score > valor) {
@@ -340,7 +345,7 @@ var Firebase = function($rootScope) {
 	_self.setNewSeason = function () {
 
 		var path = "/";
-		console.log("OI");
+		//console.log("OI");
 
 		firebase
 		.database()
@@ -348,7 +353,7 @@ var Firebase = function($rootScope) {
 		.once("value", function(snapshot){
 
 			var pathInterno = "/season4/";
-			console.log(pathInterno);
+			//console.log(pathInterno);
 
 			obj = snapshot.val();
 

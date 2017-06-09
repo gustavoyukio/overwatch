@@ -519,7 +519,7 @@ app.service('Statistics', function ($rootScope) {
 			}
 
 			this.getData = function () {
-				console.dir(tipos);
+				//console.dir(tipos);
 				return Object.values(tipos);
 			}
 
