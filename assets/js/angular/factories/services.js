@@ -280,7 +280,7 @@ app.service('Firebase', function($rootScope){
 	return new Firebase($rootScope);
 })
 
-app.service('Statistics', function () {
+app.service('Statistics', function ($rootScope) {
 
 	var Statistics = function () {
 
@@ -385,7 +385,7 @@ app.service('Statistics', function () {
 		_self.heroisPorMapa = function () {
 			var listaDeHeroisPorMapas = {};
 
-			var estatisticaDoHeroiPorMapa = function (game, hero) {
+			var estatisticaDoHeroiPorMapa = function (game, map, hero) {
 
 				var _obj = this;
 
@@ -396,6 +396,7 @@ app.service('Statistics', function () {
 				this.winPercentage = 0;
 				this.lossPercentage = 0;
 				this.hero = hero;
+				this,map = map;
 
 				this.add = function (game) {
 
@@ -433,22 +434,30 @@ app.service('Statistics', function () {
 		}
 
 		_self.mapasPorHeroi = function () {
-			var listaDeMapasPorHeroi = [];
+			var listaDeMapasPorHeroi = {};
 
-			var estatisticaDeMapaPorHeroi = function (game, callback) {
+			var estatisticaDeMapaPorHeroi = function (game, map, hero) {
 
 				var _obj = this;
-				this.map = game.map;
+
 				this.win = 0;
 				this.draw = 0;
 				this.loss = 0;
+				this.total = 0;
+				this.winPercentage = 0;
+				this.lossPercentage = 0;
+				this.hero = hero;
+				this.map = map;
 
 				this.add = function () {
-					if (game.label == 'win') this.win++;
-					if (game.label == 'loss') this.loss++;
-					if (game.label == 'draw') this.draw++;
-					//console.dir(listaDeMapasPorHeroi);
-					//callback(listaDeMapasPorHeroi);
+
+					if (game.label == 'win') _obj.win++;
+					if (game.label == 'loss') _obj.loss++;
+					if (game.label == 'draw') _obj.draw++;
+
+					_obj.total++;
+					_obj.winPercentage = (_obj.win / _obj.total) * 100;
+					_obj.lossPercentage = (_obj.loss / _obj.total) * 100;
 				}
 
 				this.add(game);
@@ -468,7 +477,7 @@ app.service('Statistics', function () {
 					}
 
 					if (listaDeMapasPorHeroi[game.heroes[i]][game.map] == null) {
-						listaDeMapasPorHeroi[game.heroes[i]][game.map] = new estatisticaDeMapaPorHeroi(game,callback)
+						listaDeMapasPorHeroi[game.heroes[i]][game.map] = new estatisticaDeMapaPorHeroi(game, game.map, game.heroes[i])
 					} else {
 						listaDeMapasPorHeroi[game.heroes[i]][game.map].add(game,callback);
 					}
@@ -545,7 +554,8 @@ app.service('Statistics', function () {
 			}
 
 			this.getData = function () {
-				return Object.values(listaScores);
+				var results = Object.values(listaScores);
+				$rootScope.listaDeScores = results[0].scores;
 			}
 
 			this.process = function (game, callback) {
@@ -577,17 +587,9 @@ app.service('Statistics', function () {
 				_self.scores.process(dados[_self.i]);
 			}
 
-		}
+			_self.scores.getData();
 
-/*		_self.getData = function () {
-			_self.data['tipos'] = _self.tipos.getData();
-			_self.data['mapas'] = _self.mapas.getData();
-			_self.data['herois'] = _self.herois.getData();
-			_self.data['heroisPorMapa'] = _self.heroisPorMapa.getData();
-			_self.data['mapasPorHeroi'] = _self.mapasPorHeroi.getData();
-			_self.data['scores'] = _self.scores.getData();
-			return _self.data;
-		}*/
+		}
 
 	}
 	abacate =  new Statistics();
