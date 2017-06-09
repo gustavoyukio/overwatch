@@ -41,6 +41,8 @@
 
 <div class="row">
     <div class="col-xs-12 col-md-6 top-info">
+        
+        {{dados.porMapa}}
 
         <canvas 
             id="line" 
@@ -231,8 +233,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="item in dados.classes">
-                                    <td> {{item.classe}} </td>
+                                <tr ng-repeat="item in dados.tipos">
+                                    <td> {{item.tipo}} </td>
                                     <td> {{item.total}} </td>
                                     <td> {{item.win}} </td>
                                     <td> {{item.draw}} </td>
@@ -421,7 +423,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in dados.herois | orderBy : '-lossPercentage' ">
+                    <tr ng-repeat="item in dados.herois | orderBy : '-lossPencetage' ">
                         <td>{{$index+1}}</td>
                         <td>{{item.hero}}</td>
                         <td>{{item.loss}}</td>
