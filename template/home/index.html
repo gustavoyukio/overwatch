@@ -132,9 +132,9 @@
                                         <tr>
                                             <th>Total</th>
                                             <th>Vitórias</th>
+                                            <th>%(wins)</th>
                                             <th>Empates</th>
                                             <th>Derrotas</th>
-                                            <th>%(wins)</th>
                                             <th>%(derrotas)</th>
                                         </tr>
                                     </thead>
@@ -142,9 +142,9 @@
                                         <tr>
                                             <td>{{dados.porSr['Menor'].total}}</td>
                                             <td>{{dados.porSr['Menor'].win}}</td>
+                                            <td>{{dados.porSr['Menor'].winPercentage | number:2}}</td>
                                             <td>{{dados.porSr['Menor'].draw}}</td>
                                             <td>{{dados.porSr['Menor'].loss}}</td>
-                                            <td>{{dados.porSr['Menor'].winPercentage | number:2}}</td>
                                             <td>{{dados.porSr['Menor'].lossPercentage | number:2}}</td>
                                         </tr>
                                     </tbody>
@@ -159,9 +159,9 @@
                                         <tr>
                                             <th>Total</th>
                                             <th>Vitórias</th>
+                                            <th>%(wins)</th>
                                             <th>Empates</th>
                                             <th>Derrotas</th>
-                                            <th>%(wins)</th>
                                             <th>%(derrotas)</th>
                                         </tr>
                                     </thead>
@@ -169,9 +169,9 @@
                                         <tr>
                                             <td>{{dados.porSr['Igual'].total}}</td>
                                             <td>{{dados.porSr['Igual'].win}}</td>
+                                            <td>{{dados.porSr['Igual'].winPercentage | number:2}}</td>
                                             <td>{{dados.porSr['Igual'].draw}}</td>
                                             <td>{{dados.porSr['Igual'].loss}}</td>
-                                            <td>{{dados.porSr['Igual'].winPercentage | number:2}}</td>
                                             <td>{{dados.porSr['Igual'].lossPercentage | number:2}}</td>
                                         </tr>
                                     </tbody>
@@ -212,12 +212,12 @@
                                         </tr>
                                         <tr>
                                             <td>%(win)</td>
-                                            <td>{{ ((wdados.porSize[1].win * 100) | number: 0) || 0}}%</td>
-                                            <td>{{ ((wdados.porSize[2].win * 100) | number: 0) || 0}}%</td>
-                                            <td>{{ ((wdados.porSize[3].win * 100) | number: 0) || 0}}%</td>
-                                            <td>{{ ((wdados.porSize[4].win * 100) | number: 0) || 0}}%</td>
-                                            <td>{{ ((wdados.porSize[5].win * 100) | number: 0) || 0}}%</td>
-                                            <td>{{ ((wdados.porSize[6].win * 100) | number: 0) || 0}}%</td>
+                                            <td>{{ ((dados.porSize[1].win * 100) | number: 0) || 0}}%</td>
+                                            <td>{{ ((dados.porSize[2].win * 100) | number: 0) || 0}}%</td>
+                                            <td>{{ ((dados.porSize[3].win * 100) | number: 0) || 0}}%</td>
+                                            <td>{{ ((dados.porSize[4].win * 100) | number: 0) || 0}}%</td>
+                                            <td>{{ ((dados.porSize[5].win * 100) | number: 0) || 0}}%</td>
+                                            <td>{{ ((dados.porSize[6].win * 100) | number: 0) || 0}}%</td>
                                         </tr>
                                     </tbody>
                                 </table>
