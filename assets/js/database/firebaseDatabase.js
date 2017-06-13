@@ -87,15 +87,31 @@ var Firebase = function($rootScope) {
 
 	// Primeiro Acesso de Gravacao de Jogo
 	_self.saveNewGameEntry = function (item, callback) {
-		_self.getScoreCounter(item, callback);
-	}	
+		_self.getScoreToStart(item, callback);
+	}
 
-
-	// Get Scores
-	_self.getScoreCounter = function (item, callback) {
+	_self.getScoreToStart = function (item, callback) {
 
 		var uid = _self.getUserUid();
 		var path = "/" + uid + "/scores";
+
+		firebase
+			.database()
+			.ref(path)
+			.once("value", function(snapshot){
+
+				var scoreInicial = snapshot.val();
+				_self.getScoreCounter(scoreInicial, item, callback);
+
+			});
+	}
+
+
+	// Get Scores
+	_self.getScoreCounter = function (start, item, callback) {
+
+		var uid = _self.getUserUid();
+		var path = "/" + uid + "/games";
 
 		firebase
 			.database()
@@ -105,9 +121,16 @@ var Firebase = function($rootScope) {
 				var valor = 0;
 
 				if (snapshot.val() != null ) {
+					
 					valor = snapshot.val();
 					contadorDeScorePartidas = Object.keys(snapshot.val()).length;
-					valor = valor[contadorDeScorePartidas-1];
+					
+					if (Object.keys(snapshot.val()).length == 0) {
+						valor = start;
+					} else {
+						valor = valor[Object.keys(snapshot.val())].score;
+					}
+					
 				}
 
 				if (item.score > valor) {
