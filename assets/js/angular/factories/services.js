@@ -710,10 +710,10 @@ app.service('Statistics', function ($rootScope) {
 
 			this.process = function (game,callback) {
 
-				if (sidwes[game.side] == null) {
-					sidwes[game.side] = new estatisticaDeSides(game)
+				if (sides[game.side] == null) {
+					sides[game.side] = new estatisticaDeSides(game)
 				} else {
-					sidwes[game.side].add(game);
+					sides[game.side].add(game);
 				}
 
 			}			
