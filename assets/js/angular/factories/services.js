@@ -567,6 +567,158 @@ app.service('Statistics', function ($rootScope) {
 			}			
 		}
 
+		_self.sr = function () {
+			var sr = {};
+
+			var estatisticaDoSr = function (game, label) {
+
+				var _obj = this;
+
+				this.win = 0;
+				this.draw = 0;
+				this.loss = 0;
+				this.total = 0;
+				this.winPercentage = 0;
+				this.lossPercentage = 0;
+				this.label = label;
+
+				this.add = function (game) {
+
+					if (game.label == 'win') _obj.win++;
+					if (game.label == 'loss') _obj.loss++;
+					if (game.label == 'draw') _obj.draw++;
+
+					_obj.total++;
+					_obj.winPercentage = (_obj.win / _obj.total) * 100;
+					_obj.lossPercentage = (_obj.loss / _obj.total) * 100;
+
+				}
+
+				this.add(game);
+
+			}
+
+			this.getData = function () {
+				return sr;
+			}
+
+			this.process = function (game,callback) {
+
+
+				if (game.srs.enemy > game.srs.team) {					
+					if (sr['Menor'] == null) {
+						sr['Menor'] = new estatisticaDoSr(game,'Menor')
+					} else {
+						sr['Menor'].add(game);
+					}
+				} else if (game.srs.enemy < game.srs.team) {
+					if (sr['Maior'] == null) {
+						sr['Maior'] = new estatisticaDoSr(game,'Maior')
+					} else {
+						sr['Maior'].add(game);
+					}
+				} else {
+					if (sr['Igual'] == null) {
+						sr['Igual'] = new estatisticaDoSr(game,'Igual')
+					} else {
+						sr['Igual'].add(game);
+					}
+				}
+			}			
+		}
+
+		_self.sizes = function () {
+			var sizes = {};
+
+			var estatisticaDeSizes = function (game, label) {
+
+				var _obj = this;
+
+				this.win = 0;
+				this.draw = 0;
+				this.loss = 0;
+				this.total = 0;
+				this.winPercentage = 0;
+				this.lossPercentage = 0;
+				this.label = label;
+
+				this.add = function (game) {
+
+					if (game.label == 'win') _obj.win++;
+					if (game.label == 'loss') _obj.loss++;
+					if (game.label == 'draw') _obj.draw++;
+
+					_obj.total++;
+					_obj.winPercentage = (_obj.win / _obj.total) * 100;
+					_obj.lossPercentage = (_obj.loss / _obj.total) * 100;
+
+				}
+
+				this.add(game);
+
+			}
+
+			this.getData = function () {
+				return sizes;
+			}
+
+			this.process = function (game,callback) {
+
+				if (sizes[game.party] == null) {
+					sizes[game.party] = new estatisticaDeSizes(game)
+				} else {
+					sizes[game.party].add(game);
+				}
+
+			}			
+		}
+
+		_self.sides = function () {
+			var sides = {};
+
+			var estatisticaDeSides = function (game, label) {
+
+				var _obj = this;
+
+				this.win = 0;
+				this.draw = 0;
+				this.loss = 0;
+				this.total = 0;
+				this.winPercentage = 0;
+				this.lossPercentage = 0;
+				this.label = label;
+
+				this.add = function (game) {
+
+					if (game.label == 'win') _obj.win++;
+					if (game.label == 'loss') _obj.loss++;
+					if (game.label == 'draw') _obj.draw++;
+
+					_obj.total++;
+					_obj.winPercentage = (_obj.win / _obj.total) * 100;
+					_obj.lossPercentage = (_obj.loss / _obj.total) * 100;
+
+				}
+
+				this.add(game);
+
+			}
+
+			this.getData = function () {
+				return sides;
+			}
+
+			this.process = function (game,callback) {
+
+				if (sidwes[game.side] == null) {
+					sidwes[game.side] = new estatisticaDeSides(game)
+				} else {
+					sidwes[game.side].add(game);
+				}
+
+			}			
+		}		
+
 		// Instancias dos Objetos
 		_self.mapas 		= new _self.mapas();
 		_self.herois 		= new _self.herois();
@@ -574,6 +726,9 @@ app.service('Statistics', function ($rootScope) {
 		_self.mapasPorHeroi = new _self.mapasPorHeroi();
 		_self.tipos			= new _self.tipos();
 		_self.scores 		= new _self.scores();
+		_self.sr 			= new _self.sr();
+		_self.sizes 		= new _self.sizes();
+		_self.sides 		= new _self.sides();
 
 		// Start Calling
 		_self.start = function (dados, callback) {
@@ -585,6 +740,9 @@ app.service('Statistics', function ($rootScope) {
 				_self.heroisPorMapa.process(dados[_self.i], callback);
 				_self.mapasPorHeroi.process(dados[_self.i], callback);
 				_self.scores.process(dados[_self.i]);
+				_self.sr.process(dados[_self.i]);
+				_self.sizes.process(dados[_self.i]);
+				_self.sides.process(dados[_self.i]);
 			}
 
 			_self.scores.getData();

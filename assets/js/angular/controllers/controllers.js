@@ -158,19 +158,26 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
 
     $scope.dados = {};
 
-    var herois = Statistics.herois.getData();
-    var mapas = Statistics.mapas.getData();
-    var tipos = Statistics.tipos.getData();
+    var herois  = Statistics.herois.getData();
+    var mapas   = Statistics.mapas.getData();
+    var tipos   = Statistics.tipos.getData();
 
-    var porMapa = Statistics.heroisPorMapa.getData();
-    var porHeroi = Statistics.mapasPorHeroi.getData();
+    var porMapa     = Statistics.heroisPorMapa.getData();
+    var porHeroi    = Statistics.mapasPorHeroi.getData();
+    var porSr       = Statistics.sr.getData();
+    var porSize     = Statistics.sizes.getData();
+    var porSide     = Statistics.sides.getData();
 
     $scope.dados.herois = herois;
-    $scope.dados.mapas = mapas;
-    $scope.dados.tipos = tipos;
+    $scope.dados.mapas  = mapas;
+    $scope.dados.tipos  = tipos;
 
-    $scope.dados.porMapa = porMapa;
-    $scope.dados.porHeroi = porHeroi;
+    $scope.dados.porMapa    = porMapa;
+    $scope.dados.porHeroi   = porHeroi;
+    $scope.dados.porSr      = porSr;
+    $scope.dados.porSize    = porSize;
+    $scope.dados.porSide    = porSide;
+    console.dir(porSide);
 
   }, 1500);
 
