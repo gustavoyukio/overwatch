@@ -41,7 +41,7 @@
 
 <div class="row">
     <div class="col-xs-12 col-md-6 top-info">
-
+        
         <canvas 
             id="line" 
             class="chart chart-line" 
@@ -231,8 +231,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="item in dados.classes">
-                                    <td> {{item.classe}} </td>
+                                <tr ng-repeat="item in dados.tipos">
+                                    <td> {{item.tipo}} </td>
                                     <td> {{item.total}} </td>
                                     <td> {{item.win}} </td>
                                     <td> {{item.draw}} </td>
@@ -339,6 +339,34 @@
             </table>
             </div>
         </div>
+    
+        <div class="card" ng-repeat="(key,value) in dados.porMapa">
+            <div class="card-header" data-background-color="red">{{key}}</div>
+            <div class="card-content">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Jogos</th>
+                        <th>Vitorias</th>
+                        <th>%</th>
+                        <th>Derrotas</th>
+                        <th>%</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in value ">
+                        <td>{{item.hero}}</td>
+                        <td>{{item.total}}</td>
+                        <td>{{item.win}}</td>
+                        <td>{{item.winPercentage | number:1}}%</td>
+                        <td>{{item.loss}}</td>
+                        <td>{{item.lossPercentage | number:1}}%</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
 
     </div>
 
@@ -421,11 +449,39 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in dados.herois | orderBy : '-lossPercentage' ">
+                    <tr ng-repeat="item in dados.herois | orderBy : '-lossPencetage' ">
                         <td>{{$index+1}}</td>
                         <td>{{item.hero}}</td>
                         <td>{{item.loss}}</td>
                         <td>{{item.total}}</td>
+                        <td>{{item.lossPercentage | number:1}}%</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+
+        <div class="card" ng-repeat="(key,value) in dados.porHeroi">
+            <div class="card-header" data-background-color="red">{{key}}</div>
+            <div class="card-content">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Jogos</th>
+                        <th>Vitorias</th>
+                        <th>%</th>
+                        <th>Derrotas</th>
+                        <th>%</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in value ">
+                        <td>{{item.map}}</td>
+                        <td>{{item.total}}</td>
+                        <td>{{item.win}}</td>
+                        <td>{{item.winPercentage | number:1}}%</td>
+                        <td>{{item.loss}}</td>
                         <td>{{item.lossPercentage | number:1}}%</td>
                     </tr>
                 </tbody>

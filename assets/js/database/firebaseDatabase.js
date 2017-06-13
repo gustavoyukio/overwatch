@@ -40,11 +40,6 @@ var Firebase = function($rootScope) {
 			var user = 'TaN3G9CWUGZan2ex0WNKy4DOIuB3'; // GYCC3
 		}
 		
-		//var user = 'qnQdKgKH0yN2KsIxWhQHkWi2zkx1'; // GYCC
-		//var user = 'uiIrBxxy95h6pew26nHIk7DnzoU2'; // GYCC2
-		
-		//var user = 'UEsnD1eSGgRzc6NVURCZge0F4fR2'; // GYCC4
-		//console.log(user);
 		return user;
 	}
 
@@ -122,13 +117,16 @@ var Firebase = function($rootScope) {
 
 				if (snapshot.val() != null ) {
 					
-					valor = snapshot.val();
+					val = snapshot.val();
 					contadorDeScorePartidas = Object.keys(snapshot.val()).length;
-					
-					if (Object.keys(snapshot.val()).length == 0) {
+					console.dir(val);
+					console.dir(Object.keys(snapshot.val())[0]);
+					console.log("Contador = " + contadorDeScorePartidas);
+
+					if (contadorDeScorePartidas == 0) {
 						valor = start;
 					} else {
-						valor = valor[Object.keys(snapshot.val())].score;
+						valor = val[Object.keys(snapshot.val())[contadorDeScorePartidas-1]].score;
 					}
 					
 				}
@@ -368,7 +366,7 @@ var Firebase = function($rootScope) {
 	_self.setNewSeason = function () {
 
 		var path = "/";
-		console.log("OI");
+		//console.log("OI");
 
 		firebase
 		.database()
@@ -376,7 +374,7 @@ var Firebase = function($rootScope) {
 		.once("value", function(snapshot){
 
 			var pathInterno = "/season4/";
-			console.log(pathInterno);
+			//console.log(pathInterno);
 
 			obj = snapshot.val();
 
