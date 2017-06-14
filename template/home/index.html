@@ -212,12 +212,12 @@
                                         </tr>
                                         <tr>
                                             <td>%(win)</td>
-                                            <td>{{ ((dados.porSize[1].win * 100) | number: 0) || 0}}%</td>
-                                            <td>{{ ((dados.porSize[2].win * 100) | number: 0) || 0}}%</td>
-                                            <td>{{ ((dados.porSize[3].win * 100) | number: 0) || 0}}%</td>
-                                            <td>{{ ((dados.porSize[4].win * 100) | number: 0) || 0}}%</td>
-                                            <td>{{ ((dados.porSize[5].win * 100) | number: 0) || 0}}%</td>
-                                            <td>{{ ((dados.porSize[6].win * 100) | number: 0) || 0}}%</td>
+                                            <td>{{ (dados.porSize[1].winPercentage | number: 0) || 0}}%</td>
+                                            <td>{{ (dados.porSize[2].winPercentage | number: 0) || 0}}%</td>
+                                            <td>{{ (dados.porSize[3].winPercentage | number: 0) || 0}}%</td>
+                                            <td>{{ (dados.porSize[4].winPercentage | number: 0) || 0}}%</td>
+                                            <td>{{ (dados.porSize[5].winPercentage | number: 0) || 0}}%</td>
+                                            <td>{{ (dados.porSize[6].winPercentage | number: 0) || 0}}%</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -289,7 +289,7 @@
                             </thead>
                             <tbody>
                                 <tr ng-repeat="item in dados.porSide">
-                                    <td> {{item.tipo || KOTH}} </td>
+                                    <td> {{item.tipo || 'King of The Hill'}} </td>
                                     <td> {{item.total}} </td>
                                     <td> {{item.win}} </td>
                                     <td> {{item.draw}} </td>

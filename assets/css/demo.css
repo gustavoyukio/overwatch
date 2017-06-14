@@ -107,3 +107,16 @@
 .login .sidebar {
 	display: none;
 }
+
+.alert.alert-blue-gray {
+	background: linear-gradient(60deg, #2F4E6F, #294461);
+	color: #fff;
+	padding: 10px 20px;
+	margin: 0;
+}
+.alert.alert-orange {
+	background: linear-gradient(60deg, #98B1C4, #8aa1b2);
+	color: #000;
+	padding: 10px 20px;
+	margin: 0;
+}
