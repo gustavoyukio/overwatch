@@ -689,13 +689,13 @@ app.service('Statistics', function ($rootScope) {
 
 				var _obj = this;
 
-				this.win = 0;
-				this.draw = 0;
-				this.loss = 0;
-				this.total = 0;
-				this.winPercentage = 0;
-				this.lossPercentage = 0;
-				this.label = label;
+				_obj.win = 0;
+				_obj.draw = 0;
+				_obj.loss = 0;
+				_obj.total = 0;
+				_obj.winPercentage = 0;
+				_obj.lossPercentage = 0;
+				_obj[label] = label;
 
 				this.add = function (game) {
 
