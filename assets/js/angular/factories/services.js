@@ -322,12 +322,16 @@ app.service('Statistics', function ($rootScope) {
 			this.getData = function () {
 				return Object.values(listaDeMapas);
 			}
-			this.process = function (game, callback) {
+			this.process = function (game, callback, counter) {
 
-				if (listaDeMapas[game.map] == null) {
-					listaDeMapas[game.map] = new estatisticaDoMapa(game, callback)
+				if (counter == 0) {
+					listaDeMapas[game.map] = new estatisticaDoMapa(game, callback);
 				} else {
-					listaDeMapas[game.map].add(game, callback);
+					if (listaDeMapas[game.map] == null) {
+						listaDeMapas[game.map] = new estatisticaDoMapa(game, callback);
+					} else {
+						listaDeMapas[game.map].add(game, callback);
+					}
 				}
 			}
 		}
@@ -554,15 +558,20 @@ app.service('Statistics', function ($rootScope) {
 			}
 
 			this.getData = function () {
+				console.log(listaScores);
 				var results = Object.values(listaScores);
-				$rootScope.listaDeScores = results[0].scores;
+				return results[0].scores;
 			}
 
-			this.process = function (game, callback) {
-				if (listaScores['scores'] == null) {
+			this.process = function (game, callback, counter) {
+				if (counter == 0) {
 					listaScores['scores'] = new resultados(game);
 				} else {
-					listaScores['scores'].add(game);
+					if (listaScores['scores'] == null) {
+						listaScores['scores'] = new resultados(game);
+					} else {
+						listaScores['scores'].add(game);
+					}	
 				}
 			}			
 		}
@@ -719,30 +728,30 @@ app.service('Statistics', function ($rootScope) {
 			}			
 		}		
 
-		// Instancias dos Objetos
-		_self.mapas 		= new _self.mapas();
-		_self.herois 		= new _self.herois();
-		_self.heroisPorMapa = new _self.heroisPorMapa();
-		_self.mapasPorHeroi = new _self.mapasPorHeroi();
-		_self.tipos			= new _self.tipos();
-		_self.scores 		= new _self.scores();
-		_self.sr 			= new _self.sr();
-		_self.sizes 		= new _self.sizes();
-		_self.sides 		= new _self.sides();
-
 		// Start Calling
 		_self.start = function (dados, callback) {
+
+			// Instancias dos Objetos
+			_self.mapas 		= new _self.mapas();
+			_self.herois 		= new _self.herois();
+			_self.heroisPorMapa = new _self.heroisPorMapa();
+			_self.mapasPorHeroi = new _self.mapasPorHeroi();
+			_self.tipos			= new _self.tipos();
+			_self.scores 		= new _self.scores();
+			_self.sr 			= new _self.sr();
+			_self.sizes 		= new _self.sizes();
+			_self.sides 		= new _self.sides();
 			
 			for (_self.i=0; _self.i < dados.length; _self.i++) {
-				_self.mapas.process(dados[_self.i], callback);
-				_self.tipos.process(dados[_self.i], callback);
-				_self.herois.process(dados[_self.i], callback);
-				_self.heroisPorMapa.process(dados[_self.i], callback);
-				_self.mapasPorHeroi.process(dados[_self.i], callback);
-				_self.scores.process(dados[_self.i]);
-				_self.sr.process(dados[_self.i]);
-				_self.sizes.process(dados[_self.i]);
-				_self.sides.process(dados[_self.i]);
+				_self.mapas.process(dados[_self.i], callback, _self.i);
+				_self.tipos.process(dados[_self.i], callback, _self.i);
+				_self.herois.process(dados[_self.i], callback, _self.i);
+				_self.heroisPorMapa.process(dados[_self.i], callback, _self.i);
+				_self.mapasPorHeroi.process(dados[_self.i], callback, _self.i);
+				_self.scores.process(dados[_self.i], _self.i);
+				_self.sr.process(dados[_self.i], _self.i);
+				_self.sizes.process(dados[_self.i], _self.i);
+				_self.sides.process(dados[_self.i], _self.i);
 			}
 
 			_self.scores.getData();

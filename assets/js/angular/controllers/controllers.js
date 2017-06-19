@@ -90,7 +90,10 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
                     var data = valores;
 
                     $scope.labels = [];
+
                     $scope.data   = [];
+                    $scope.data.length = 0;
+
                     $scope.scoreHighest = 0;
                     $scope.scoreCurrent = 0;
                     var limit = data.length;
@@ -113,6 +116,9 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
                             $scope.scoreCurrent = data[i];
                         }
                     }
+
+                    //console.dir($scope.data);
+
                 }, 200);
             }
         }
@@ -167,6 +173,8 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
             var porSize     = Statistics.sizes.getData();
             var porSide     = Statistics.sides.getData();
 
+            var scores      = Statistics.scores.getData();
+
             $scope.dados.herois = herois;
             $scope.dados.mapas  = mapas;
             $scope.dados.tipos  = tipos;
@@ -177,6 +185,8 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
             
             $scope.dados.porSize    = porSize;
             $scope.dados.porSide    = porSide;
+
+             setGraphScore(scores);
         }, 1500);
 
         if (!$scope.showScoreInicial) {
