@@ -186,7 +186,8 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
             $scope.dados.porSize    = porSize;
             $scope.dados.porSide    = porSide;
 
-             setGraphScore(scores);
+            setGraphScore(scores);
+
         }, 1500);
 
         if (!$scope.showScoreInicial) {
