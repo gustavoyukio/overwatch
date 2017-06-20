@@ -289,8 +289,7 @@
                             </thead>
                             <tbody>
                                 <tr ng-repeat="item in dados.porSide">
-                                    <td> {{item}} </td>
-                                    <td> {{item.tipo || 'King of The Hill'}} </td>
+                                    <td> {{item.side || 'King of The Hill'}} </td>
                                     <td> {{item.total}} </td>
                                     <td> {{item.win}} </td>
                                     <td> {{item.draw}} </td>

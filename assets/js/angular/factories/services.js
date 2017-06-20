@@ -695,7 +695,7 @@ app.service('Statistics', function ($rootScope) {
 				_obj.total = 0;
 				_obj.winPercentage = 0;
 				_obj.lossPercentage = 0;
-				_obj[label] = label;
+				_obj.side = label;
 
 				this.add = function (game) {
 
@@ -720,9 +720,9 @@ app.service('Statistics', function ($rootScope) {
 			this.process = function (game,callback) {
 
 				if (sides[game.side] == null) {
-					sides[game.side] = new estatisticaDeSides(game)
+					sides[game.side] = new estatisticaDeSides(game, game.side)
 				} else {
-					sides[game.side].add(game);
+					sides[game.side].add(game, game.side);
 				}
 
 			}			

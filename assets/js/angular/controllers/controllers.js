@@ -172,6 +172,7 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
     
             var porSize     = Statistics.sizes.getData();
             var porSide     = Statistics.sides.getData();
+            console.dir(porSize);
 
             var scores      = Statistics.scores.getData();
 
