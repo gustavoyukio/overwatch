@@ -56,6 +56,22 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
 
     $rootScope.$broadcast('changeShowArrow',false);
     $scope.showScoreInicial = false;
+    $scope.melhores = {
+        mapas: {
+            nome: '',
+            valor: 0
+        },
+        hero: {
+            nome: '',
+            valor: 0,
+            pior: '',
+            piorValor: 0
+        },
+        hour: {
+            nome: '',
+            valor: 0
+        }
+    };
 
     /*
      * Graph Setup
@@ -121,6 +137,49 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
 
                 }, 200);
             }
+        }
+
+    /*
+     *
+     * Callbacks para para melhores
+     *
+     */
+
+        $scope.melhorMapa = function (a,b) {
+
+            if (parseInt(b) > parseInt($scope.melhores.mapas.valor)) {
+                $scope.melhores.mapas.nome = a;
+                $scope.melhores.mapas.valor = parseInt(b);
+            }
+
+            if (!$scope.$$phase) {
+                $scope.$apply();
+            }
+
+        }
+        $scope.melhorHeroi = function (a,b) {
+
+            if (parseInt(b) > parseInt($scope.melhores.hero.valor)) {
+                $scope.melhores.hero.nome = a;
+                $scope.melhores.hero.valor = parseInt(b);
+            }
+
+            if (!$scope.$$phase) {
+                $scope.$apply();
+            }
+
+        }
+        $scope.piorHeroi = function (a,b) {
+
+            if (parseInt(b) > parseInt($scope.melhores.hero.piorValor)) {
+                $scope.melhores.hero.pior = a;
+                $scope.melhores.hero.piorValor = parseInt(b);
+            }
+
+            if (!$scope.$$phase) {
+                $scope.$apply();
+            }
+
         }
 
     /*
