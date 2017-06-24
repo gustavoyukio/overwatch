@@ -559,7 +559,7 @@ app.service('Statistics', function ($rootScope) {
 			}
 
 			this.getData = function () {
-				console.log(listaScores);
+				//console.log(listaScores);
 				var results = Object.values(listaScores);
 				return results[0].scores;
 			}

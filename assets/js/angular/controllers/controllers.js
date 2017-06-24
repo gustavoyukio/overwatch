@@ -103,8 +103,12 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
 
                 $timeout(function(){
 
-                    var scores = valores.reverse();
-                    var data = valores
+                    var data = valores;
+
+                    if (valores.length > 30) {
+                        data = valores.splice(valores.length-30,30);
+                    }
+                    
 
                     $scope.labels = [];
 
@@ -113,6 +117,7 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
 
                     $scope.scoreHighest = 0;
                     $scope.scoreCurrent = 0;
+
                     var limit = data.length;
                     var counter = 0;
 
@@ -121,9 +126,12 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
                         counter = data.length - 30;
                     }
 
+                    //console.log(scores)
+
                     for (var i=0; i < limit; i++) {
-                        $scope.labels.push(counter + i);
-                        $scope.data.push(scores[counter  + i]);
+
+                        $scope.labels.push(i + 1);
+                        $scope.data.push(data[i]);
 
                         if (data[i] > $scope.scoreHighest) {
                             $scope.scoreHighest = data[i];
