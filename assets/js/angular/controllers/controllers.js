@@ -103,7 +103,8 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
 
                 $timeout(function(){
 
-                    var data = valores;
+                    var scores = valores.reverse();
+                    var data = valores
 
                     $scope.labels = [];
 
@@ -122,7 +123,7 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
 
                     for (var i=0; i < limit; i++) {
                         $scope.labels.push(counter + i);
-                        $scope.data.push(data[counter  + i]);
+                        $scope.data.push(scores[counter  + i]);
 
                         if (data[i] > $scope.scoreHighest) {
                             $scope.scoreHighest = data[i];

@@ -123,7 +123,8 @@ app.service('Map', function(){
 			"Ilios",
 			"Lijiang Tower",
 			"Nepal",
-			"Oasis"
+			"Oasis",
+			"Horizon Lunar"
 		];
 
 		_self.getMaps = function () {
