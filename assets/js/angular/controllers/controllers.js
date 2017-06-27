@@ -210,56 +210,52 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
                     $scope.$apply();
                 }	
             }
-        } 	
-
-        $rootScope.listaDeScores = [];
-        $rootScope.porMapa = [];
-
-        $rootScope.$watch('listaDeScores', function () {
-            if ($rootScope.listaDeScores.length > 0) {
-                setGraphScore($rootScope.listaDeScores);
-            }
-        });
-        $rootScope.$watch('porMapa', function () {
-            if ($rootScope.porMapa.length > 0) {
-                $scope.dados.porMapa = $rootScope.porMapa;
-            }
-        });  
+        } 	 
 
         $timeout(function(){
 
+            /*
             $scope.dados = {};
 
-            var herois  = Statistics.herois.getData();
-            var mapas   = Statistics.mapas.getData();
-            var tipos   = Statistics.tipos.getData();
+            $scope.dados.herois     = Statistics.heroisArray.getData();
+            $scope.dados.mapas      = Statistics.mapas.getData();
+            $scope.dados.tipos      = Statistics.tipos.getData();
 
-            var porMapa     = Statistics.heroisPorMapa.getData();
-            var porHeroi    = Statistics.mapasPorHeroi.getData();
-            var porSr       = Statistics.sr.getData();
-    
-            var porSize     = Statistics.sizes.getData();
-            var porSide     = Statistics.sides.getData();
-
-            var scores      = Statistics.scores.getData();
-
-            $scope.dados.herois = herois;
-            $scope.dados.mapas  = mapas;
-            $scope.dados.tipos  = tipos;
-
-            $scope.dados.porMapa    = porMapa;
-            $scope.dados.porHeroi   = porHeroi;
-            $scope.dados.porSr      = porSr;
+            $scope.dados.porMapa    = Statistics.heroisPorMapa.getData();
+            $scope.dados.porHeroi   = Statistics.mapasPorHeroi.getData();
+            $scope.dados.porSr      = Statistics.sr.getData();
             
-            $scope.dados.porSize    = porSize;
-            $scope.dados.porSide    = porSide;
+            $scope.dados.porSize    = Statistics.sizes.getData();
+            $scope.dados.porSide    = Statistics.sides.getData();
 
-            setGraphScore(scores);
+            setGraphScore(Statistics.scores.getData());
+            */
+            Statistics.getScores(scoreCallback);
+            Statistics.getHerois(heroisCallback);
+            Statistics.getMapas(mapasCallback);
 
         }, 1500);
 
-        if (!$scope.showScoreInicial) {
-            getScoreInicial();
-        }
+        /*
+         * Callbacks
+         */
+            var scoreCallback = function (data) {
+                 setGraphScore(data);
+            }
+
+            var heroisCallback = function (data) {
+                $scope.herois = data;
+            }
+
+            var mapasCallback = function (data) {
+                $scope.mapas = data;
+            }
+
+        /*
+         *  Initial Show Score Inicial
+         */
+            if (!$scope.showScoreInicial) {
+                getScoreInicial();
+            }
 })
 ;

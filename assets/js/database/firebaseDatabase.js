@@ -119,9 +119,6 @@ var Firebase = function($rootScope) {
 					
 					val = snapshot.val();
 					contadorDeScorePartidas = Object.keys(snapshot.val()).length;
-					console.dir(val);
-					console.dir(Object.keys(snapshot.val())[0]);
-					console.log("Contador = " + contadorDeScorePartidas);
 
 					if (contadorDeScorePartidas == 0) {
 						valor = start;

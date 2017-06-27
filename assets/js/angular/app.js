@@ -13,7 +13,7 @@ angular.module('myApp', [
 ]).
 run(['$rootScope', 'User', '$location', function($rootScope, User, $location, $cookies){
 
-  $rootScope.test = false;
+  $rootScope.test = true;
 
     if (!$rootScope.test) {
       $rootScope.$on("$locationChangeStart", function(event, next, current) { 
