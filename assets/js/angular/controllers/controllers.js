@@ -52,33 +52,35 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
     // Apenas quando trocar de temporada
     //Home.setNewSeason();
     // Data calling
-    Home.getStatistics();
-
-    $rootScope.$broadcast('changeShowArrow',false);
-    $scope.showScoreInicial = false;
-    $scope.melhores = {
-        mapas: {
-            nome: '',
-            valor: 0
-        },
-        hero: {
-            nome: '',
-            valor: 0,
-            pior: '',
-            piorValor: 0
-        },
-        hour: {
-            nome: '',
-            valor: 0
-        }
-    };
+    //Home.getStatistics();
+    /*
+    *
+    */
+        $rootScope.$broadcast('changeShowArrow',false);
+        $scope.showScoreInicial = false;
+        $scope.melhores = {
+            mapas: {
+                nome: '',
+                valor: 0
+            },
+            hero: {
+                nome: '',
+                valor: 0,
+                pior: '',
+                piorValor: 0
+            },
+            hour: {
+                nome: '',
+                valor: 0
+            }
+        };
 
     /*
-     * Graph Setup
-     * Inicialização do Grafico e adicao de Pontos
-     *
-     */
-        var setGraphScore = function (valores) {
+    * Graph Setup
+    * Inicialização do Grafico e adicao de Pontos
+    *
+    */
+        var setGraphScores = function (valores) {
 
             $scope.series = ['SR'];
             $scope.datasetOverride = [{ xAxisID: 'jogos' }, { yAxisID: 'SR' }];
@@ -99,60 +101,41 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
                 }
             };
 
-            if (valores != undefined ) {
+            $scope.scoreHighest = 0;
+            $scope.scoreCurrent = 0;
+            var counter = 0;
+            var limit = 30;
 
-                $timeout(function(){
+            $scope.labels = [];
+            $scope.labels.length = 0;
+            $scope.data   = [];
+            $scope.data.length = 0;
 
-                    var data = valores;
-
-                    if (valores.length > 30) {
-                        data = valores.splice(valores.length-30,30);
-                    }
-                    
-
-                    $scope.labels = [];
-
-                    $scope.data   = [];
-                    $scope.data.length = 0;
-
-                    $scope.scoreHighest = 0;
-                    $scope.scoreCurrent = 0;
-
-                    var limit = data.length;
-                    var counter = 0;
-
-                    if ( data.length > 30 ) {
-                        limit = 30;
-                        counter = data.length - 30;
-                    }
-
-                    //console.log(scores)
-
-                    for (var i=0; i < limit; i++) {
-
-                        $scope.labels.push(i + 1);
-                        $scope.data.push(data[i]);
-
-                        if (data[i] > $scope.scoreHighest) {
-                            $scope.scoreHighest = data[i];
-                        }
-
-                        if (i == limit-1) {
-                            $scope.scoreCurrent = data[i];
-                        }
-                    }
-
-                    //console.dir($scope.data);
-
-                }, 200);
+            if ( valores.length > 30 ) {
+                counter = valores.length - 30;
             }
+
+            for (counter; counter < valores.length; counter++) {
+
+                $scope.labels.push(counter + 1);
+                $scope.data.push(valores[counter]);
+
+                if (valores[counter] > $scope.scoreHighest) {
+                    $scope.scoreHighest = valores[counter];
+                }
+
+                if (counter == limit-1) {
+                    $scope.scoreCurrent = valores[counter];
+                }
+            }
+
         }
 
     /*
-     *
-     * Callbacks para para melhores
-     *
-     */
+    *
+    * Callbacks para para melhores
+    *
+    */
 
         $scope.melhorMapa = function (a,b) {
 
@@ -192,10 +175,10 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
         }
 
     /*
-     * Data Setup
-     * Inicialização do callbcks de Dados
-     *
-     */
+    * Data Setup
+    * Inicialização do callbcks de Dados
+    *
+    */
         $scope.setScoreInicial = function () {
             Score.setScoreInicial($scope.scoreInicialValue, scoreInicialCallback);
         }
@@ -253,13 +236,14 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
             
             $scope.dados.porSize    = porSize;
             $scope.dados.porSide    = porSide;
-
-            setGraphScore(scores);
+            
+            setGraphScores(scores);
 
         }, 1500);
 
-        if (!$scope.showScoreInicial) {
-            getScoreInicial();
-        }
+    if (!$scope.showScoreInicial) {
+        getScoreInicial();
+    }
+
 })
 ;

@@ -1,4 +1,4 @@
-var Firebase = function($rootScope) {
+var Firebase = function($rootScope, Statistics) {
 	
 	var _self	 			= this;
 	this.config  			= null;
@@ -59,7 +59,7 @@ var Firebase = function($rootScope) {
 
 		callback(msg);
 	}
-	_self.getGamesList = function (callback, callbackHome) {
+	_self.getGamesList = function (callback) {
 
 		var uid  = _self.getUserUid();
 		var path = "/" + uid + "/games";
@@ -73,7 +73,8 @@ var Firebase = function($rootScope) {
 				var array = $.map(snapshot.val(), function(value, index) {
     				return [value];
 				});
-				callback(array,callbackHome);
+				//console.log(array);
+				callback(array);
 
 			}, function (error) {
 				console.dir(error);
@@ -119,9 +120,6 @@ var Firebase = function($rootScope) {
 					
 					val = snapshot.val();
 					contadorDeScorePartidas = Object.keys(snapshot.val()).length;
-					console.dir(val);
-					console.dir(Object.keys(snapshot.val())[0]);
-					console.log("Contador = " + contadorDeScorePartidas);
 
 					if (contadorDeScorePartidas == 0) {
 						valor = start;
@@ -139,6 +137,7 @@ var Firebase = function($rootScope) {
 					item.label = 'loss';
 				}
 				
+				Statistics.addLastItem(item);
 				_self.saveEntry(item, callback);
 
 			});
@@ -178,6 +177,7 @@ var Firebase = function($rootScope) {
 
 		_self.getScoreInicial(callback);
 	}
+	
 	_self.getScoreInicial = function (callback) {
 		var uid  = _self.getUserUid();
 		var path = "/" + uid + "/scores"; 

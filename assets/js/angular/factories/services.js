@@ -277,8 +277,8 @@ app.service('User', function () {
 	return new User();
 })
 
-app.service('Firebase', function($rootScope){
-	return new Firebase($rootScope);
+app.service('Firebase', function($rootScope, Statistics){
+	return new Firebase($rootScope, Statistics);
 })
 
 app.service('Statistics', function ($rootScope) {
@@ -561,7 +561,8 @@ app.service('Statistics', function ($rootScope) {
 			this.getData = function () {
 				//console.log(listaScores);
 				var results = Object.values(listaScores);
-				return results[0].scores;
+				var scoresFull = results[0].scores;
+				return scoresFull;
 			}
 
 			this.process = function (game, callback, counter) {
@@ -729,39 +730,41 @@ app.service('Statistics', function ($rootScope) {
 			}			
 		}		
 
+		// Instancias dos Objetos
+		_self.mapas 		= new _self.mapas();
+		_self.herois 		= new _self.herois();
+		_self.heroisPorMapa = new _self.heroisPorMapa();
+		_self.mapasPorHeroi = new _self.mapasPorHeroi();
+		_self.tipos			= new _self.tipos();
+		_self.scores 		= new _self.scores();
+		_self.sr 			= new _self.sr();
+		_self.sizes 		= new _self.sizes();
+		_self.sides 		= new _self.sides();
+
 		// Start Calling
-		_self.start = function (dados, callback) {
+		_self.start = function (dados) {
 
-			// Instancias dos Objetos
-			_self.mapas 		= new _self.mapas();
-			_self.herois 		= new _self.herois();
-			_self.heroisPorMapa = new _self.heroisPorMapa();
-			_self.mapasPorHeroi = new _self.mapasPorHeroi();
-			_self.tipos			= new _self.tipos();
-			_self.scores 		= new _self.scores();
-			_self.sr 			= new _self.sr();
-			_self.sizes 		= new _self.sizes();
-			_self.sides 		= new _self.sides();
-			
-			for (_self.i=0; _self.i < dados.length; _self.i++) {
-				_self.mapas.process(dados[_self.i], callback, _self.i);
-				_self.tipos.process(dados[_self.i], callback, _self.i);
-				_self.herois.process(dados[_self.i], callback, _self.i);
-				_self.heroisPorMapa.process(dados[_self.i], callback, _self.i);
-				_self.mapasPorHeroi.process(dados[_self.i], callback, _self.i);
-				_self.scores.process(dados[_self.i], _self.i);
-				_self.sr.process(dados[_self.i], _self.i);
-				_self.sizes.process(dados[_self.i], _self.i);
-				_self.sides.process(dados[_self.i], _self.i);
+			for (var i = 0; i < dados.length; i++) {
+				_self.addLastItem(dados[i])
 			}
-
-			_self.scores.getData();
 
 		}
 
+		_self.addLastItem = function (item) {
+			_self.sr.process(item)
+			_self.mapas.process(item)
+			_self.tipos.process(item)
+			_self.sizes.process(item)
+			_self.sides.process(item)
+			_self.herois.process(item)
+			_self.scores.process(item)
+			_self.mapasPorHeroi.process(item)
+			_self.heroisPorMapa.process(item)
+		}
+
 	}
-	abacate =  new Statistics();
-	return abacate;
+
+	return new Statistics();
 
 })
 
@@ -770,6 +773,8 @@ app.service('Home', function(Firebase,Statistics) {
 	var Home = function () {
 
 		var _self = this;
+
+		Firebase.getGamesList(Statistics.start);
 
 		_self.heroesNeverDie = function (callback) {
 			Firebase.heroesNeverDie(callback);
