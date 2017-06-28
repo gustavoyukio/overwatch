@@ -1,5 +1,28 @@
 <div class="row">
 	<div class="col-xs-12">
+		
+		<style>
+			td.win,
+			td.loss,
+			td.draw {
+				color: white;
+				text-align: center;
+				font-weight: bold;
+			}
+			td.win {
+				background-color: #d3ebc9;
+				color:#365833;
+			}
+			td.loss {
+				background-color: #f2dee0;
+				color:#a88e8d;
+			}
+			td.draw {
+				background-color: #fff6bf;
+				color: #beb277;
+			}
+		</style>
+
 
 		<div class="card" data-background-color="orange">
 			<div class="card-header" >Lista dos seus Jogos</div>
@@ -18,7 +41,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="item in gameList.reverse() ">
+						<tr ng-repeat="item in gameList ">
 							<td>{{$index+1}}</td>
 							<td>{{item.hour}}:00</td>
 							<td>{{item.map}}</td>
@@ -28,7 +51,7 @@
 							</td>
 							<td>{{item.label}}</td>
 							<td>{{item.score}}</td>
-							<td>{{gameList[$index].score - gameList[$index + 1].score}}</td>
+							<td class="{{item.label}}">{{gameList[$index].score - gameList[$index + 1].score}}</td>
 						</tr>
 					</tbody>
 				</table>

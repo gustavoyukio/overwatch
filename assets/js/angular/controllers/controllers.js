@@ -211,6 +211,8 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
 
         $timeout(function(){
 
+            console.dir(Statistics);
+
             $scope.dados = {};
 
             var herois  = Statistics.herois.getData();
