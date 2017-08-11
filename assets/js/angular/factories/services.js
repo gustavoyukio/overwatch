@@ -58,6 +58,8 @@ app.service("Heroes", function(){
 			},{
 				'name' : 'Tracer', 'type' : 'DPS' 
 			},{
+				'name' : 'Doomfist', 'type' : 'DPS' 
+			},{
 				'name' : 'Bastion', 'type' : 'Defense' 
 			},{
 				'name' : 'Hanzo', 'type' : 'Defense' 
