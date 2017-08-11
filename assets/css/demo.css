@@ -1,3 +1,13 @@
+.page-title {
+	position: relative;
+}
+.page-title a {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 20px;
+}
+
 .main-panel .main-content {
 	padding: 0 20px;
 	margin: 0;
