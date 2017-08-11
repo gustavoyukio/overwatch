@@ -271,6 +271,10 @@ app.service('User', function () {
 		_self.getUid = function () {
 			return _self.data.uid;
 		}
+
+		_self.getName = function () {
+			return _self.data.name;
+		}
 		
 	}
 

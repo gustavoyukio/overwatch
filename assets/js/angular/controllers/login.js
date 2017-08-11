@@ -2,7 +2,7 @@
 
 var app = angular.module('myApp.loginController', ["ngRoute","myApp.services"]);
 
-app.controller('LoginController', ['$rootScope', '$scope','User','$location', function($rootScope,$scope,User,$location) {
+app.controller('LoginController', function($rootScope,$scope,User,$location,$cookies) {
 
 	$rootScope.$broadcast('changeShowArrow',false);
 	$rootScope.$broadcast('changeShowMenu',false);
@@ -11,27 +11,19 @@ app.controller('LoginController', ['$rootScope', '$scope','User','$location', fu
 		$scope.loginClass = 'login-wrapper';
 	}
 
-	if (User.getLoggedStatus()) {
-
-        $location.path('/adicionarJogo');
-
-    } else {
-
-	    var logIn = function (valor) {
-			if (valor == true || valor) {
-				$rootScope.$broadcast('abacate',true);
-				if (!$scope.$$phase) {
-					$location.path('/');
-					$scope.$apply();
-				}
+	var logIn = function (valor) {
+		if (valor == true || valor) {
+			$scope.loginClass = '';
+			$rootScope.telaDeLogin = 'abacate';
+			//$rootScope.$broadcast('abacate',true);
+			$location.path('/');
+			if (!$scope.$$phase) {
+				$scope.$apply();
 			}
 		}
+	}
 
-    }
-
-	
-
-	$scope.googleLogin = function () {
+	var googleLogin = function () {
 
 		firebase.auth().signInWithPopup(provider).then(function(result) {
 	        // This gives you a Google Access Token. You can use it to access the Google API.
@@ -40,7 +32,11 @@ app.controller('LoginController', ['$rootScope', '$scope','User','$location', fu
 	        var user = result.user;
 
 	        if (user.uid != null) {
-	          	User.setLoggedStatus(user, logIn)  
+
+	        	$cookies.put('user', user.uid);
+        		$cookies.put('userName', user.displayName);
+
+	          	User.setLoggedStatus(user, logIn);  
 	          	// Mais pra frente, guardar dados
 	          	//$location.path('/adicionarJogo');
 	        }
@@ -57,5 +53,21 @@ app.controller('LoginController', ['$rootScope', '$scope','User','$location', fu
 	        console.dir(error);
 	    });
 
+	}	
+
+	if ($cookies.get('user') != undefined && $cookies.get('userName') != undefined) {
+		
+		var user = {};
+		user.uid = $cookies.get('user');
+		user.name = $cookies.get('userName');
+
+		User.setLoggedStatus(user, logIn);
+		$rootScope.telaDeLogin = 'abacate';
+		$location.path('/');
+
+	} else {
+		googleLogin();
 	}
-}])
+
+
+})

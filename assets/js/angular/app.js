@@ -13,7 +13,8 @@ angular.module('myApp', [
 ]).
 run(['$rootScope', 'User', '$location', function($rootScope, User, $location, $cookies){
 
-  $rootScope.test = true;
+  $rootScope.test = false;
+  $rootScope.telaDeLogin = 'telaDeLogin';
 
     if (!$rootScope.test) {
       $rootScope.$on("$locationChangeStart", function(event, next, current) { 

@@ -3,16 +3,20 @@
 // Declare app level module which depends on views, and components
 var app = angular.module('myApp.controllers', ["ngRoute","myApp.services","chart.js","myApp.filters",'ngCookies']);
 
-app.controller('BodyController', function ($rootScope, $scope) {
+app.controller('BodyController', function ($rootScope, $scope, User) {
 
 	$scope.class = "login";
 
 	$scope.$on("$routeChangeSuccess", function($currentRoute, $previousRoute) {
-   if ($previousRoute.$$route.controller == "LoginController") {
-    $scope.class = "login"
-  } else {
-    $scope.class = ""
-  }
+    
+    if ($previousRoute.$$route.controller == "LoginController") {
+        $scope.class = "login"
+    } else {
+        $scope.class = ""
+    }
+
+    $scope.user = User.getName();
+
 });
 })
 
@@ -47,7 +51,7 @@ app.controller('NavController', ['$scope', function ($scope) {
 app.controller('MenuController', ['$scope', function($scope) {
 }])
 
-app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$timeout,$http,Statistics){
+app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$timeout,$http,Statistics,$cookies){
 
     // Apenas quando trocar de temporada
     //Home.setNewSeason();
@@ -56,6 +60,8 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
     /*
     *
     */
+        $scope.user = $cookies.get('userName');
+
         $rootScope.$broadcast('changeShowArrow',false);
         $scope.showScoreInicial = false;
         $scope.melhores = {
