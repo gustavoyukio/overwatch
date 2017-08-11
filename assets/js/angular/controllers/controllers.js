@@ -3,7 +3,7 @@
 // Declare app level module which depends on views, and components
 var app = angular.module('myApp.controllers', ["ngRoute","myApp.services","chart.js","myApp.filters",'ngCookies']);
 
-app.controller('BodyController', function ($rootScope, $scope, User) {
+app.controller('BodyController', function ($rootScope, $scope, User, $cookies) {
 
 	$scope.class = "login";
 
@@ -15,7 +15,7 @@ app.controller('BodyController', function ($rootScope, $scope, User) {
         $scope.class = ""
     }
 
-    $scope.user = User.getName();
+    $scope.user = $cookies.get('userName');
 
 });
 })
@@ -60,8 +60,6 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
     /*
     *
     */
-        $scope.user = $cookies.get('userName');
-
         $rootScope.$broadcast('changeShowArrow',false);
         $scope.showScoreInicial = false;
         $scope.melhores = {
