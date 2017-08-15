@@ -10,7 +10,18 @@
 		<div class="col-xs-12 advanced">
 			
 			<h3 class="alert alert-orange">Opções Iniciais</h3>
-			
+
+			<div class="row">
+				<div class="form-group col-xs-3">
+					<label for="sr-time">Sr do seu Time:</label>
+					<input id="sr-time" type="number" name="teamsr" class="form-control" ng-model="teamSR">
+				</div>
+				<div class="form-group col-xs-3">
+					<label for="sr-inimigo">Sr do Time Inimigo:</label>
+					<input id="sr-inimigo" type="number" name="enemysr" class="form-control" ng-model="enemySR">
+				</div>
+			</div>
+
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="form-group">
@@ -23,17 +34,6 @@
 							<label for="defesa">Defesa</label>
 						</div>
 					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="form-group col-xs-3">
-					<label for="sr-time">Sr do seu Time:</label>
-					<input id="sr-time" type="number" name="teamsr" class="form-control" ng-model="teamSR">
-				</div>
-				<div class="form-group col-xs-3">
-					<label for="sr-inimigo">Sr do Time Inimigo:</label>
-					<input id="sr-inimigo" type="number" name="enemysr" class="form-control" ng-model="enemySR">
 				</div>
 			</div>			
 

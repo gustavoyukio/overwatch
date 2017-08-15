@@ -4,6 +4,8 @@ var app = angular.module('myApp.loginController', ["ngRoute","myApp.services"]);
 
 app.controller('LoginController', function($rootScope,$scope,User,$location,$cookies) {
 
+	console.log("login controller");
+
 	$rootScope.$broadcast('changeShowArrow',false);
 	$rootScope.$broadcast('changeShowMenu',false);
 
@@ -23,8 +25,8 @@ app.controller('LoginController', function($rootScope,$scope,User,$location,$coo
 		}
 	}
 
-	var googleLogin = function () {
-
+	$scope.googleLogin = function () {
+		console.log("vamos logar")
 		firebase.auth().signInWithPopup(provider).then(function(result) {
 	        // This gives you a Google Access Token. You can use it to access the Google API.
 	        var token = result.credential.accessToken;
@@ -56,7 +58,7 @@ app.controller('LoginController', function($rootScope,$scope,User,$location,$coo
 	}	
 
 	if ($cookies.get('user') != undefined && $cookies.get('userName') != undefined) {
-		
+		console.log("Usuario jah logado");
 		var user = {};
 		user.uid = $cookies.get('user');
 		user.name = $cookies.get('userName');
@@ -64,10 +66,6 @@ app.controller('LoginController', function($rootScope,$scope,User,$location,$coo
 		User.setLoggedStatus(user, logIn);
 		$rootScope.telaDeLogin = 'abacate';
 		$location.path('/');
-
-	} else {
-		googleLogin();
 	}
-
 
 })

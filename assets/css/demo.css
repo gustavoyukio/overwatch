@@ -1,3 +1,21 @@
+/*
+ *
+ * Color Schemas
+ *
+ */
+.card .card-body .bg-info {
+	background-color: #67c2ef;
+}
+.card .card-body .bg-warning {
+	background-color: #fabb3d;
+}
+.card .card-body .bg-danger {
+	background-color: #ff5454;
+}
+
+
+
+
 .wrapper.telaDeLogin .sidebar,
 .wrapper.telaDeLogin .user,
 .wrapper.telaDeLogin .page-title a {
@@ -174,6 +192,66 @@
 	width: 100%;
 }
 
-.card {
 
+
+
+
+
+.card {
+	border: 1px solid #dbdee0;
+	position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+}
+.card .card-body,
+.card .card-foot {
+	padding: 1rem;
+}
+.card .card-body i {
+	padding: 1rem;
+	font-size: 30px;
+	color: #fff;
+}
+.card .card-body .card-content {
+	padding: 0;
+	text-align: right;
+}
+.card .card-body .card-content h1,
+.card .card-body .card-content h2 {
+	padding: 0;
+	margin: 0;
+}
+.card .card-body .card-content h1 {
+	font-size: 12px;
+	font-weight: bold;
+	color: #9fabb8;
+}
+.card .card-body .card-content h2 {
+	font-size: 20px;
+	color: #34383c;
+}
+.card .card-foot {
+	background-color: #f9f9f9;
+	border-top: 1px solid #dbdee0;
+	position: relative;
+	cursor: pointer;
+	transition: all 200ms 1ms linear;
+}
+.card .card-foot a {
+	color: #9fabb8;
+}
+.card .card-foot:hover a {
+	color: #9fabb8;
+	font-weight: bold;
+	text-decoration: underline;
+}
+.card .card-foot:hover {
+	background-color: #f1f1f1;
+}
+.card .card-foot i {
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	transform: translateY(-50%);
 }

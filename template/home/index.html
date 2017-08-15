@@ -1,4 +1,5 @@
 <div class="home">
+<!--
 <ol class="breadcrumb">
     <li>
         <b>Score Inicial : </b> {{scoreInicialValue}} 
@@ -10,35 +11,127 @@
         <b>Score Atual : </b> {{scoreCurrent}} 
     </li>
 </ol>
+-->
 
 <div class="row">
-    <div class="col-xs-3">
-        <div class="fomr-group">
+    <div class="best-info">
 
-            <p ng-show="showScoreInicial">
-                Score Inicial : {{scoreInicialValue}}
-            </p>
-            <div class="input-inicial" ng-show="!showScoreInicial" >
-                
-                <input 
-                    type="number" 
-                    placeholder="Colocar Score Inicial" 
-                    class="form-control"
-                    ng-model="scoreInicialValue"
-                    />
-                <input type="submit" value="settar" ng-click="setScoreInicial()">
+        <div class="col-xs-3">
+            <div class="card">
+
+                <div class="card-head"></div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <i class="fa fa-bar-chart bg-primary"></i>
+                        </div>
+                        <div class="col-xs-8">
+                            <div class="card-content">
+                                <h1>Maior Score</h1>
+                                <h2>
+                                    {{scoreHighest}}
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-foot">
+                    <a href="" class="">
+                        Veja Seus Scores
+                        <i class="fa fa-angle-right float-right font-lg"></i>
+                    </a>
+                </div>
 
             </div>
-            
         </div>
+
+        <div class="col-xs-3">
+            <div class="card">
+
+                <div class="card-head"></div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <i class="fa fa-superpowers bg-info"></i>
+                        </div>
+                        <div class="col-xs-8">
+                            <div class="card-content">
+                                <h1>Melhor Mapa</h1>
+                                <h2>{{ melhores.mapas.nome }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-foot">
+                    <a href="" class="">
+                        Veja Todos Mapas
+                        <i class="fa fa-angle-right float-right font-lg"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-xs-3">
+            <div class="card">
+
+                <div class="card-head"></div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <i class="fa fa-crosshairs bg-warning"></i>
+                        </div>
+                        <div class="col-xs-8">
+                            <div class="card-content">
+                                <h1>Melhor Herói</h1>
+                                <h2>{{ melhores.hero.nome }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-foot">
+                    <a href="" class="">
+                        Veja Todos Mapas
+                        <i class="fa fa-angle-right float-right font-lg"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-xs-3">
+            <div class="card">
+
+                <div class="card-head"></div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <i class="fa fa-th-large bg-danger"></i>
+                        </div>
+                        <div class="col-xs-8">
+                            <div class="card-content">
+                                <h1>Total de Jogos</h1>
+                                <h2>{{ jogos.total }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-foot">
+                    <a href="" class="">
+                        Veja Todos Mapas
+                        <i class="fa fa-angle-right float-right font-lg"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
     </div>
 </div>
 
-<hr/>
-
 <div class="row">
-    <div class="col-xs-12 col-md-6 top-info">
-        
+    <div class="col-xs-12 top-info">
+
         <canvas 
             id="line" 
             class="chart chart-line" 
@@ -49,34 +142,7 @@
             chart-dataset-override="datasetOverride" 
             chart-click="onClick">
         </canvas>
-    </div>
-
-    <div class="col-xs-12 col-md-6">
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                Maior SR: <b>{{scoreHighest}}</b>
-            </div>
-        </div>
-        <div class="panel panel-success">
-            <div class="panel-heading">
-                Melhor Herói : <b> {{ melhores.hero.nome }} </b>
-            </div>
-        </div>
-        <div class="panel panel-warning">
-            <div class="panel-heading">
-                Melhor Mapa : <b> {{ melhores.mapas.nome }} </b>
-            </div>
-        </div>
-        <div class="panel panel-warning">
-            <div class="panel-heading">
-                Melhor Horário :
-            </div>
-        </div>
-        <div class="panel panel-danger">
-            <div class="panel-heading">
-                Pior Herói : <b> {{ melhores.hero.pior }} </b>
-            </div>
-        </div>
+        
     </div>
 </div>
 
