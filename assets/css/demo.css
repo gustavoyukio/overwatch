@@ -13,7 +13,14 @@
 	background-color: #ff5454;
 }
 
-
+/*
+ *
+ * FonT
+ *
+ */
+* {
+	font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
 
 
 .wrapper.telaDeLogin .sidebar,
@@ -204,6 +211,31 @@
     flex-direction: column;
     background-color: #fff;
 }
+.card .card-head {
+	padding: 1rem;
+	line-height: 45px;
+	color: #34383c;
+	font-size: 30px;
+	font-weight: bold;
+}
+.card .card-head i {
+	font-size: 30px;
+}
+.card .card-head .nav-tabs {
+	float: right;
+	background-color: #d8d8d8;
+}
+.card .card-head .nav-tabs li:hover {
+	background-color: #bfbfbf;
+}
+.card .card-head .nav-tabs li:hover a {
+	color: #fff !important;
+}
+.card .card-head .nav-tabs li a {
+	color: #888888 !important;
+	cursor: pointer;
+	user-select: none;
+}
 .card .card-body,
 .card .card-foot {
 	padding: 1rem;
@@ -254,4 +286,16 @@
 	right: 10px;
 	top: 50%;
 	transform: translateY(-50%);
+}
+
+.chart-line {
+	height: 350px !important;
+}
+
+.data-info .card .card-head {
+	border-bottom: 1px solid #aeaeae;
+}
+
+.data-info .card .card-head ul li .active {
+	background-color: #aeaeae;
 }

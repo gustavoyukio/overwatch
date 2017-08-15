@@ -4,6 +4,7 @@
 angular.module('myApp', [
   'ngRoute',
   'myApp.services',
+  'myApp.home.directives',
   'myApp.controllers',
   'myApp.loginController',
   'myApp.GameController',

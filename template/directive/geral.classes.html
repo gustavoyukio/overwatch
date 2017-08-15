@@ -1,0 +1,72 @@
+<div class="data-geral-classes">
+    <div class="card card-plain">
+        <div class="card-header" data-background-color="title">
+            <h1> Estatísticas Baseadas nas Classes </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+
+            <div class="card">
+                <div class="card-header" data-background-color="default">Dados Por classes</div>
+                <div class="card-content">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Classe</th>
+                                <th>Total</th>
+                                <th>Vitórias</th>
+                                <th>Empates</th>
+                                <th>Derrotas</th>
+                                <th>%(wins)</th>
+                                <th>%(derrotas)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in dados.tipos">
+                                <td> {{item.tipo}} </td>
+                                <td> {{item.total}} </td>
+                                <td> {{item.win}} </td>
+                                <td> {{item.draw}} </td>
+                                <td> {{item.loss}} </td>
+                                <td> {{item.winPercentage | number:1}}% </td>
+                                <td> {{item.lossPercentage | number:1}}% </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" data-background-color="default">Dados por tipo de Comeco </div>
+                <div class="card-content">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Tipo de Ataque</th>
+                                <th>Total</th>
+                                <th>Vitórias</th>
+                                <th>Empates</th>
+                                <th>Derrotas</th>
+                                <th>%(wins)</th>
+                                <th>%(derrotas)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in dados.porSide">
+                                <td> {{item.side || 'King of The Hill'}} </td>
+                                <td> {{item.total}} </td>
+                                <td> {{item.win}} </td>
+                                <td> {{item.draw}} </td>
+                                <td> {{item.loss}} </td>
+                                <td> {{item.winPercentage | number:1}}% </td>
+                                <td> {{item.lossPercentage | number:1}}% </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -115,6 +115,9 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
             $scope.data   = [];
             $scope.data.length = 0;
 
+            $scope.jogos = {};
+            $scope.jogos.total = valores.length;
+
             if ( valores.length > 30 ) {
                 counter = valores.length - 30;
             }
@@ -177,6 +180,20 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
             }
 
         }
+
+    /*
+     *
+     * Change Tab Function
+     * 
+     */
+    
+    $scope.tab = {};
+    $scope.tab.active = 'geral';
+
+    $scope.changeTab = function (val) {
+        $scope.tab.active = val;
+        $scope.tab.class = val;
+    }
 
     /*
     * Data Setup

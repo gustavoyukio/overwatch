@@ -142,7 +142,40 @@
             chart-dataset-override="datasetOverride" 
             chart-click="onClick">
         </canvas>
-        
+
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="data-info col-xs-12">
+        <div class="card">
+            <div class="card-head">
+                <i class="fa fa-check-circle" aria-hidden="true"></i> Informações 
+                <ul class="nav nav-tabs float-right" role="tablist">
+                    <li class="nav-item" ng-class="'active' ? tab.class == 'geral' ">
+                        <a tab="" class="nav-link" ng-click="changeTab('geral');">Geral</a>
+                    </li>
+                    <li class="nav-item" ng-class="'active' ? tab.class == 'heroes' ">
+                        <a tab="" class="nav-link" ng-click="changeTab('heroes');">Heroes</a>
+                    </li>
+                    <li class="nav-item" ng-class="'active' ? tab.class == 'mapas' ">
+                        <a tab="" class="nav-link" ng-click="changeTab('mapas');">Mapas</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div ng-show="tab.active == 'geral'" ng-class='tab.class'>
+                    <home-classes></home-classes>
+                </div>
+                <div ng-show="tab.active == 'heroes'" ng-class='tab.class'>
+                    Herois {{ tab.active }}
+                </div>
+                <div ng-show="tab.active == 'mapas'" ng-class='tab.class'>
+                    Mapas {{ tab.active }}
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
