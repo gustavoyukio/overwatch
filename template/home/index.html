@@ -169,10 +169,10 @@
                     <home-classes></home-classes>
                 </div>
                 <div ng-show="tab.active == 'heroes'" ng-class='tab.class'>
-                    <home-mapas></home-mapas>
+                    
                 </div>
                 <div ng-show="tab.active == 'mapas'" ng-class='tab.class'>
-                    Mapas {{ tab.active }}
+                    <home-mapas></home-mapas>
                 </div>
             </div>
         </div>
@@ -180,124 +180,6 @@
 </div>
 
 <div class="row">
-    
-    <div class="col-xs-12 col-md-6">
-        
-        <div class="card card-plain">
-            <div class="card-header" data-background-color="title">
-                <h1>Estatisticas Baseadas em Mapas</h1>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header" data-background-color="blue">Mapas Mais Jogados</div>
-            <div class="card-content">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Mapa</th>
-                        <th>Jogos</th>
-                        <th>Vitórias</th>
-                        <th>Empates</th>
-                        <th>Derrotas</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="item in dados.mapas | orderBy: '-total' ">
-                        <td>{{$index+1}}</td>
-                        <td>{{item.map}}</td>
-                        <td>{{item.total}}</td>
-                        <td>{{item.win}}</td>
-                        <td>{{item.draw}}</td>
-                        <td>{{item.loss}}</td>
-                    </tr>
-                </tbody>
-            </table>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header" data-background-color="green">Mais Vitoriosos</div>
-            <div class="card-content">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Mapa</th>
-                        <th>%</th>
-                        <th>Jogos</th>
-                        <th>Vitórias</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="item in dados.mapas | orderBy: '-winPercentage' " ng-init="melhorMapa(item.map,item.winPercentage);">
-                        <td>{{$index+1}}</td>
-                        <td>{{item.map}}</td>
-                        <td>{{item.winPercentage | number:1}}%</td>
-                        <td>{{item.total}}</td>
-                        <td>{{item.win}}</td>
-                    </tr>
-                </tbody>
-            </table>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header" data-background-color="red">Piores Mapas</div>
-            <div class="card-content">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Mapa</th>
-                        <th>%</th>
-                        <th>Jogos</th>
-                        <th>Derrotas</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="item in dados.mapas | orderBy: '-lossPercentage' ">
-                        <td>{{$index+1}}</td>
-                        <td>{{item.map}}</td>
-                        <td>{{item.lossPercentage | number:1}}%</td>
-                        <td>{{item.total}}</td>
-                        <td>{{item.loss}}</td>
-                    </tr>
-                </tbody>
-            </table>
-            </div>
-        </div>
-    
-        <div class="card" ng-repeat="(key,value) in dados.porMapa">
-            <div class="card-header" data-background-color="red">{{key}}</div>
-            <div class="card-content">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Jogos</th>
-                        <th>Vitorias</th>
-                        <th>%</th>
-                        <th>Derrotas</th>
-                        <th>%</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="item in value ">
-                        <td>{{item.hero}}</td>
-                        <td>{{item.total}}</td>
-                        <td>{{item.win}}</td>
-                        <td>{{item.winPercentage | number:1}}%</td>
-                        <td>{{item.loss}}</td>
-                        <td>{{item.lossPercentage | number:1}}%</td>
-                    </tr>
-                </tbody>
-            </table>
-            </div>
-        </div>
-
-    </div>
 
     <div class="col-xs-12 col-md-6">
         
