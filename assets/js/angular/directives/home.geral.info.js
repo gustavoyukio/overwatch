@@ -11,3 +11,15 @@ app.directive('homeClasses', function () {
         templateUrl: '/template/directive/geral.classes.html'
     }
 })
+
+app.directive('homeMapas', function () {
+    return {
+        restrict: 'E',
+        link: function(scope, element, attrs) {
+            // concatenating the directory to the ver attr to select the correct excerpt for the day
+            contentUrl = 'content/excerpts/hymn-' + attrs.ver + '.html';
+        },
+        // passing in contentUrl variable
+        templateUrl: '/template/directive/geral.mapas.html'
+    }   
+})

@@ -7,7 +7,7 @@ var bodyParser 		= require('body-parser');    // pull information from HTML POST
 var methodOverride 	= require('method-override'); // simulate DELETE and PUT (express4)
 
 // configuration =================
-app.set('port', (process.env.PORT || 5000))
+app.set('port', (process.env.PORT || 5100))
 
 // Config Express
 app.use(express.static(__dirname));                 // set the static files location /public/img will be /img for users

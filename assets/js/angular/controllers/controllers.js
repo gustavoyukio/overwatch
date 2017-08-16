@@ -60,6 +60,9 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
     /*
     *
     */
+
+        $scope.abacate = 1;
+
         $rootScope.$broadcast('changeShowArrow',false);
         $scope.showScoreInicial = false;
         $scope.melhores = {

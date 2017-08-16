@@ -151,15 +151,15 @@
     <div class="data-info col-xs-12">
         <div class="card">
             <div class="card-head">
-                <i class="fa fa-check-circle" aria-hidden="true"></i> Informações 
+                <i class="fa fa-check-circle" aria-hidden="true"></i> Informações {{ tab.active }}
                 <ul class="nav nav-tabs float-right" role="tablist">
-                    <li class="nav-item" ng-class="'active' ? tab.class == 'geral' ">
+                    <li class="nav-item" ng-class="'active' ? tab.active == 'geral' : '' ">
                         <a tab="" class="nav-link" ng-click="changeTab('geral');">Geral</a>
                     </li>
-                    <li class="nav-item" ng-class="'active' ? tab.class == 'heroes' ">
+                    <li class="nav-item" ng-class="'active' ? tab.active == 'heroes' : '' ">
                         <a tab="" class="nav-link" ng-click="changeTab('heroes');">Heroes</a>
                     </li>
-                    <li class="nav-item" ng-class="'active' ? tab.class == 'mapas' ">
+                    <li class="nav-item" ng-class="'active' ? tab.active == 'mapas' : '' ">
                         <a tab="" class="nav-link" ng-click="changeTab('mapas');">Mapas</a>
                     </li>
                 </ul>
@@ -169,237 +169,13 @@
                     <home-classes></home-classes>
                 </div>
                 <div ng-show="tab.active == 'heroes'" ng-class='tab.class'>
-                    Herois {{ tab.active }}
+                    <home-mapas></home-mapas>
                 </div>
                 <div ng-show="tab.active == 'mapas'" ng-class='tab.class'>
                     Mapas {{ tab.active }}
                 </div>
             </div>
         </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-xs-12">
-
-        <div class="card card-plain">
-            <div class="card-header" data-background-color="title">
-                <h1> Estatísticas Baseadas no Time </h1>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xs-12 col-md-6">
-                <div class="row">
-                    <div class="col-xs-12">
-
-                        <div class="card" ng-show="dados.porSr['Maior']">
-                            <div class="card-header" data-background-color="default">Seu time com SR Maior</div>
-                            <div class="card-content">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Total</th>
-                                            <th>Vitórias</th>
-                                            <th>Empates</th>
-                                            <th>Derrotas</th>
-                                            <th>%(wins)</th>
-                                            <th>%(derrotas)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>{{dados.porSr['Maior'].total}}</td>
-                                            <td>{{dados.porSr['Maior'].win}}</td>
-                                            <td>{{dados.porSr['Maior'].draw}}</td>
-                                            <td>{{dados.porSr['Maior'].loss}}</td>
-                                            <td>{{dados.porSr['Maior'].winPercentage | number:2}}</td>
-                                            <td>{{dados.porSr['Maior'].lossPercentage | number:2}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="card" ng-show="dados.porSr['Menor']">
-                            <div class="card-header" data-background-color="green">Seu time com SR Menor </div>
-                            <div class="card-content">
-                                <table class="table table-hover">
-                                     <thead>
-                                        <tr>
-                                            <th>Total</th>
-                                            <th>Vitórias</th>
-                                            <th>%(wins)</th>
-                                            <th>Empates</th>
-                                            <th>Derrotas</th>
-                                            <th>%(derrotas)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>{{dados.porSr['Menor'].total}}</td>
-                                            <td>{{dados.porSr['Menor'].win}}</td>
-                                            <td>{{dados.porSr['Menor'].winPercentage | number:2}}</td>
-                                            <td>{{dados.porSr['Menor'].draw}}</td>
-                                            <td>{{dados.porSr['Menor'].loss}}</td>
-                                            <td>{{dados.porSr['Menor'].lossPercentage | number:2}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="card" ng-show="dados.porSr['Igual']">
-                            <div class="card-header" data-background-color="green">Igual ou Indiferente </div>
-                            <div class="card-content">
-                                <table class="table table-hover">
-                                     <thead>
-                                        <tr>
-                                            <th>Total</th>
-                                            <th>Vitórias</th>
-                                            <th>%(wins)</th>
-                                            <th>Empates</th>
-                                            <th>Derrotas</th>
-                                            <th>%(derrotas)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>{{dados.porSr['Igual'].total}}</td>
-                                            <td>{{dados.porSr['Igual'].win}}</td>
-                                            <td>{{dados.porSr['Igual'].winPercentage | number:2}}</td>
-                                            <td>{{dados.porSr['Igual'].draw}}</td>
-                                            <td>{{dados.porSr['Igual'].loss}}</td>
-                                            <td>{{dados.porSr['Igual'].lossPercentage | number:2}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-12 col-md-6">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="card">
-                            <div class="card-header" data-background-color="party">Vitorias por Tamanho das Parties </div>
-                                <div class="card-content">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Tamanho</th>
-                                            <th>1</th>
-                                            <th>2</th>
-                                            <th>3</th>
-                                            <th>4</th>
-                                            <th>5</th>
-                                            <th>6</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Jogos</td>
-                                            <td>{{dados.porSize[1].total || 0}}</td>
-                                            <td>{{dados.porSize[2].total || 0}}</td>
-                                            <td>{{dados.porSize[3].total || 0}}</td>
-                                            <td>{{dados.porSize[4].total || 0}}</td>
-                                            <td>{{dados.porSize[5].total || 0}}</td>
-                                            <td>{{dados.porSize[6].total || 0}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>%(win)</td>
-                                            <td>{{ (dados.porSize[1].winPercentage | number: 0) || 0}}%</td>
-                                            <td>{{ (dados.porSize[2].winPercentage | number: 0) || 0}}%</td>
-                                            <td>{{ (dados.porSize[3].winPercentage | number: 0) || 0}}%</td>
-                                            <td>{{ (dados.porSize[4].winPercentage | number: 0) || 0}}%</td>
-                                            <td>{{ (dados.porSize[5].winPercentage | number: 0) || 0}}%</td>
-                                            <td>{{ (dados.porSize[6].winPercentage | number: 0) || 0}}%</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-xs-12">
-
-        <div class="card card-plain">
-            <div class="card-header" data-background-color="title">
-                <h1> Estatísticas Baseadas nas Classes </h1>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xs-12">
-
-                <div class="card">
-                    <div class="card-header" data-background-color="default">Dados Por classes</div>
-                    <div class="card-content">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Classe</th>
-                                    <th>Total</th>
-                                    <th>Vitórias</th>
-                                    <th>Empates</th>
-                                    <th>Derrotas</th>
-                                    <th>%(wins)</th>
-                                    <th>%(derrotas)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="item in dados.tipos">
-                                    <td> {{item.tipo}} </td>
-                                    <td> {{item.total}} </td>
-                                    <td> {{item.win}} </td>
-                                    <td> {{item.draw}} </td>
-                                    <td> {{item.loss}} </td>
-                                    <td> {{item.winPercentage | number:1}}% </td>
-                                    <td> {{item.lossPercentage | number:1}}% </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header" data-background-color="default">Dados por tipo de Comeco </div>
-                    <div class="card-content">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Tipo de Ataque</th>
-                                    <th>Total</th>
-                                    <th>Vitórias</th>
-                                    <th>Empates</th>
-                                    <th>Derrotas</th>
-                                    <th>%(wins)</th>
-                                    <th>%(derrotas)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="item in dados.porSide">
-                                    <td> {{item.side || 'King of The Hill'}} </td>
-                                    <td> {{item.total}} </td>
-                                    <td> {{item.win}} </td>
-                                    <td> {{item.draw}} </td>
-                                    <td> {{item.loss}} </td>
-                                    <td> {{item.winPercentage | number:1}}% </td>
-                                    <td> {{item.lossPercentage | number:1}}% </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
 </div>
 
