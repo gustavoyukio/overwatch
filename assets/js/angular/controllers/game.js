@@ -69,12 +69,12 @@ app.controller('GameController', function($rootScope,$scope,Score,Heroes,Map,Gam
 		
 		if (verifyForm()) {
 
-			console.log("Entrada Corretas");
 			Game.setPartySize($scope.partySize);
 			Game.setSRs($scope.teamSR,$scope.enemySR);
 			Game.setMap($scope.MapaSelecionado);
 			Game.setScore($scope.SrFinal);
-			Game.setHour(hour);
+			Game.setDate(day+'/'+month);
+			Game.setHour(hour+':'+minutes);
 			Game.saveEntry(resetarForm);
 			Game.setSide($scope.side);
 

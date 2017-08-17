@@ -23,3 +23,15 @@ app.directive('homeMapas', function () {
         templateUrl: '/template/directive/geral.mapas.html'
     }   
 })
+
+app.directive('homeHeroes', function () {
+    return {
+        restrict: 'E',
+        link: function(scope, element, attrs) {
+            // concatenating the directory to the ver attr to select the correct excerpt for the day
+            contentUrl = 'content/excerpts/hymn-' + attrs.ver + '.html';
+        },
+        // passing in contentUrl variable
+        templateUrl: '/template/directive/geral.heroes.html'
+    }  
+})

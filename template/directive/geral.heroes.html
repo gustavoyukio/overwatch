@@ -1,0 +1,195 @@
+<div class="geral-info-main data-info lista-de-mapas">
+        
+        <header>
+            <div class="row">
+                <div class="col-xs-9">
+                    <h1>Estátisticas por Herói</h1>    
+                </div>
+            </div>
+        </header>
+    
+        <div class="geral-info-main">
+            <!-- Cards -->
+            <div class="row">
+                <div class="col-xs-4">
+                    
+                    <div class="card">        
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <i class="fa fa-superpowers bg-info"></i>
+                                </div>
+                                <div class="col-xs-8">
+                                    <div class="card-content">
+                                        <h2>{{ melhores.mapas.nome }}</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card-foot">
+                            Herói mais Jogado
+                        </div>            
+                    </div>
+                    
+                </div>
+                <div class="col-xs-4">
+                    
+                    <div class="card">        
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <i class="fa fa-superpowers bg-info"></i>
+                                </div>
+                                <div class="col-xs-8">
+                                    <div class="card-content">
+                                        <h2>{{ melhores.mapas.nome }}</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card-foot">
+                            Herói mais Vitorioso
+                        </div>            
+                    </div>
+                    
+                </div>
+                <div class="col-xs-4">
+                    
+                    <div class="card">        
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <i class="fa fa-superpowers bg-info"></i>
+                                </div>
+                                <div class="col-xs-8">
+                                    <div class="card-content">
+                                        <h2>{{ melhores.mapas.nome }}</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card-foot">
+                            Pior Herói
+                        </div>            
+                    </div>
+                    
+                </div>
+            </div>
+    
+            <h1 class="title">Heroís mais Jogados</h1>
+    
+            <!-- Tables -->
+            <div class="row">
+                <div class="col-xs-12">
+                <table class="table">
+                    <thead>
+                        <th>#</th>
+                        <th>Herói</th>
+                        <th>jogos</th>
+                        <th>Vitórias</th>
+                        <th>Empates</th>
+                        <th>Derrotas</th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in dados.herois | orderBy : '-total' | limitTo: 5 ">
+                            <td>{{$index+1}}</td>
+                            <td>{{item.hero}}</td>
+                            <td>{{item.total}}</td>
+                            <td>{{item.win}}</td>
+                            <td>{{item.winPercentage | number:1}}%</td>
+                            <td>{{item.draw}}</td>
+                            <td>{{item.loss}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+            
+            <h1 class="title">
+                Heróis
+                <select
+                    ng-model="abacate"
+                    ng-change="">
+                    <option value="1" selected>Todos</option>
+                    <option value="2">Gerais</option>
+                    <option value="3">Classe</option>
+                    <option value="4">Tamanho</option>
+                </select>
+            </h1>
+    
+            <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <table class="table table-info">
+                    <thead>
+                        <th>Melhores Heróis</th>
+                        <th>%(Vitórias)</th>
+                        <th>Jogos</th>
+                        <th>Vitórias</th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in dados.herois | orderBy : '-winPercentage' " ng-init="melhorHeroi(item.hero,item.winPercentage)">
+                            <td>{{$index+1}}</td>
+                            <td>{{item.hero}}</td>
+                            <td>{{item.win}}</td>
+                            <td>{{item.total}}</td>
+                            <td>{{item.winPercentage | number:1}}%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-12 col-md-6 col-maps">
+                    <table class="table table-danger">
+                        <thead>
+                            <th>Piores Heróis</th>
+                            <th>%(Derrotas)</th>
+                            <th>Jogos</th>
+                            <th>Derrotas</th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in dados.herois | orderBy : '-lossPercentage' " ng-init="piorHeroi(item.hero,item.lossPercentage)">
+                                <td>{{$index+1}}</td>
+                                <td>{{item.hero}}</td>
+                                <td>{{item.loss}}</td>
+                                <td>{{item.total}}</td>
+                                <td>{{item.lossPercentage | number:1}}%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    
+            <h1 class="title">Mapas</h1>
+    
+            <div class="col-xs-12 col-md-6" ng-repeat="(key,value) in dados.porHeroi">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>{{ key }}</th>
+                        </tr>
+                        <tr>
+                            <th>#</th>
+                            <th>Jogos</th>
+                            <th>Vitorias</th>
+                            <th>%</th>
+                            <th>Derrotas</th>
+                            <th>%</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in value | limitTo: 5  ">
+                            <td>{{item.map}}</td>
+                            <td>{{item.total}}</td>
+                            <td>{{item.win}}</td>
+                            <td>{{item.winPercentage | number:1}}%</td>
+                            <td>{{item.loss}}</td>
+                            <td>{{item.lossPercentage | number:1}}%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>    
+    
+        </div>
+    </div>

@@ -187,6 +187,7 @@ app.service('Game', ['Firebase','$cookies', function(Firebase,$cookies){
 			'map'   : '',
 			'score' : '',
 			'hour'  : '',
+			'date' : '',
 			'heroes': [],
 			'types' : [],
 			'party' : '',
@@ -209,13 +210,15 @@ app.service('Game', ['Firebase','$cookies', function(Firebase,$cookies){
 			_self.obj.types.push(hero.type);
 		}
 		_self.setTypes = function (item) {
-
 		}
 		_self.setScore = function (item) {
 			_self.obj.score = item;
 		}
 		_self.setHour = function (item) {
 			_self.obj.hour = item;
+		}
+		_self.setDate = function (valor) {
+			_self.obj.date = valor;
 		}
 		_self.setSRs = function (team, enemy) {
 			var time    = _self.obj.srs.team = team;
