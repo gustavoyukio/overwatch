@@ -288,10 +288,6 @@
 	transform: translateY(-50%);
 }
 
-.chart-line {
-	height: 350px !important;
-}
-
 .data-info .card .card-head {
 	border-bottom: 1px solid #aeaeae;
 }

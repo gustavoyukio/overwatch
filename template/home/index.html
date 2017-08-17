@@ -130,7 +130,7 @@
 </div>
 
 <div class="row">
-    <div class="col-xs-12 top-info">
+    <div class="col-xs-6 top-info">
 
         <canvas 
             id="line" 
@@ -138,9 +138,23 @@
             chart-data="data"
             chart-labels="labels" 
             chart-series="series" 
+            legend="true"
             chart-options="options"
             chart-dataset-override="datasetOverride" 
             chart-click="onClick">
+        </canvas>
+
+    </div>
+    <div class="col-xs-6 top-info">
+        
+        <canvas 
+            id="line" 
+            class="chart chart-doughnut" 
+            chart-data="doughnut"
+            labels="doughnut.labels" 
+            legend="false" 
+            series="doughnut.series"
+            click="onClick">
         </canvas>
 
     </div>

@@ -1,5 +1,8 @@
 'use strict';
 
+var teste = null;
+var abacate = null;
+
 // Declare app level module which depends on views, and components
 var app = angular.module('myApp.controllers', ["ngRoute","myApp.services","chart.js","myApp.filters",'ngCookies']);
 
@@ -99,13 +102,50 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
                 scales: {
                     yAxes: [
                         {
-                        id: 'SR',
-                        type: 'linear',
-                        display: true,
-                        position: 'left'
+                            id: 'SR',
+                            type: 'linear',
+                            display: true,
+                            position: 'left'
                         }
                     ]
+                },
+                tooltips: {
+                    callbacks: {
+                        labelColor: function(tooltipItem, chart) {
+                            return {
+                                borderColor: 'rgb(255, 0, 0)',
+                                backgroundColor: 'rgb(255, 0, 0)'
+                            }
+                        },
+                        title: function (a,b) {
+                            return "Partida: " + a[0].xLabel
+                        },
+                        label: function (a,b) {
+
+                            var diferenca = 0;
+                            
+                            var index = a.index;
+
+                            var atual = b.datasets[0].data[index];
+                            var past = b.datasets[0].data[index-1];
+
+                            var diferenca = atual - past;
+                            
+                            return "SR: " + atual + " ("+diferenca+")";
+                        }
+                    }
                 }
+            };
+
+            Chart.defaults.global.tooltipTemplate = function(value) {
+                if (value.label)  {
+                    return value.label + ":" + value.value;
+                } else {
+                    return value.value;
+                }
+            };
+            Chart.defaults.global.multiTooltipTemplate = function(value) {
+                return 'The value is ' + value.value;
             };
 
             $scope.scoreHighest = 0;
@@ -140,6 +180,8 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
             }
 
         }
+
+        $scope.doughnut = ['200','200','100']
 
     /*
     *
