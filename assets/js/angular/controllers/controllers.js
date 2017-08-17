@@ -181,7 +181,18 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
 
         }
 
-        $scope.doughnut = ['200','200','100']
+        var setDoughnut = function (valores) {
+            $scope.doughnut = {};
+            $scope.doughnut.labels = [];
+            $scope.doughnut.data = [];
+
+            valores.map(function(arr,index){
+                $scope.doughnut.labels.push(arr.tipo);
+                $scope.doughnut.data.push(arr.total);
+            });
+
+            console.log($scope.doughnut);
+        }
 
     /*
     *
@@ -277,7 +288,7 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
 
         $timeout(function(){
 
-            console.dir(Statistics);
+            //console.dir(Statistics);
 
             $scope.dados = {};
 
@@ -305,6 +316,7 @@ app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$tim
             $scope.dados.porSize    = porSize;
             $scope.dados.porSide    = porSide;
             
+            setDoughnut(tipos);
             setGraphScores(scores);
 
         }, 1500);
