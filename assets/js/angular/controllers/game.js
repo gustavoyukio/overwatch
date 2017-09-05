@@ -6,6 +6,10 @@ app.controller('GameController', function($rootScope,$scope,Score,Heroes,Map,Gam
 
 	$rootScope.$broadcast('changeShowArrow',true);
 	$scope.number = 6;
+	var day = 0;
+	var hour = 0;
+	var month = 0;
+	var minutes = 0;
 
 	var verifyForm = function () {
 		
@@ -34,16 +38,14 @@ app.controller('GameController', function($rootScope,$scope,Score,Heroes,Map,Gam
 		var a = new Date();
 		
 		hour = (a.getHours()<10?'0':'') + a.getHours();
-		var minutes = (a.getMinutes()<10?'0':'') + a.getMinutes();
+		minutes = (a.getMinutes()<10?'0':'') + a.getMinutes();
 
-		var day 	= (a.getDate() < 10 ? '0' : '' ) + a.getDate();
-		var month 	= (a.getMonth() < 10 ? '0' : '') + a.getMonth();
+		day 	= (a.getDate() < 10 ? '0' : '' ) + a.getDate();
+		month 	= (a.getMonth() < 10 ? '0' : '') + a.getMonth();
 
 		$scope.startHour = hour+':'+minutes;
 		$scope.startDate = day+'/'+month;
 	}
-
-	var hour = 0;
 
 	$scope.startHour 	= "00:00";
 	$scope.heroList 	= [];
