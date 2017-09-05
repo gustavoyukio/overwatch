@@ -43,12 +43,16 @@ var Firebase = function($rootScope, Statistics) {
 		return user;
 	}
 
+	_self.getCurrentPath = function () {
+		return = "/season6/";
+	}
+
 
 	// Save Game Entry
 	_self.saveEntry = function (obj, callback) {
 
 		var uid  = _self.getUserUid();
-		var path = "/" + uid + "/games";
+		var path = _self.getCurrentPath + uid + "/games";
 
 		firebase
 			.database()
@@ -62,7 +66,7 @@ var Firebase = function($rootScope, Statistics) {
 	_self.getGamesList = function (callback) {
 
 		var uid  = _self.getUserUid();
-		var path = "/" + uid + "/games";
+		var path = _self.getCurrentPath + uid + "/games";
 
 		firebase
 			.database()
@@ -89,7 +93,7 @@ var Firebase = function($rootScope, Statistics) {
 	_self.getScoreToStart = function (item, callback) {
 
 		var uid = _self.getUserUid();
-		var path = "/" + uid + "/scores";
+		var path = _self.getCurrentPath + uid + "/scores";
 
 		firebase
 			.database()
@@ -107,7 +111,7 @@ var Firebase = function($rootScope, Statistics) {
 	_self.getScoreCounter = function (start, item, callback) {
 
 		var uid = _self.getUserUid();
-		var path = "/" + uid + "/games";
+		var path = _self.getCurrentPath + uid + "/games";
 
 		firebase
 			.database()
@@ -146,7 +150,7 @@ var Firebase = function($rootScope, Statistics) {
 	_self.getScores = function (callback) {
 		
 		var uid  = _self.getUserUid();
-		var path = "/" + uid + "/scores"; 
+		var path = _self.getCurrentPath + uid + "/scores"; 
 		
 		firebase
 			.database()
@@ -165,7 +169,7 @@ var Firebase = function($rootScope, Statistics) {
 		delete obj;
 
 		var uid  = _self.getUserUid();
-		var path = "/" + uid + "/scores"; 
+		var path = _self.getCurrentPath + uid + "/scores"; 
 
 		obj = {};
 		obj[0] = val;
@@ -180,7 +184,7 @@ var Firebase = function($rootScope, Statistics) {
 	
 	_self.getScoreInicial = function (callback) {
 		var uid  = _self.getUserUid();
-		var path = "/" + uid + "/scores"; 
+		var path = _self.getCurrentPath + uid + "/scores"; 
 
 		firebase
 			.database()
@@ -197,7 +201,7 @@ var Firebase = function($rootScope, Statistics) {
 	}
 	_self.getHeroesInicial = function (callback) {
 		var uid  = _self.getUserUid();
-		var path = "/" + uid + "/types"; 
+		var path = _self.getCurrentPath + uid + "/types"; 
 
 		firebase
 			.database()
@@ -217,7 +221,7 @@ var Firebase = function($rootScope, Statistics) {
 	_self.heroesNeverDie = function (callback) {
 		
 		var uid = _self.getUserUid();
-		var path = "/" + uid + "/heroes";
+		var path = _self.getCurrentPath + uid + "/heroes";
 
 		firebase
 		.database()
@@ -240,7 +244,7 @@ var Firebase = function($rootScope, Statistics) {
 	_self.mapsNeverDie = function (callback) {
 		
 		var uid = _self.getUserUid();
-		var path = "/" + uid + "/maps";
+		var path = _self.getCurrentPath + uid + "/maps";
 
 		firebase
 		.database()
@@ -263,7 +267,7 @@ var Firebase = function($rootScope, Statistics) {
 	_self.srsNeverDie = function (callback) {
 		
 		var uid = _self.getUserUid();
-		var path = "/" + uid + "/srs";
+		var path = _self.getCurrentPath + uid + "/srs";
 
 		firebase
 		.database()
@@ -279,7 +283,7 @@ var Firebase = function($rootScope, Statistics) {
 	_self.sizesNeverDie = function (callback) {
 		
 		var uid = _self.getUserUid();
-		var path = "/" + uid + "/sizes";
+		var path = _self.getCurrentPath + uid + "/sizes";
 		var sizes = {
 			1: {
 				total: '',
@@ -345,7 +349,7 @@ var Firebase = function($rootScope, Statistics) {
 	_self.typesNeverDie = function (callback) {
 		
 		var uid = _self.getUserUid();
-		var path = "/" + uid + "/types";
+		var path = _self.getCurrentPath + uid + "/types";
 
 		firebase
 		.database()
@@ -365,7 +369,7 @@ var Firebase = function($rootScope, Statistics) {
 
 	_self.setNewSeason = function () {
 
-		var path = "/";
+		var path = _self.getCurrentPath 
 		//console.log("OI");
 
 		firebase
