@@ -57,13 +57,12 @@ app.controller('MenuController', ['$scope', function($scope) {
 app.controller('HomeController', function($rootScope,$scope,User,Score,Home,$timeout,$http,Statistics,$cookies){
 
     // Apenas quando trocar de temporada
-    //Home.setNewSeason();
+    Home.setNewSeason();
     // Data calling
     //Home.getStatistics();
     /*
     *
     */
-
         $scope.abacate = 1;
 
         $rootScope.$broadcast('changeShowArrow',false);

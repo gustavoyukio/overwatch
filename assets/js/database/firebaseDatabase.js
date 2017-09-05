@@ -373,7 +373,7 @@ var Firebase = function($rootScope, Statistics) {
 		.ref(path)
 		.once("value", function(snapshot){
 
-			var pathInterno = "/season4/";
+			var pathInterno = "/season6/";
 			//console.log(pathInterno);
 
 			obj = snapshot.val();
