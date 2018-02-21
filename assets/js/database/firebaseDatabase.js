@@ -44,7 +44,7 @@ var Firebase = function($rootScope, Statistics) {
 	}
 
 	_self.getCurrentPath = function () {
-		return = "/season6/";
+		return = "/season5/";
 	}
 
 
