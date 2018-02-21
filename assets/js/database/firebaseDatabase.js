@@ -5,6 +5,7 @@ var Firebase = function($rootScope, Statistics) {
 	this.hasInit 			= false;
 	this.initCallbacks 		= [];
 	_self.gameStatusLabel   = 'loss';
+	_self.getCurrentPath    = '/season4/';
 	
 	this.addInitCallback = function(callback){
 		if(_self.hasInit) callback();
@@ -43,10 +44,6 @@ var Firebase = function($rootScope, Statistics) {
 		return user;
 	}
 
-	_self.getCurrentPath = function () {
-		return "/season5/";
-	}
-
 
 	// Save Game Entry
 	_self.saveEntry = function (obj, callback) {
@@ -67,6 +64,7 @@ var Firebase = function($rootScope, Statistics) {
 
 		var uid  = _self.getUserUid();
 		var path = _self.getCurrentPath + uid + "/games";
+		console.log(path);
 
 		firebase
 			.database()
